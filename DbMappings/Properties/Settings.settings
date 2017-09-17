@@ -1,0 +1,145 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DbMappings.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="JsonString" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">[
+  {
+    "name": "id",
+    "dbname": "number",
+    "typename": "System.Int64"
+  },
+  {
+    "name": "linija",
+    "dbname": "Linia",
+    "typename": "System.String"
+  },
+  {
+    "name": "kelias",
+    "dbname": "Kel",
+    "typename": "System.Int32"
+  },
+  {
+    "name": "km",
+    "dbname": "kilomrtras",
+    "typename": "System.Int32"
+  },
+  {
+    "name": "pk",
+    "dbname": "piket",
+    "typename": "System.Int32"
+  },
+  {
+    "name": "m",
+    "dbname": "metras",
+    "typename": "System.Int32"
+  },
+  {
+    "name": "siule",
+    "dbname": "siule",
+    "typename": "System.Int32"
+  },
+  {
+    "name": "salyginis_kodas",
+    "dbname": "saliginis kodas",
+    "typename": "System.String"
+  },
+  {
+    "name": "suv_numer",
+    "dbname": "suv_numer",
+    "typename": "System.Int32"
+  },
+  {
+    "name": "suvirino",
+    "dbname": "suvirino",
+    "typename": "System.String"
+  },
+  {
+    "name": "nr_pagal_schema",
+    "dbname": "nr_pagal_shema",
+    "typename": "System.Int32"
+  },
+  {
+    "name": "ifas",
+    "dbname": "IFas",
+    "typename": "System.Int32"
+  },
+  {
+    "name": "pak_suv_data",
+    "dbname": "Pak_suv_data",
+    "typename": "System.DateTime"
+  },
+  {
+    "name": "I_pat_data",
+    "dbname": "I_pat_data",
+    "typename": "System.DateTime"
+  },
+  {
+    "name": "I_pat_aparatas",
+    "dbname": "I_pat_aparat",
+    "typename": "System.String"
+  },
+  {
+    "name": "I_pat_operatorius",
+    "dbname": "I_pat_operator",
+    "typename": "System.String"
+  },
+  {
+    "name": "II_pat_data",
+    "dbname": "II_pat_data",
+    "typename": "System.DateTime"
+  },
+  {
+    "name": "II_pat_aparatas",
+    "dbname": "II_pat_aparat",
+    "typename": "System.String"
+  },
+  {
+    "name": "II_pat_operatorius",
+    "dbname": "II_pat_operator",
+    "typename": "System.String"
+  },
+  {
+    "name": "III_pat_data",
+    "dbname": "III_pat_data",
+    "typename": "System.DateTime"
+  },
+  {
+    "name": "III_pat_aparatas",
+    "dbname": "III_pat_aparat",
+    "typename": "System.String"
+  },
+  {
+    "name": "III_pat_operatorius",
+    "dbname": "III_pat_operaqtor",
+    "typename": "System.String"
+  },
+  {
+    "name": "VI_pat_data",
+    "dbname": "IV_pat_data",
+    "typename": "System.DateTime"
+  },
+  {
+    "name": "VI_pat_aparatas",
+    "dbname": "IV_pat_operator",
+    "typename": "System.String"
+  },
+  {
+    "name": "VI_pat_operatorius",
+    "dbname": "Pastaba",
+    "typename": "System.String"
+  },
+  {
+    "name": "panaikintas",
+    "dbname": "Panaikintas",
+    "typename": "System.Boolean"
+  },
+  {
+    "name": "defekto_id",
+    "dbname": "DefektoId",
+    "typename": "System.Int64"
+  }
+]</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
