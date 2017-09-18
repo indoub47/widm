@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RecordValidation
 {
-    internal static class GeneralValidationMethods
+    public static partial class ValidationMethods
     {
         [AttributeUsage(AttributeTargets.Method)]
         private class AllowZeroAttribute : System.Attribute
@@ -90,7 +90,7 @@ namespace RecordValidation
         }
 
         [Int64]
-        internal static InvalidDataInfo ValidatePositiveLong(
+        private static InvalidDataInfo ValidatePositiveLong(
             string propertyName,
             IList<object> record,
             string[] mapping,
@@ -107,7 +107,7 @@ namespace RecordValidation
         }
 
         [AllowNull]
-        internal static InvalidDataInfo ValidatePositiveIntOrNull(
+        private static InvalidDataInfo ValidatePositiveIntOrNull(
             string propertyName,
             IList<object> record,
             string[] mapping,
@@ -124,7 +124,7 @@ namespace RecordValidation
         }
 
         [AllowZero]
-        internal static InvalidDataInfo ValidatePositiveIntOrZero(
+        private static InvalidDataInfo ValidatePositiveIntOrZero(
             string propertyName,
             IList<object> record,
             string[] mapping,
@@ -142,7 +142,7 @@ namespace RecordValidation
 
         [AllowZero]
         [AllowNull]
-        internal static InvalidDataInfo ValidatePositiveIntOrZeroOrNull(
+        private static InvalidDataInfo ValidatePositiveIntOrZeroOrNull(
             string propertyName,
             IList<object> record,
             string[] mapping,
@@ -158,7 +158,7 @@ namespace RecordValidation
                 attributes);
         }
 
-        internal static InvalidDataInfo ValidatePositiveInt(
+        private static InvalidDataInfo ValidatePositiveInt(
             string propertyName,
             IList<object> record,
             string[] mapping,
@@ -174,7 +174,7 @@ namespace RecordValidation
                 attributes);
         }
 
-        internal static InvalidDataInfo ValidateStringFromArray(
+        private static InvalidDataInfo ValidateStringFromArray(
             string propertyName,
             string[] validValues,
             IList<object> record,
@@ -193,45 +193,6 @@ namespace RecordValidation
             {
                 return null;
             }
-        }
-
-        // Tikrina, ar patikrinimo data nėra ateityje arba per giliai praeityje
-        internal static bool IsNotReal(DateTime tikrinimoData)
-        {
-            return (tikrinimoData > DateTime.Now) ||
-                (tikrinimoData < DateTime.Now.AddDays(-Properties.Settings.Default.AllowedDaysInPast));
-        }
-
-        /// <summary>
-        /// Jeigu dataRow turi mažiau Items negu mapping, 
-        /// vietoje nesamo dataRow item grąžina null. 
-        /// </summary>
-        /// <param name="colName"></param>
-        /// <param name="mapping"></param>
-        /// <param name="dataRow"></param>
-        /// <returns></returns>
-        internal static object GetRowItem(string colName, IList<object> record, string[] mapping)
-        {
-            int ind = Array.IndexOf(mapping, colName);
-            if (ind == - 1 || record.Count - 1 < ind) return null;
-            return record[ind];
-        }
-
-        /// <summary>
-        /// Returns true if object is null or represents an empty string
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        internal static bool IsEmpty(object value)
-        {
-            return value == null || value.ToString().Trim() == string.Empty;
-        }
-
-        internal static RecordContext PushMethodName(RecordContext ctx)
-        {
-            string mname = System.Reflection.MethodBase.GetCurrentMethod().Name;
-            ctx.Objects.Add(mname);
-            return ctx;
         }
     }
 }

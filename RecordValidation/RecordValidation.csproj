@@ -58,7 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GeneralValidationMethods.cs" />
+    <Compile Include="ValidationMethods - general methods.cs" />
     <Compile Include="InvalidDataInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -67,7 +67,8 @@
     </Compile>
     <Compile Include="RecordsBatchValidator.cs" />
     <Compile Include="SingleRecordValidator.cs" />
-    <Compile Include="ValidationMethods.cs" />
+    <Compile Include="ValidationMethods - utilities.cs" />
+    <Compile Include="ValidationMethods - validators.cs" />
     <Content Include="LEGEND.txt" />
     <Compile Include="NepirmRecordValidator.cs" />
     <Compile Include="PirmRecordValidator.cs" />
