@@ -7,12 +7,12 @@ using InspectionLib;
 
 namespace InspectionValidation
 {
-    public class SuspiciousInspectionInfo
+    public class SuspInspInfo
     {
-        public Inspection Inspection { get; set; }
+        public Insp Insp { get; set; }
         public string Message { get; set; }
         public string ValidationMethod { get; set; }
-        public InspectionContext Context { get; set; }
+        public InspContext Context { get; set; }
 
         // must be overriden
         public string Tag
@@ -20,7 +20,7 @@ namespace InspectionValidation
             get { return ""; }
         }
 
-        public SuspiciousInspectionInfo(string errorMessage)
+        public SuspInspInfo(string errorMessage)
         {
             Message = errorMessage;
         }

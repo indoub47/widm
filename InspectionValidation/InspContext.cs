@@ -7,26 +7,26 @@ using InspectionLib;
 
 namespace InspectionValidation
 {
-    public struct InspectionContext
+    public struct InspContext
     {
         public List<object> Objects { get; set; }
 
-        public static InspectionContext Create()
+        public static InspContext Create()
         {
-            return new InspectionContext(new List<object>());
+            return new InspContext(new List<object>());
         }
 
-        public static InspectionContext Create(params object[] context)
+        public static InspContext Create(params object[] context)
         {
-            return new InspectionContext(context);
+            return new InspContext(context);
         }
 
-        public static InspectionContext CreateFrom(InspectionContext from)
+        public static InspContext CreateFrom(InspContext from)
         {
-            return new InspectionContext(from.Objects.ToArray<object>());
+            return new InspContext(from.Objects.ToArray<object>());
         }
 
-        public InspectionContext(params object[] context)
+        public InspContext(params object[] context)
         {
             Objects = new List<object>();
             AddContext(context);

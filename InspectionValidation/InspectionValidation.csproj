@@ -11,6 +11,7 @@
     <AssemblyName>InspectionValidation</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -48,8 +49,12 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="InspectionLib">
-      <HintPath>..\InspectionLib\bin\Release\InspectionLib.dll</HintPath>
+    <Reference Include="InspectionLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\InspectionLib\bin\x64\Release\InspectionLib.dll</HintPath>
+    </Reference>
+    <Reference Include="InspPoolCommunication">
+      <HintPath>..\InspPoolCommunication\bin\Release\InspPoolCommunication.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -61,8 +66,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InspectionContext.cs" />
-    <Compile Include="SuspiciousInspectionInfo.cs" />
+    <Compile Include="BaseValidationManager.cs" />
+    <Compile Include="PirmNepirmValidationManager.cs" />
+    <Compile Include="ValidationMethods.cs" />
+    <Compile Include="IInspBatchValidator.cs" />
+    <Compile Include="InspContext.cs" />
+    <Compile Include="SuspInspInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

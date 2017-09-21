@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InspectionLib
 {
-    public class Inspection
+    public class Insp
     {
         public long? Id { private set; get; }
         public string Linija { private set; get; }
@@ -24,7 +24,7 @@ namespace InspectionLib
         public Kelintas Kelintas { private set; get; }
         public string Pastaba { set; get; }
 
-        public Inspection(
+        public Insp(
             long? id,
             string linija, int kelias, int km, int? pk, int m, int? siule, string salyginisKodas,
             string operatorius, string aparatas, DateTime tikrinimoData, string suvirino,
@@ -54,11 +54,11 @@ namespace InspectionLib
             this.Pastaba = pastaba;
         }
 
-        public static Inspection FromValidRecord(IList<object> record, string[] mapping, string operatorId)
+        public static Insp FromValidRecord(IList<object> record, string[] mapping, string operatorId)
         {
             // jeigu record neturi lauko "kelintas_suvirinimas", priskiriamas pirmasis suvirinimas
 
-            Inspection insp = FromValidRecord(record, mapping);
+            Insp insp = FromValidRecord(record, mapping);
             insp.Operatorius = operatorId;
             return insp;
         }
@@ -72,7 +72,7 @@ namespace InspectionLib
         /// <param name="record"></param>
         /// <param name="mapping"></param>
         /// <returns></returns>
-        public static Inspection FromValidRecord(IList<object> record, string[] mapping)
+        public static Insp FromValidRecord(IList<object> record, string[] mapping)
         {
             // record turi būti validated
             // jeigu record neturi lauko "kelintas_suvirinimas", priskiriamas pirmasis suvirinimas
@@ -126,7 +126,7 @@ namespace InspectionLib
             if (ind != -1)
                 pastaba = record[ind].ToString().Trim();
 
-            return new Inspection(id, linija, kelias, km, pk, m, siule, salyginisKodas, 
+            return new Insp(id, linija, kelias, km, pk, m, siule, salyginisKodas, 
                 operatorius, aparatas, tikrinimoData, suvirino, kelintasTikrinimas, pastaba);
         }
 
