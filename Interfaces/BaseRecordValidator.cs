@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RecordValidation
+namespace Interfaces
 {
-    public abstract class SingleRecordValidator
+
+    public delegate IInvalidDataInfo ValidationMethod(IList<object> record, string[] mapping);
+
+    public abstract class BaseRecordValidator
     {
         protected string[] mapping;
         protected ValidationMethod[] validationMethods;
@@ -17,18 +20,18 @@ namespace RecordValidation
         /// <param name="record">welding inspection record</param>
         /// <param name="context">additional data, which is being passed along with a record</param>
         /// <returns>the list of InvalidDataInfo objects. In case there is no InvalidDataInfo returns an empty list</returns>
-        public List<InvalidDataInfo> ValidateRecord(IList<object> record, RecordContext context)
+        public List<IInvalidDataInfo> ValidateRecord(IList<object> record, IRecordContext context)
         {
-            List<InvalidDataInfo> invalidList = new List<InvalidDataInfo>();
+            List<IInvalidDataInfo> invalidList = new List<IInvalidDataInfo>();
 
             foreach (var validationMethod in validationMethods)
             {
-                InvalidDataInfo info = validationMethod(record, mapping);
+                IInvalidDataInfo info = validationMethod(record, mapping);
                 if (info != null)
                 {
                     info.ValidationMethod = validationMethod.Method.Name; // mostly for testing
                     info.Record = record;
-                    info.Context = RecordContext.CreateFrom(context);
+                    info.Context = (IRecordContext)context.Clone();
                     // (RecordContext kuriama kopija - tam, kad atsiradus poreikiui, būtų galima pridėti individualios info)
                     invalidList.Add(info);
                 }

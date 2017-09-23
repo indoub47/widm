@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace RecordValidation
 {
-    public static partial class ValidationMethods
+    public static partial class RecordValidationMethods
     {
         // Tikrina, ar patikrinimo data nėra ateityje arba per giliai praeityje
         private static bool IsNotReal(DateTime tikrinimoData)

@@ -5,7 +5,7 @@ using RecordValidation;
 namespace RecordValidationTest
 {
     [TestClass]
-    public class ValidationMethodsTest
+    public class RecordValidationMethodsTest
     {
         private static string[] mapping;
 

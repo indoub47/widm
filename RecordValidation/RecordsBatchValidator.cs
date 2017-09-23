@@ -3,27 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Interfaces;
 
 namespace RecordValidation
 {
     public class RecordsBatchValidator
     {
-        public SingleRecordValidator SingleRecordValidator { get; }
+        public BaseRecordValidator RecordValidator { get; }
         public RecordContext Context { get; }
 
-        public RecordsBatchValidator(SingleRecordValidator singleRecordValidator, RecordContext context)
+        public RecordsBatchValidator(BaseRecordValidator recordValidator, RecordContext context)
         {
-            SingleRecordValidator = singleRecordValidator;
+            RecordValidator = recordValidator;
             Context = context;
         }
         
-        public List<InvalidDataInfo> ValidateBatch(List<IList<object>> records)
+        public List<IInvalidDataInfo> ValidateBatch(List<IList<object>> records)
         {
-            List<InvalidDataInfo> allInvalids = new List<InvalidDataInfo>();
+            List<IInvalidDataInfo> allInvalids = new List<IInvalidDataInfo>();
 
             foreach(var record in records)
             {
-                List<InvalidDataInfo> singleRecordInvalids = SingleRecordValidator.ValidateRecord(record, Context);
+                List<IInvalidDataInfo> singleRecordInvalids = RecordValidator.ValidateRecord(record, Context);
                 allInvalids.AddRange(singleRecordInvalids);
             }
 

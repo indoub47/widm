@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspectionValidationTests",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspPoolCommunication", "InspPoolCommunication\InspPoolCommunication.csproj", "{A5CF4285-5E8E-4F1D-96EE-89178AF4F07F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\Interfaces.csproj", "{EC03EBF3-4317-4304-9ECA-E7E7937673F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -101,6 +103,14 @@ Global
 		{A5CF4285-5E8E-4F1D-96EE-89178AF4F07F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A5CF4285-5E8E-4F1D-96EE-89178AF4F07F}.Release|x64.ActiveCfg = Release|Any CPU
 		{A5CF4285-5E8E-4F1D-96EE-89178AF4F07F}.Release|x64.Build.0 = Release|Any CPU
+		{EC03EBF3-4317-4304-9ECA-E7E7937673F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC03EBF3-4317-4304-9ECA-E7E7937673F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC03EBF3-4317-4304-9ECA-E7E7937673F3}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{EC03EBF3-4317-4304-9ECA-E7E7937673F3}.Debug|x64.Build.0 = Debug|Any CPU
+		{EC03EBF3-4317-4304-9ECA-E7E7937673F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC03EBF3-4317-4304-9ECA-E7E7937673F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC03EBF3-4317-4304-9ECA-E7E7937673F3}.Release|x64.ActiveCfg = Release|Any CPU
+		{EC03EBF3-4317-4304-9ECA-E7E7937673F3}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

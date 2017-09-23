@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Data;
 using InspectionLib;
 
-namespace InspPoolCommunication
+namespace Interfaces
 {
     public interface IInspPoolCommunicator
     {

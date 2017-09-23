@@ -73,7 +73,7 @@
     <Compile Include="NepirmRecordValidatorTest.cs" />
     <Compile Include="PirmRecordValidatorTest.cs" />
     <Compile Include="RecordsBatchValidatorTest.cs" />
-    <Compile Include="ValidationMethodsTest.cs" />
+    <Compile Include="RecordValidationMethodsTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

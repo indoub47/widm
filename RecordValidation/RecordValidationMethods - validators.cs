@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Interfaces;
 
 namespace RecordValidation
 {
-    public delegate InvalidDataInfo ValidationMethod(IList<object> record, string[] mapping); 
-
-    public static partial class ValidationMethods
+    public static partial class RecordValidationMethods
     {
-        public static InvalidDataInfo ValidateId(IList<object> record, string[] mapping)
+        public static IInvalidDataInfo ValidateId(IList<object> record, string[] mapping)
         {
             return ValidatePositiveLong(
                 "id",
@@ -21,7 +20,7 @@ namespace RecordValidation
                 );
         }
 
-        public static InvalidDataInfo ValidateLinija(IList<object> record, string[] mapping)
+        public static IInvalidDataInfo ValidateLinija(IList<object> record, string[] mapping)
         {
             return ValidateStringFromArray(
                 "linija",
@@ -31,33 +30,33 @@ namespace RecordValidation
                 "linija");
         }
 
-        public static InvalidDataInfo ValidateKelias(
+        public static IInvalidDataInfo ValidateKelias(
             IList<object> record, string[] mapping)
         {
             return ValidatePositiveInt("kelias", record, mapping, "oo.Xooo.oo.oo.o");
         }
 
-        public static InvalidDataInfo ValidateKm(IList<object> record, string[] mapping)
+        public static IInvalidDataInfo ValidateKm(IList<object> record, string[] mapping)
         {
             return ValidatePositiveInt("km", record, mapping, "oo.oXXX.oo.oo.o");
         }
 
-        public static InvalidDataInfo ValidatePk(IList<object> record, string[] mapping)
+        public static IInvalidDataInfo ValidatePk(IList<object> record, string[] mapping)
         {
             return ValidatePositiveIntOrZeroOrNull("pk", record, mapping, "oo.oooo.XX.oo.o");
         }
 
-        public static InvalidDataInfo ValidateM(IList<object> record, string[] mapping)
+        public static IInvalidDataInfo ValidateM(IList<object> record, string[] mapping)
         {
             return ValidatePositiveIntOrZero("m", record, mapping, "oo.oooo.oo.XX.o");
         }
 
-        public static InvalidDataInfo ValidateSiule(IList<object> record, string[] mapping)
+        public static IInvalidDataInfo ValidateSiule(IList<object> record, string[] mapping)
         {
             return ValidatePositiveIntOrZeroOrNull("siule", record, mapping, "oo.oooo.oo.oo.X");
         }
 
-        public static InvalidDataInfo ValidateSalKodas(IList<object> record, string[] mapping)
+        public static IInvalidDataInfo ValidateSalKodas(IList<object> record, string[] mapping)
         {
             return ValidateStringFromArray(
                 "salyginis_kodas",
@@ -67,7 +66,7 @@ namespace RecordValidation
                 "salyginis kodas");
         }
 
-        public static InvalidDataInfo ValidateAparatas(IList<object> record, string[] mapping)
+        public static IInvalidDataInfo ValidateAparatas(IList<object> record, string[] mapping)
         {
             return ValidateStringFromArray(
                 "aparatas",
@@ -77,7 +76,7 @@ namespace RecordValidation
                 "defektoskopo kodas");
         }
 
-        public static InvalidDataInfo ValidateTikrinimoData(IList<object> record, string[] mapping)
+        public static IInvalidDataInfo ValidateTikrinimoData(IList<object> record, string[] mapping)
         {
             string errorMessage = "tikrinimo data";
             object value = GetRowItem("tikrinimo_data", record, mapping);
@@ -121,7 +120,7 @@ namespace RecordValidation
         /// <param name="mapping"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public static InvalidDataInfo ValidateTikrinimoDataIsReal(IList<object> record, string[] mapping)
+        public static IInvalidDataInfo ValidateTikrinimoDataIsReal(IList<object> record, string[] mapping)
         {
             if (
                 !Properties.Settings.Default.CheckIfDateIfReal ||
@@ -144,7 +143,7 @@ namespace RecordValidation
             }  
         }
 
-        public static InvalidDataInfo ValidateSuvirino(IList<object> record, string[] mapping)
+        public static IInvalidDataInfo ValidateSuvirino(IList<object> record, string[] mapping)
         {
             return ValidateStringFromArray(
                 "suvirino",
@@ -154,7 +153,7 @@ namespace RecordValidation
                 "kas suvirino");
         }
 
-        public static InvalidDataInfo ValidateKelintas(IList<object> record, string[] mapping)
+        public static IInvalidDataInfo ValidateKelintas(IList<object> record, string[] mapping)
         {
             return ValidateStringFromArray(
                 "kelintas_tikrinimas",
@@ -164,7 +163,7 @@ namespace RecordValidation
                 "kelintas tikrinimas");
         }
 
-        public static InvalidDataInfo ValidateNegaliButiPirmas(IList<object> record, string[] mapping)
+        public static IInvalidDataInfo ValidateNegaliButiPirmas(IList<object> record, string[] mapping)
         {
             // jeigu "kelintas" yra išvis blogas - bus išgaudytas, ten, kur tikrinamas kelintas
             if (ValidateKelintas(record, mapping) != null)
@@ -200,7 +199,7 @@ namespace RecordValidation
         /// <param name="record"></param>
         /// <param name="mapping"></param>
         /// <returns></returns>
-        public static InvalidDataInfo ValidatePrivalomasPk(IList<object> record, string[] mapping)
+        public static IInvalidDataInfo ValidatePrivalomasPk(IList<object> record, string[] mapping)
         {
             // specifinis pirmiesiems
 
@@ -242,7 +241,7 @@ namespace RecordValidation
         /// <param name="record"></param>
         /// <param name="mapping"></param>
         /// <returns></returns>
-        public static InvalidDataInfo ValidateSiuleIesmeEmpty(IList<object> record, string[] mapping)
+        public static IInvalidDataInfo ValidateSiuleIesmeEmpty(IList<object> record, string[] mapping)
         {
             // specifinis pirmiesiems
 

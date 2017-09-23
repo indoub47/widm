@@ -5,12 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InspectionLib;
+using Interfaces;
 
 namespace InspectionValidation
 {
-    public delegate IList<SuspInspInfo> InspValidateMethod(Insp inspection, DataTable records);
+    public delegate IList<ISuspInspInfo> InspValidateMethod(Insp inspection, DataTable records);
 
-    public static class ValidationMethods
+    public static class InspValidationMethods
     {
         /// <summary>
         /// Tikrina pirmąjį tikrinimą ar DB nėra su tokiu pat vietos kodu
@@ -18,9 +19,9 @@ namespace InspectionValidation
         /// <param name="insp">Suvirinimo tikrinimo objektas, kurį reikia patikrinti</param>
         /// <param name="tblRecords">Įrašai DB, kurie turi tą patį vietos kodą kaip tikrinamas suvirinimas</param>
         /// <returns></returns>
-        public static IList<SuspInspInfo> ValidatePirm(Insp insp, DataTable tblRecords)
+        public static IList<ISuspInspInfo> ValidatePirm(Insp insp, DataTable tblRecords)
         {
-            var returnList = new List<SuspInspInfo>();
+            var returnList = new List<ISuspInspInfo>();
             if (insp.Kelintas != Kelintas.First)
             {
                 throw new ArgumentException("Nepirmasis tikrinimas tikrinamas kaip pirmasis");
@@ -45,7 +46,7 @@ namespace InspectionValidation
         /// <param name="tblRecords">Įrašai DB, kurie turi tą patį ID kaip tikrinamas suvirinimas. 
         /// Turėtų būti tik vienas toks, nes keli vienodi ID neleidžiami DB</param>
         /// <returns></returns>
-        public static IList<SuspInspInfo> ValidateNepirm(Insp insp, DataTable tblRecords)
+        public static IList<ISuspInspInfo> ValidateNepirm(Insp insp, DataTable tblRecords)
         {
             if (insp.Kelintas == Kelintas.First)
             {
@@ -57,7 +58,7 @@ namespace InspectionValidation
                 throw new Exception("DB keli įrašai su tuo pačiu ID " + tblRecords.Rows[0]["id"]?.ToString());
             }
 
-            var suspicions = new List<SuspInspInfo>();
+            var suspicions = new List<ISuspInspInfo>();
 
             if (tblRecords.Rows.Count == 0)
             {
@@ -76,18 +77,18 @@ namespace InspectionValidation
                 switch (insp.Kelintas)
                 {
                     case Kelintas.Second:
-                        patDataField = "II_pat_data";
-                        formerPatDataField = "I_pat_data";
-                        nextPatDataField = "III_pat_data";
+                        patDataField = "data2";
+                        formerPatDataField = "data1";
+                        nextPatDataField = "data3";
                         break;
                     case Kelintas.Third:
-                        patDataField = "III_pat_data";
-                        formerPatDataField = "II_pat_data";
-                        nextPatDataField = "IV_pat_data";
+                        patDataField = "data3";
+                        formerPatDataField = "data2";
+                        nextPatDataField = "data4";
                         break;
                     case Kelintas.Fourth:
-                        patDataField = "IV_pat_data";
-                        formerPatDataField = "III_pat_data";
+                        patDataField = "data4";
+                        formerPatDataField = "data3";
                         break;
                 }
 
@@ -103,13 +104,15 @@ namespace InspectionValidation
 
         private static void checkIfFormerInspDateIsNotLater(
             Insp insp,
-            List<SuspInspInfo> suspicions,
+            List<ISuspInspInfo> suspicions,
             DataRow record,
             string patDataField,
             string formerPatDataField)
         {
             // formerPatDataField turi būti ankstesnis už wi.Data
-            if (Convert.ToDateTime(record[formerPatDataField]) > insp.TData)
+            if (
+                record[formerPatDataField] != null && record[formerPatDataField].ToString().Trim() != string.Empty &&
+                Convert.ToDateTime(record[formerPatDataField]) > insp.TData )
             {
                 suspicions.Add(new SuspInspInfo(string.Format(
                     "ankstesnis patikrinimas {0} atliktas vėliau ({1:d}) negu dabar siūlomas {2} ({3:d}).",
@@ -121,7 +124,7 @@ namespace InspectionValidation
         }
 
         private static void checkIfLaterInspIsntDone(
-            List<SuspInspInfo> suspicions,
+            List<ISuspInspInfo> suspicions,
             DataRow record,
             string nextPatDataField)
         {
@@ -140,7 +143,7 @@ namespace InspectionValidation
 
 
         private static void checkIfFormerInspIsDone(
-            List<SuspInspInfo> suspicions,
+            List<ISuspInspInfo> suspicions,
             DataRow record,
             string formerPatDataField)
         {
@@ -157,7 +160,7 @@ namespace InspectionValidation
 
         private static void checkIfNotInspectedYet(
             Insp insp,
-            List<SuspInspInfo> suspicions,
+            List<ISuspInspInfo> suspicions,
             DataRow record,
             string patDataField)
         {
@@ -166,7 +169,7 @@ namespace InspectionValidation
                  record[patDataField].ToString() != string.Empty)
             {
                 suspicions.Add(new SuspInspInfo(string.Format(
-                    "{0} tikrinimas jau atliktas.",
+                    "{0} tikrinimas jau atliktas",
                     (int)insp.Kelintas)));
             }
         }
@@ -174,21 +177,21 @@ namespace InspectionValidation
 
         private static void checkIfSkodaiAgree(
             Insp insp,
-            List<SuspInspInfo> suspicions,
+            List<ISuspInspInfo> suspicions,
             DataRow record)
         {
-            if (record["salyginis_kodas"].ToString() != insp.SKodas) // nereikia tikrinti null,  nes yra privalomas
+            if (record["skodas"].ToString() != insp.SKodas) // nereikia tikrinti null,  nes yra privalomas
             {
                 suspicions.Add(new SuspInspInfo(string.Format(
                     "esantis sąlyginis kodas {0} neatitinka siūlomo sąlyginio kodo {1}",
-                    record["salyginis_kodas"],
+                    record["skodas"],
                     insp.SKodas)));
             }
         }
 
         private static void checkIfVietosAgree(
             Insp insp,
-            List<SuspInspInfo> suspicions,
+            List<ISuspInspInfo> suspicions,
             DataRow record)
         {
             string recordVietosKodas = string.Format("{0}.{1:0}{2:000}.{3:#00}.{4:#00}.{5:##0}",

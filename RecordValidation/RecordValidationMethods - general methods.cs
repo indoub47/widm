@@ -4,10 +4,11 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Interfaces;
 
 namespace RecordValidation
 {
-    public static partial class ValidationMethods
+    public static partial class RecordValidationMethods
     {
         [AttributeUsage(AttributeTargets.Method)]
         private class AllowZeroAttribute : System.Attribute
@@ -35,7 +36,7 @@ namespace RecordValidation
         /// <param name="errorMessage"></param>
         /// <param name="attributes"></param>
         /// <returns></returns>
-        private static InvalidDataInfo validateIntegralNumber(
+        private static IInvalidDataInfo validateIntegralNumber(
             string propertyName,
             IList<object> record,
             string[] mapping,
@@ -90,7 +91,7 @@ namespace RecordValidation
         }
 
         [Int64]
-        private static InvalidDataInfo ValidatePositiveLong(
+        private static IInvalidDataInfo ValidatePositiveLong(
             string propertyName,
             IList<object> record,
             string[] mapping,
@@ -107,7 +108,7 @@ namespace RecordValidation
         }
 
         [AllowNull]
-        private static InvalidDataInfo ValidatePositiveIntOrNull(
+        private static IInvalidDataInfo ValidatePositiveIntOrNull(
             string propertyName,
             IList<object> record,
             string[] mapping,
@@ -124,7 +125,7 @@ namespace RecordValidation
         }
 
         [AllowZero]
-        private static InvalidDataInfo ValidatePositiveIntOrZero(
+        private static IInvalidDataInfo ValidatePositiveIntOrZero(
             string propertyName,
             IList<object> record,
             string[] mapping,
@@ -142,7 +143,7 @@ namespace RecordValidation
 
         [AllowZero]
         [AllowNull]
-        private static InvalidDataInfo ValidatePositiveIntOrZeroOrNull(
+        private static IInvalidDataInfo ValidatePositiveIntOrZeroOrNull(
             string propertyName,
             IList<object> record,
             string[] mapping,
@@ -158,7 +159,7 @@ namespace RecordValidation
                 attributes);
         }
 
-        private static InvalidDataInfo ValidatePositiveInt(
+        private static IInvalidDataInfo ValidatePositiveInt(
             string propertyName,
             IList<object> record,
             string[] mapping,
@@ -174,7 +175,7 @@ namespace RecordValidation
                 attributes);
         }
 
-        private static InvalidDataInfo ValidateStringFromArray(
+        private static IInvalidDataInfo ValidateStringFromArray(
             string propertyName,
             string[] validValues,
             IList<object> record,
