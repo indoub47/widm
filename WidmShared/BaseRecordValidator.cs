@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Interfaces
+namespace WidmShared
 {
 
-    public delegate IInvalidDataInfo ValidationMethod(IList<object> record, string[] mapping);
+    public delegate InvalidRecordInfo ValidationMethod(IList<object> record, string[] mapping);
 
     public abstract class BaseRecordValidator
     {
@@ -20,18 +20,18 @@ namespace Interfaces
         /// <param name="record">welding inspection record</param>
         /// <param name="context">additional data, which is being passed along with a record</param>
         /// <returns>the list of InvalidDataInfo objects. In case there is no InvalidDataInfo returns an empty list</returns>
-        public List<IInvalidDataInfo> ValidateRecord(IList<object> record, IRecordContext context)
+        public List<InvalidRecordInfo> ValidateRecord(IList<object> record, RecordContext context)
         {
-            List<IInvalidDataInfo> invalidList = new List<IInvalidDataInfo>();
+            List<InvalidRecordInfo> invalidList = new List<InvalidRecordInfo>();
 
             foreach (var validationMethod in validationMethods)
             {
-                IInvalidDataInfo info = validationMethod(record, mapping);
+                InvalidRecordInfo info = validationMethod(record, mapping);
                 if (info != null)
                 {
                     info.ValidationMethod = validationMethod.Method.Name; // mostly for testing
                     info.Record = record;
-                    info.Context = (IRecordContext)context.Clone();
+                    info.Context = (RecordContext)context.Clone();
                     // (RecordContext kuriama kopija - tam, kad atsiradus poreikiui, būtų galima pridėti individualios info)
                     invalidList.Add(info);
                 }

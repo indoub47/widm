@@ -21,7 +21,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspectionValidationTests",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspPoolCommunication", "InspPoolCommunication\InspPoolCommunication.csproj", "{A5CF4285-5E8E-4F1D-96EE-89178AF4F07F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\Interfaces.csproj", "{EC03EBF3-4317-4304-9ECA-E7E7937673F3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WidmShared", "WidmShared\WidmShared.csproj", "{EC03EBF3-4317-4304-9ECA-E7E7937673F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

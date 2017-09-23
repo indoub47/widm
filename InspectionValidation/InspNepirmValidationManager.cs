@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InspectionLib;
-using Interfaces;
+using WidmShared;
 using System.Data;
 
 namespace InspectionValidation
@@ -17,7 +17,7 @@ namespace InspectionValidation
             
         }
 
-        public override IList<ISuspInspInfo> Validate(Insp insp)
+        public override IList<SuspInspInfo> Validate(Insp insp)
         {
             DataTable dTable = _inspPoolCommunicator.FetchById((long)insp.Id);
                 return InspValidationMethods.ValidateNepirm(insp, dTable);

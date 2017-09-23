@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using Interfaces;
+using WidmShared;
 
 namespace RecordValidation
 {
@@ -36,7 +36,7 @@ namespace RecordValidation
         /// <param name="errorMessage"></param>
         /// <param name="attributes"></param>
         /// <returns></returns>
-        private static IInvalidDataInfo validateIntegralNumber(
+        private static InvalidRecordInfo validateIntegralNumber(
             string propertyName,
             IList<object> record,
             string[] mapping,
@@ -45,7 +45,7 @@ namespace RecordValidation
         {
 
             object value = GetRowItem(propertyName, record, mapping);
-            var idi = new InvalidDataInfo(errorMessage);
+            var idi = new InvalidRecordInfo(errorMessage);
 
             if (IsEmpty(value))
             {
@@ -91,7 +91,7 @@ namespace RecordValidation
         }
 
         [Int64]
-        private static IInvalidDataInfo ValidatePositiveLong(
+        private static InvalidRecordInfo ValidatePositiveLong(
             string propertyName,
             IList<object> record,
             string[] mapping,
@@ -108,7 +108,7 @@ namespace RecordValidation
         }
 
         [AllowNull]
-        private static IInvalidDataInfo ValidatePositiveIntOrNull(
+        private static InvalidRecordInfo ValidatePositiveIntOrNull(
             string propertyName,
             IList<object> record,
             string[] mapping,
@@ -125,7 +125,7 @@ namespace RecordValidation
         }
 
         [AllowZero]
-        private static IInvalidDataInfo ValidatePositiveIntOrZero(
+        private static InvalidRecordInfo ValidatePositiveIntOrZero(
             string propertyName,
             IList<object> record,
             string[] mapping,
@@ -143,7 +143,7 @@ namespace RecordValidation
 
         [AllowZero]
         [AllowNull]
-        private static IInvalidDataInfo ValidatePositiveIntOrZeroOrNull(
+        private static InvalidRecordInfo ValidatePositiveIntOrZeroOrNull(
             string propertyName,
             IList<object> record,
             string[] mapping,
@@ -159,7 +159,7 @@ namespace RecordValidation
                 attributes);
         }
 
-        private static IInvalidDataInfo ValidatePositiveInt(
+        private static InvalidRecordInfo ValidatePositiveInt(
             string propertyName,
             IList<object> record,
             string[] mapping,
@@ -175,7 +175,7 @@ namespace RecordValidation
                 attributes);
         }
 
-        private static IInvalidDataInfo ValidateStringFromArray(
+        private static InvalidRecordInfo ValidateStringFromArray(
             string propertyName,
             string[] validValues,
             IList<object> record,
@@ -188,7 +188,7 @@ namespace RecordValidation
                 Array.IndexOf(validValues, value.ToString().Trim()) == -1
                )
             {
-                return new InvalidDataInfo(errorMessage);
+                return new InvalidRecordInfo(errorMessage);
             }
             else
             {

@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using InspectionLib;
-using Interfaces;
 
-namespace InspectionValidation
+namespace WidmShared
 {
-    public class SuspInspInfo : ISuspInspInfo
+    public class InvalidRecordInfo
     {
-        public Insp Insp { get; set; }
+        public IList<object> Record { get; set; }
         public string Message { get; set; }
         public string ValidationMethod { get; set; }
-        public InspContext Context { get; set; }
+        public RecordContext Context { get; set; }
 
         // must be overriden
         public string Tag
@@ -21,7 +19,7 @@ namespace InspectionValidation
             get { return ""; }
         }
 
-        public SuspInspInfo(string errorMessage)
+        public InvalidRecordInfo(string errorMessage)
         {
             Message = errorMessage;
         }

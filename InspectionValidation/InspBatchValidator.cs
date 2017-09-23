@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InspectionLib;
-using Interfaces;
+using WidmShared;
 
 namespace InspectionValidation
 {
@@ -17,9 +17,9 @@ namespace InspectionValidation
             _validationManager = validationManager;
         }
 
-        IList<ISuspInspInfo> Validate(IList<Insp> inspections)
+        IList<SuspInspInfo> Validate(IList<Insp> inspections)
         {
-            List<ISuspInspInfo> allInfos = new List<ISuspInspInfo>();
+            List<SuspInspInfo> allInfos = new List<SuspInspInfo>();
             foreach (Insp insp in inspections)
             {
                 allInfos.Concat(_validationManager.Validate(insp));

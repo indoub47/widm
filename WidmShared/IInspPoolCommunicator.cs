@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Data;
 using InspectionLib;
 
-namespace Interfaces
+namespace WidmShared
 {
     public interface IInspPoolCommunicator
     {

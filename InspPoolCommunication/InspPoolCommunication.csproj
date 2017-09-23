@@ -33,9 +33,6 @@
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="InspectionLib">
-      <HintPath>..\InspectionLib\bin\x64\Release\InspectionLib.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -49,9 +46,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+    <ProjectReference Include="..\WidmShared\WidmShared.csproj">
       <Project>{ec03ebf3-4317-4304-9eca-e7e7937673f3}</Project>
-      <Name>Interfaces</Name>
+      <Name>WidmShared</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

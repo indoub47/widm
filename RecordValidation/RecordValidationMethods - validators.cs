@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Interfaces;
+using WidmShared;
 
 namespace RecordValidation
 {
     public static partial class RecordValidationMethods
     {
-        public static IInvalidDataInfo ValidateId(IList<object> record, string[] mapping)
+        public static InvalidRecordInfo ValidateId(IList<object> record, string[] mapping)
         {
             return ValidatePositiveLong(
                 "id",
@@ -20,7 +20,7 @@ namespace RecordValidation
                 );
         }
 
-        public static IInvalidDataInfo ValidateLinija(IList<object> record, string[] mapping)
+        public static InvalidRecordInfo ValidateLinija(IList<object> record, string[] mapping)
         {
             return ValidateStringFromArray(
                 "linija",
@@ -30,33 +30,33 @@ namespace RecordValidation
                 "linija");
         }
 
-        public static IInvalidDataInfo ValidateKelias(
+        public static InvalidRecordInfo ValidateKelias(
             IList<object> record, string[] mapping)
         {
             return ValidatePositiveInt("kelias", record, mapping, "oo.Xooo.oo.oo.o");
         }
 
-        public static IInvalidDataInfo ValidateKm(IList<object> record, string[] mapping)
+        public static InvalidRecordInfo ValidateKm(IList<object> record, string[] mapping)
         {
             return ValidatePositiveInt("km", record, mapping, "oo.oXXX.oo.oo.o");
         }
 
-        public static IInvalidDataInfo ValidatePk(IList<object> record, string[] mapping)
+        public static InvalidRecordInfo ValidatePk(IList<object> record, string[] mapping)
         {
             return ValidatePositiveIntOrZeroOrNull("pk", record, mapping, "oo.oooo.XX.oo.o");
         }
 
-        public static IInvalidDataInfo ValidateM(IList<object> record, string[] mapping)
+        public static InvalidRecordInfo ValidateM(IList<object> record, string[] mapping)
         {
             return ValidatePositiveIntOrZero("m", record, mapping, "oo.oooo.oo.XX.o");
         }
 
-        public static IInvalidDataInfo ValidateSiule(IList<object> record, string[] mapping)
+        public static InvalidRecordInfo ValidateSiule(IList<object> record, string[] mapping)
         {
             return ValidatePositiveIntOrZeroOrNull("siule", record, mapping, "oo.oooo.oo.oo.X");
         }
 
-        public static IInvalidDataInfo ValidateSalKodas(IList<object> record, string[] mapping)
+        public static InvalidRecordInfo ValidateSalKodas(IList<object> record, string[] mapping)
         {
             return ValidateStringFromArray(
                 "salyginis_kodas",
@@ -66,7 +66,7 @@ namespace RecordValidation
                 "salyginis kodas");
         }
 
-        public static IInvalidDataInfo ValidateAparatas(IList<object> record, string[] mapping)
+        public static InvalidRecordInfo ValidateAparatas(IList<object> record, string[] mapping)
         {
             return ValidateStringFromArray(
                 "aparatas",
@@ -76,14 +76,14 @@ namespace RecordValidation
                 "defektoskopo kodas");
         }
 
-        public static IInvalidDataInfo ValidateTikrinimoData(IList<object> record, string[] mapping)
+        public static InvalidRecordInfo ValidateTikrinimoData(IList<object> record, string[] mapping)
         {
             string errorMessage = "tikrinimo data";
             object value = GetRowItem("tikrinimo_data", record, mapping);
 
             if (IsEmpty(value))
             {
-                return new InvalidDataInfo(errorMessage);
+                return new InvalidRecordInfo(errorMessage);
             }
 
             Regex regex = new Regex(@"\d{4}[/\.\- ]\d{1,2}[/\.\- ]\d{1,2}");
@@ -96,7 +96,7 @@ namespace RecordValidation
             if (!regex.IsMatch(value.ToString().Trim()))
             {
                 errorMessage = "blogas datos formatas";
-                return new InvalidDataInfo(errorMessage);
+                return new InvalidRecordInfo(errorMessage);
             }
 
             try
@@ -106,7 +106,7 @@ namespace RecordValidation
             }
             catch
             {
-                return new InvalidDataInfo(errorMessage);
+                return new InvalidRecordInfo(errorMessage);
             }
         }
 
@@ -120,7 +120,7 @@ namespace RecordValidation
         /// <param name="mapping"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public static IInvalidDataInfo ValidateTikrinimoDataIsReal(IList<object> record, string[] mapping)
+        public static InvalidRecordInfo ValidateTikrinimoDataIsReal(IList<object> record, string[] mapping)
         {
             if (
                 !Properties.Settings.Default.CheckIfDateIfReal ||
@@ -135,7 +135,7 @@ namespace RecordValidation
             if (IsNotReal(data))
             {
                 string errorMessage = string.Format("tikrinimo data {0:yyyy-MM-dd} neatrodo reali", data);
-                return new InvalidDataInfo(errorMessage);
+                return new InvalidRecordInfo(errorMessage);
             }
             else
             {
@@ -143,7 +143,7 @@ namespace RecordValidation
             }  
         }
 
-        public static IInvalidDataInfo ValidateSuvirino(IList<object> record, string[] mapping)
+        public static InvalidRecordInfo ValidateSuvirino(IList<object> record, string[] mapping)
         {
             return ValidateStringFromArray(
                 "suvirino",
@@ -153,7 +153,7 @@ namespace RecordValidation
                 "kas suvirino");
         }
 
-        public static IInvalidDataInfo ValidateKelintas(IList<object> record, string[] mapping)
+        public static InvalidRecordInfo ValidateKelintas(IList<object> record, string[] mapping)
         {
             return ValidateStringFromArray(
                 "kelintas_tikrinimas",
@@ -163,7 +163,7 @@ namespace RecordValidation
                 "kelintas tikrinimas");
         }
 
-        public static IInvalidDataInfo ValidateNegaliButiPirmas(IList<object> record, string[] mapping)
+        public static InvalidRecordInfo ValidateNegaliButiPirmas(IList<object> record, string[] mapping)
         {
             // jeigu "kelintas" yra išvis blogas - bus išgaudytas, ten, kur tikrinamas kelintas
             if (ValidateKelintas(record, mapping) != null)
@@ -185,7 +185,7 @@ namespace RecordValidation
             if (kelintas == "1")
             {
                 string errorMessage = "šitas suvirinimas negali būti pirmasis";
-                return new InvalidDataInfo(errorMessage);
+                return new InvalidRecordInfo(errorMessage);
             }
 
             // jeigu ne pirmas
@@ -199,7 +199,7 @@ namespace RecordValidation
         /// <param name="record"></param>
         /// <param name="mapping"></param>
         /// <returns></returns>
-        public static IInvalidDataInfo ValidatePrivalomasPk(IList<object> record, string[] mapping)
+        public static InvalidRecordInfo ValidatePrivalomasPk(IList<object> record, string[] mapping)
         {
             // specifinis pirmiesiems
 
@@ -222,12 +222,12 @@ namespace RecordValidation
             if (kelias != 8 && (IsEmpty(obPk) || Convert.ToInt32(obPk) == 0))
             {
                 string errorMessage = "pk čia negali būti tuščias arba nulis";
-                return new InvalidDataInfo(errorMessage);
+                return new InvalidRecordInfo(errorMessage);
             }
             else if (kelias == 8 && !IsEmpty(obPk) && Convert.ToInt32(obPk) != 0)
             {
                 string errorMessage = "didelės stoties iešme pk turi būti tuščias arba nulis";
-                return new InvalidDataInfo(errorMessage);
+                return new InvalidRecordInfo(errorMessage);
             }
             else
             {
@@ -241,7 +241,7 @@ namespace RecordValidation
         /// <param name="record"></param>
         /// <param name="mapping"></param>
         /// <returns></returns>
-        public static IInvalidDataInfo ValidateSiuleIesmeEmpty(IList<object> record, string[] mapping)
+        public static InvalidRecordInfo ValidateSiuleIesmeEmpty(IList<object> record, string[] mapping)
         {
             // specifinis pirmiesiems
 
@@ -265,12 +265,12 @@ namespace RecordValidation
             if ((kelias == 8 || kelias == 9) && !IsEmpty(obSiule))
             {
                 string errorMessage = "suvirinimas iešme, o nurodyta siūlė";
-                return new InvalidDataInfo(errorMessage);
+                return new InvalidRecordInfo(errorMessage);
             }
             else if (kelias != 8 && kelias != 9 && IsEmpty(obSiule))
             {
                 string errorMessage = "suvirinimas ne iešme, o siūlė nenurodyta";
-                return new InvalidDataInfo(errorMessage);
+                return new InvalidRecordInfo(errorMessage);
             }
             else
             {

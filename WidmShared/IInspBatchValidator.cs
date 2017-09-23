@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using InspectionLib;
 
-namespace Interfaces
+namespace WidmShared
 {
     public interface IInspBatchValidator
     {
-        IList<ISuspInspInfo> Validate(IList<Insp> inspections);
+        IList<SuspInspInfo> Validate(IList<Insp> inspections);
     }
 }

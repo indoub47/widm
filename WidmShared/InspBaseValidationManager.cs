@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using InspectionLib;
 
 
-namespace Interfaces
+namespace WidmShared
 {
     abstract public class InspBaseValidationManager
     {
@@ -14,6 +14,6 @@ namespace Interfaces
 
         public InspBaseValidationManager(IInspPoolCommunicator communicator) => _inspPoolCommunicator = communicator;
 
-        public abstract IList<ISuspInspInfo> Validate(Insp insp);
+        public abstract IList<SuspInspInfo> Validate(Insp insp);
     }
 }

@@ -74,9 +74,9 @@
       <Project>{a39bc841-3df0-4dbe-b091-7f97c647561f}</Project>
       <Name>InspectionValidation</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+    <ProjectReference Include="..\WidmShared\WidmShared.csproj">
       <Project>{ec03ebf3-4317-4304-9eca-e7e7937673f3}</Project>
-      <Name>Interfaces</Name>
+      <Name>WidmShared</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

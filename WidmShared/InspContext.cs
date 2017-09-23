@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InspectionLib;
-using Interfaces;
 
-namespace InspectionValidation
+namespace WidmShared
 {
-    public struct InspContext : IInspContext
+    public struct InspContext
     {
         public List<object> Objects { get; set; }
 

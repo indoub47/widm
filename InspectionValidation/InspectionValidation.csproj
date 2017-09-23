@@ -63,18 +63,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="InspContext.cs" />
     <Compile Include="InspNepirmValidationManager.cs" />
     <Compile Include="InspPirmValidationManager.cs" />
     <Compile Include="InspValidationMethods.cs" />
     <Compile Include="InspBatchValidator.cs" />
-    <Compile Include="SuspInspInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+    <ProjectReference Include="..\WidmShared\WidmShared.csproj">
       <Project>{ec03ebf3-4317-4304-9eca-e7e7937673f3}</Project>
-      <Name>Interfaces</Name>
+      <Name>WidmShared</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

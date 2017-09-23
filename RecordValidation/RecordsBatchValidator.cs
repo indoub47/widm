@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Interfaces;
+using WidmShared;
 
 namespace RecordValidation
 {
@@ -18,13 +18,13 @@ namespace RecordValidation
             Context = context;
         }
         
-        public List<IInvalidDataInfo> ValidateBatch(List<IList<object>> records)
+        public List<InvalidRecordInfo> ValidateBatch(List<IList<object>> records)
         {
-            List<IInvalidDataInfo> allInvalids = new List<IInvalidDataInfo>();
+            List<InvalidRecordInfo> allInvalids = new List<InvalidRecordInfo>();
 
             foreach(var record in records)
             {
-                List<IInvalidDataInfo> singleRecordInvalids = RecordValidator.ValidateRecord(record, Context);
+                List<InvalidRecordInfo> singleRecordInvalids = RecordValidator.ValidateRecord(record, Context);
                 allInvalids.AddRange(singleRecordInvalids);
             }
 

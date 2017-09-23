@@ -41,15 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IInspContext.cs" />
-    <Compile Include="IInvalidDataInfo.cs" />
     <Compile Include="InspBaseValidationManager.cs" />
     <Compile Include="IInspBatchValidator.cs" />
     <Compile Include="IInspPoolCommunicator.cs" />
-    <Compile Include="IRecordContext.cs" />
-    <Compile Include="ISuspInspInfo.cs" />
+    <Compile Include="InspContext.cs" />
+    <Compile Include="InvalidRecordInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BaseRecordValidator.cs" />
+    <Compile Include="RecordContext.cs" />
+    <Compile Include="SuspInspInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\InspectionLib\InspectionLib.csproj">

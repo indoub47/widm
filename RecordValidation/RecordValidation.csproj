@@ -60,7 +60,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="RecordValidationMethods - general methods.cs" />
-    <Compile Include="InvalidDataInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -73,7 +72,6 @@
     <Compile Include="NepirmRecordValidator.cs" />
     <Compile Include="PirmRecordValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RecordContext.cs" />
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -82,9 +80,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+    <ProjectReference Include="..\WidmShared\WidmShared.csproj">
       <Project>{ec03ebf3-4317-4304-9eca-e7e7937673f3}</Project>
-      <Name>Interfaces</Name>
+      <Name>WidmShared</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
