@@ -13,6 +13,14 @@ namespace DbMappings
         public string Name;
         public string DbName;
         public string TypeName;
+
+        public Type Tipas
+        {
+            get
+            {
+                return Type.GetType(TypeName);
+            }
+        }
     }
 
     public static class Mappings

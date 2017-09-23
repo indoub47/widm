@@ -1,0 +1,30 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="InspPoolCommunication.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ConnectionString" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Provider=Microsoft.ACE.OLEDB.12.0;Data Source={0};Persist Security Info=False;</Value>
+    </Setting>
+    <Setting Name="DbPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="FetchByIdQuery" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">SELECT * FROM ssd WHERE number = @id</Value>
+    </Setting>
+    <Setting Name="FetchByVietaQuery" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">SELECT * FROM ssd WHERE Linia = @linija AND Kel = @kelias AND kilomrtras = @km AND piket = @pk AND metras = @m AND siule = @siule AND [saliginis kodas] IN ('06.4', '06.3');</Value>
+    </Setting>
+    <Setting Name="InsertQuery" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">INSERT INTO ssd (Linia, Kel, kilomrtras, piket, metras, siule, [saliginis kodas], suv_numer, suvirino, IFas, Pak_suv_data, I_pat_data, I_pat_aparat, I_pat_operator, Pastaba) VALUES (@linija, @kelias, @km, @pk, @m, @siule, @skodas, @suv_numer, @suvirino, @ifas, @pak_suv_data, @data, @aparatas, @operatorius, @pastaba)</Value>
+    </Setting>
+    <Setting Name="Ifas" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="UpdateExtraQuery" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">UPDATE ssd SET Pastaba = Pastaba + " " + @pastaba WHERE number = @id;</Value>
+    </Setting>
+    <Setting Name="UpdateQueryFormat" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">UPDATE ssd SET {0} = @data, {1} = @aparatas, {2} = @operatorius, Pastaba = @pastaba WHERE number = @id</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

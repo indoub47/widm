@@ -12,5 +12,9 @@ namespace WidmShared
     {
         DataTable FetchById(long id);
         DataTable FetchByVieta(Insp insp);
+        int InsertInsp(Insp insp);
+        int BatchInsertInsp(IList<Insp> insps);
+        int UpdateInspInfo(Insp insp);
+        int BatchUpdateInsp(IList<Insp> insps);
     }
 }

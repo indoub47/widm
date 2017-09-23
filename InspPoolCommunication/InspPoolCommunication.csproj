@@ -43,13 +43,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OleDbInspPoolCommunicator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DbMappings\DbMappings.csproj">
+      <Project>{d17a7305-45bf-476a-abeb-9e7119d7f8a7}</Project>
+      <Name>DbMappings</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\InspectionLib\InspectionLib.csproj">
+      <Project>{8893fdcf-18f1-4b18-a07c-59bb802a9f9f}</Project>
+      <Name>InspectionLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WidmShared\WidmShared.csproj">
       <Project>{ec03ebf3-4317-4304-9eca-e7e7937673f3}</Project>
       <Name>WidmShared</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
