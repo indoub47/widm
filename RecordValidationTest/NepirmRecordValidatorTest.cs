@@ -2,6 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RecordValidation;
 using System.Collections.Generic;
+using TagMaking;
+using WidmShared;
 
 namespace RecordValidationTest
 {
@@ -11,8 +13,10 @@ namespace RecordValidationTest
         [TestMethod]
         public void ValidateNepirmRecordTest()
         {
-            NepirmRecordValidator validator = new NepirmRecordValidator();
-            RecordContext ctx = new RecordContext(42, true, "meaning of life");
+            NepirmiejiRecordTagMaker tagMaker = new NepirmiejiRecordTagMaker();
+            NepirmRecordValidator validator = new NepirmRecordValidator(tagMaker);
+            Dictionary<string, object> ctx = new Dictionary<string, object>();
+            ctx["operatorId"] = "402"; ctx["sheetName"] = "nepirmieji tikrinimai";
 
             IList<IList<object>> recs = new object[][]
             {
@@ -25,25 +29,25 @@ namespace RecordValidationTest
                 new object[] { 0, "01", 8, 3, 6, 12, 0, "06.4", DateTime.Now, 5 } // 0 id, 5 kelintas, aparatas
             };
 
-            List<InvalidDataInfo> badDataList;
+            List<InvalidInfo> invalidList;
 
-            badDataList = validator.ValidateRecord(recs[0], ctx);
-            Assert.IsTrue(badDataList.Count == 0, "recs[0] count");
+            invalidList = validator.ValidateRecord(recs[0], ctx);
+            Assert.IsTrue(invalidList.Count == 0, "recs[0] count");
 
-            badDataList = validator.ValidateRecord(recs[1], ctx);
-            Assert.IsTrue(badDataList.Count == 0, "recs[1] count");
+            invalidList = validator.ValidateRecord(recs[1], ctx);
+            Assert.IsTrue(invalidList.Count == 0, "recs[1] count");
 
-            badDataList = validator.ValidateRecord(recs[2], ctx);
-            Assert.IsTrue(badDataList.Count == 1, "recs[2] count");
+            invalidList = validator.ValidateRecord(recs[2], ctx);
+            Assert.IsTrue(invalidList.Count == 1, "recs[2] count");
 
-            badDataList = validator.ValidateRecord(recs[3], ctx);
-            Assert.IsTrue(badDataList.Count == 2, "recs[3] count");
+            invalidList = validator.ValidateRecord(recs[3], ctx);
+            Assert.IsTrue(invalidList.Count == 2, "recs[3] count");
 
-            badDataList = validator.ValidateRecord(recs[4], ctx);
-            Assert.IsTrue(badDataList.Count == 9, "recs[4] count");
+            invalidList = validator.ValidateRecord(recs[4], ctx);
+            Assert.IsTrue(invalidList.Count == 9, "recs[4] count");
 
-            badDataList = validator.ValidateRecord(recs[5], ctx);
-            Assert.IsTrue(badDataList.Count == 3, "recs[5] count");
+            invalidList = validator.ValidateRecord(recs[5], ctx);
+            Assert.IsTrue(invalidList.Count == 3, "recs[5] count");
         }
     }
 }

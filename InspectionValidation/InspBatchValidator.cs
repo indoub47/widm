@@ -8,21 +8,22 @@ using WidmShared;
 
 namespace InspectionValidation
 {
-    public class InspBatchValidator
+    public class InspBatchValidator : IBatchInspValidator
     {
-        private InspBaseValidationManager _validationManager;
+        private BaseInspValidator _validator;
+        public Dictionary<string, object> Context;
 
-        public InspBatchValidator(InspBaseValidationManager validationManager)
+        public InspBatchValidator(BaseInspValidator validator)
         {
-            _validationManager = validationManager;
+            _validator = validator;
         }
 
-        IList<SuspInspInfo> Validate(IList<Insp> inspections)
+        public IList<InvalidInfo> Validate(IList<Insp> inspections)
         {
-            List<SuspInspInfo> allInfos = new List<SuspInspInfo>();
+            List<InvalidInfo> allInfos = new List<InvalidInfo>();
             foreach (Insp insp in inspections)
             {
-                allInfos.Concat(_validationManager.Validate(insp));
+                allInfos.Concat(_validator.Validate(insp, Context));
             }
 
             return allInfos;

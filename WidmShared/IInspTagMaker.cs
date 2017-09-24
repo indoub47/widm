@@ -7,8 +7,8 @@ using InspectionLib;
 
 namespace WidmShared
 {
-    public interface IInspBatchValidator
+    public interface IInspTagMaker
     {
-        IList<SuspInspInfo> Validate(IList<Insp> inspections);
+        string Make(Insp insp);
     }
 }

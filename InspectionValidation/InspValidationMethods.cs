@@ -8,9 +8,7 @@ using InspectionLib;
 using WidmShared;
 
 namespace InspectionValidation
-{
-    public delegate IList<SuspInspInfo> InspValidateMethod(Insp inspection, DataTable records);
-
+{ 
     public static class InspValidationMethods
     {
         /// <summary>
@@ -19,9 +17,9 @@ namespace InspectionValidation
         /// <param name="insp">Suvirinimo tikrinimo objektas, kurį reikia patikrinti</param>
         /// <param name="tblRecords">Įrašai DB, kurie turi tą patį vietos kodą kaip tikrinamas suvirinimas</param>
         /// <returns></returns>
-        public static IList<SuspInspInfo> ValidatePirm(Insp insp, DataTable tblRecords)
+        public static IList<InvalidInfo> ValidatePirm(Insp insp, DataTable tblRecords)
         {
-            var returnList = new List<SuspInspInfo>();
+            var returnList = new List<InvalidInfo>();
             if (insp.Kelintas != Kelintas.First)
             {
                 throw new ArgumentException("Nepirmasis tikrinimas tikrinamas kaip pirmasis");
@@ -32,7 +30,7 @@ namespace InspectionValidation
                 string suspMessage = "ta pati vieta: " + string.Join(", ",
                     tblRecords.Rows.Cast<DataRow>().Select(r => r["id"].ToString()).ToArray());
 
-                returnList.Add(new SuspInspInfo(suspMessage));
+                returnList.Add(new InvalidInfo(suspMessage));
             }
             return returnList;
         }
@@ -46,7 +44,7 @@ namespace InspectionValidation
         /// <param name="tblRecords">Įrašai DB, kurie turi tą patį ID kaip tikrinamas suvirinimas. 
         /// Turėtų būti tik vienas toks, nes keli vienodi ID neleidžiami DB</param>
         /// <returns></returns>
-        public static IList<SuspInspInfo> ValidateNepirm(Insp insp, DataTable tblRecords)
+        public static IList<InvalidInfo> ValidateNepirm(Insp insp, DataTable tblRecords)
         {
             if (insp.Kelintas == Kelintas.First)
             {
@@ -58,11 +56,11 @@ namespace InspectionValidation
                 throw new Exception("DB keli įrašai su tuo pačiu ID " + tblRecords.Rows[0]["id"]?.ToString());
             }
 
-            var suspicions = new List<SuspInspInfo>();
+            var suspicions = new List<InvalidInfo>();
 
             if (tblRecords.Rows.Count == 0)
             {
-                suspicions.Add(new SuspInspInfo("toks įrašas nerastas ir jo duomenys negali būti pakeisti"));
+                suspicions.Add(new InvalidInfo("toks įrašas nerastas ir jo duomenys negali būti pakeisti"));
                 return suspicions;
             }
 
@@ -104,7 +102,7 @@ namespace InspectionValidation
 
         private static void checkIfFormerInspDateIsNotLater(
             Insp insp,
-            List<SuspInspInfo> suspicions,
+            List<InvalidInfo> suspicions,
             DataRow record,
             string patDataField,
             string formerPatDataField)
@@ -114,7 +112,7 @@ namespace InspectionValidation
                 record[formerPatDataField] != null && record[formerPatDataField].ToString().Trim() != string.Empty &&
                 Convert.ToDateTime(record[formerPatDataField]) > insp.TData )
             {
-                suspicions.Add(new SuspInspInfo(string.Format(
+                suspicions.Add(new InvalidInfo(string.Format(
                     "ankstesnis patikrinimas {0} atliktas vėliau ({1:d}) negu dabar siūlomas {2} ({3:d}).",
                     formerPatDataField,
                     record[formerPatDataField],
@@ -124,7 +122,7 @@ namespace InspectionValidation
         }
 
         private static void checkIfLaterInspIsntDone(
-            List<SuspInspInfo> suspicions,
+            List<InvalidInfo> suspicions,
             DataRow record,
             string nextPatDataField)
         {
@@ -135,7 +133,7 @@ namespace InspectionValidation
             if (nextPatDataField != "" && record[nextPatDataField] != null &&
                 record[nextPatDataField].ToString() != string.Empty)
             {
-                suspicions.Add(new SuspInspInfo(string.Format(
+                suspicions.Add(new InvalidInfo(string.Format(
                     "įrašyta, kad jau atliktas vėlesnis patikrinimas ({0} netuščias)",
                     nextPatDataField)));
             }
@@ -143,7 +141,7 @@ namespace InspectionValidation
 
 
         private static void checkIfFormerInspIsDone(
-            List<SuspInspInfo> suspicions,
+            List<InvalidInfo> suspicions,
             DataRow record,
             string formerPatDataField)
         {
@@ -151,7 +149,7 @@ namespace InspectionValidation
             if (record[formerPatDataField] == null ||
                 record[formerPatDataField].ToString() == string.Empty)
             {
-                suspicions.Add(new SuspInspInfo(string.Format(
+                suspicions.Add(new InvalidInfo(string.Format(
                     "neatliktas ankstesnis patikrinimas ({0} tuščias)",
                     formerPatDataField)));
             }
@@ -160,7 +158,7 @@ namespace InspectionValidation
 
         private static void checkIfNotInspectedYet(
             Insp insp,
-            List<SuspInspInfo> suspicions,
+            List<InvalidInfo> suspicions,
             DataRow record,
             string patDataField)
         {
@@ -168,7 +166,7 @@ namespace InspectionValidation
             if (record[patDataField] != null &&
                  record[patDataField].ToString() != string.Empty)
             {
-                suspicions.Add(new SuspInspInfo(string.Format(
+                suspicions.Add(new InvalidInfo(string.Format(
                     "{0} tikrinimas jau atliktas",
                     (int)insp.Kelintas)));
             }
@@ -177,12 +175,12 @@ namespace InspectionValidation
 
         private static void checkIfSkodaiAgree(
             Insp insp,
-            List<SuspInspInfo> suspicions,
+            List<InvalidInfo> suspicions,
             DataRow record)
         {
             if (record["skodas"].ToString() != insp.SKodas) // nereikia tikrinti null,  nes yra privalomas
             {
-                suspicions.Add(new SuspInspInfo(string.Format(
+                suspicions.Add(new InvalidInfo(string.Format(
                     "esantis sąlyginis kodas {0} neatitinka siūlomo sąlyginio kodo {1}",
                     record["skodas"],
                     insp.SKodas)));
@@ -191,7 +189,7 @@ namespace InspectionValidation
 
         private static void checkIfVietosAgree(
             Insp insp,
-            List<SuspInspInfo> suspicions,
+            List<InvalidInfo> suspicions,
             DataRow record)
         {
             string recordVietosKodas = string.Format("{0}.{1:0}{2:000}.{3:#00}.{4:#00}.{5:##0}",
@@ -200,7 +198,7 @@ namespace InspectionValidation
 
             if (recordVietosKodas != insp.VietosKodas)
             {
-                suspicions.Add(new SuspInspInfo("neatitinka vietos kodas"));
+                suspicions.Add(new InvalidInfo("neatitinka vietos kodas"));
             }
         }
     }

@@ -2,6 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RecordValidation;
 using System.Collections.Generic;
+using WidmShared;
+using TagMaking;
 
 namespace RecordValidationTest
 {
@@ -11,11 +13,13 @@ namespace RecordValidationTest
         [TestMethod]
         public void TestBatchPirmValidatorAllRecsOK()
         {
-            RecordContext ctx = new RecordContext(42, true, "meaning of life");
+            Dictionary<string, object> ctx = new Dictionary<string, object>();
+            ctx["operatorId"] = "402"; ctx["sheetName"] = "pirmieji tikrinimai";
 
-            PirmRecordValidator pirmValidator = new PirmRecordValidator();
+            PirmRecordValidator pirmValidator = new PirmRecordValidator(new PirmiejiRecordTagMaker());
 
-            RecordsBatchValidator batchValidator = new RecordsBatchValidator(pirmValidator, ctx);
+            BatchRecordValidator batchValidator = new BatchRecordValidator(pirmValidator);
+            batchValidator.Context = ctx;
 
             List<IList<object>> bunchOfRecords = new List<IList<object>>
             {
@@ -27,7 +31,7 @@ namespace RecordValidationTest
                 new object[]{"52", 8, "10", 0, 12, "  ", "06.4", "IF4", DateTime.Now.AddDays(-2), "831"}
             };
 
-            List<InvalidDataInfo> idList = batchValidator.ValidateBatch(bunchOfRecords);
+            List<InvalidInfo> idList = batchValidator.ValidateBatch(bunchOfRecords);
             Assert.AreEqual(0, idList.Count);
         }
 
@@ -35,11 +39,13 @@ namespace RecordValidationTest
         [TestMethod]
         public void TestBatchPirmValidatorFewRecsNotOK()
         {
-            RecordContext ctx = new RecordContext(42, true, "meaning of life");
+            Dictionary<string, object> ctx = new Dictionary<string, object>();
+            ctx["operatorId"] = "402"; ctx["sheetName"] = "pirmieji tikrinimai";
 
-            PirmRecordValidator pirmValidator = new PirmRecordValidator();
+            PirmRecordValidator pirmValidator = new PirmRecordValidator(new PirmiejiRecordTagMaker());
 
-            RecordsBatchValidator batchValidator = new RecordsBatchValidator(pirmValidator, ctx);
+            BatchRecordValidator batchValidator = new BatchRecordValidator(pirmValidator);
+            batchValidator.Context = ctx;
 
             List<IList<object>> bunchOfRecords = new List<IList<object>>
             {
@@ -51,7 +57,7 @@ namespace RecordValidationTest
                 new object[]{"52", 8, "10", 0, 12, 9, "06.4", "IF4", DateTime.Now.AddDays(-2), "831"} // siule iešme
             };
 
-            List<InvalidDataInfo> idList = batchValidator.ValidateBatch(bunchOfRecords);
+            List<InvalidInfo> idList = batchValidator.ValidateBatch(bunchOfRecords);
             Assert.AreEqual(6, idList.Count);
         }
 
@@ -59,28 +65,32 @@ namespace RecordValidationTest
         [TestMethod]
         public void TestBatchPirmValidatorEmptyList()
         {
-            RecordContext ctx = new RecordContext(42, true, "meaning of life");
+            Dictionary<string, object> ctx = new Dictionary<string, object>();
+            ctx["operatorId"] = "402"; ctx["sheetName"] = "pirmieji tikrinimai";
 
-            PirmRecordValidator pirmValidator = new PirmRecordValidator();
+            PirmRecordValidator pirmValidator = new PirmRecordValidator(new PirmiejiRecordTagMaker());
 
-            RecordsBatchValidator batchValidator = new RecordsBatchValidator(pirmValidator, ctx);
+            BatchRecordValidator batchValidator = new BatchRecordValidator(pirmValidator);
+            batchValidator.Context = ctx;
 
             List<IList<object>> bunchOfRecords = new List<IList<object>>{};
 
-            List<InvalidDataInfo> idList = batchValidator.ValidateBatch(bunchOfRecords);
+            List<InvalidInfo> idList = batchValidator.ValidateBatch(bunchOfRecords);
             Assert.AreEqual(0, idList.Count);
         }
 
         [TestMethod]
         public void TestBatchNepirmAllRecsOK()
         {
-            RecordContext ctx = new RecordContext(42, true, "meaning of life");
+            Dictionary<string, object> ctx = new Dictionary<string, object>();
+            ctx["operatorId"] = "402"; ctx["sheetName"] = "pirmieji tikrinimai";
 
-            NepirmRecordValidator nepirmValidator = new NepirmRecordValidator();
+            NepirmRecordValidator nepirmValidator = new NepirmRecordValidator(new NepirmiejiRecordTagMaker());
 
-            RecordsBatchValidator batchValidator = new RecordsBatchValidator(nepirmValidator, ctx);
+            BatchRecordValidator batchValidator = new BatchRecordValidator(nepirmValidator);
+            batchValidator.Context = ctx;
 
-             // id, linija, kelias, km, pk, m, siule, salyginis_kodas, tikrinimo_data, kelintas_tikrinimas, aparatas
+            // id, linija, kelias, km, pk, m, siule, salyginis_kodas, tikrinimo_data, kelintas_tikrinimas, aparatas
 
             List<IList<object>> bunchOfRecords = new List<IList<object>>
             {
@@ -91,7 +101,7 @@ namespace RecordValidationTest
                 new object[]{"1", "52", 8, "10", 0, 12, "  ", "06.4", DateTime.Now.AddDays(-2), "  2", "831"}
             };
 
-            List<InvalidDataInfo> idList = batchValidator.ValidateBatch(bunchOfRecords);
+            List<InvalidInfo> idList = batchValidator.ValidateBatch(bunchOfRecords);
             Assert.AreEqual(0, idList.Count);
         }
 
@@ -99,11 +109,13 @@ namespace RecordValidationTest
         [TestMethod]
         public void TestBatchNepirmFewRecsNotOK()
         {
-            RecordContext ctx = new RecordContext(42, true, "meaning of life");
+            Dictionary<string, object> ctx = new Dictionary<string, object>();
+            ctx["operatorId"] = "402"; ctx["sheetName"] = "pirmieji tikrinimai";
 
-            NepirmRecordValidator nepirmValidator = new NepirmRecordValidator();
+            NepirmRecordValidator nepirmValidator = new NepirmRecordValidator(new NepirmiejiRecordTagMaker());
 
-            RecordsBatchValidator batchValidator = new RecordsBatchValidator(nepirmValidator, ctx);
+            BatchRecordValidator batchValidator = new BatchRecordValidator(nepirmValidator);
+            batchValidator.Context = ctx;
 
             List<IList<object>> bunchOfRecords = new List<IList<object>>
             {
@@ -115,23 +127,25 @@ namespace RecordValidationTest
                 new object[]{"1", "52", 8, "10", 0, 12, 9, "06.4", DateTime.Now.AddDays(-2), "   2", "831"} // siule iešme netikrinama
             };
 
-            List<InvalidDataInfo> idList = batchValidator.ValidateBatch(bunchOfRecords);
+            List<InvalidInfo> idList = batchValidator.ValidateBatch(bunchOfRecords);
             Assert.AreEqual(7, idList.Count);
         }
 
 
         [TestMethod]
         public void TestBatchNepirmEmptyList()
-        { 
-            RecordContext ctx = new RecordContext(42, true, "meaning of life");
+        {
+            Dictionary<string, object> ctx = new Dictionary<string, object>();
+            ctx["operatorId"] = "402"; ctx["sheetName"] = "pirmieji tikrinimai";
 
-            NepirmRecordValidator nepirmValidator = new NepirmRecordValidator();
+            NepirmRecordValidator nepirmValidator = new NepirmRecordValidator(new NepirmiejiRecordTagMaker());
 
-            RecordsBatchValidator batchValidator = new RecordsBatchValidator(nepirmValidator, ctx);
+            BatchRecordValidator batchValidator = new BatchRecordValidator(nepirmValidator);
+            batchValidator.Context = ctx;
 
             List<IList<object>> bunchOfRecords = new List<IList<object>>{};
 
-            List<InvalidDataInfo> idList = batchValidator.ValidateBatch(bunchOfRecords);
+            List<InvalidInfo> idList = batchValidator.ValidateBatch(bunchOfRecords);
             Assert.AreEqual(0, idList.Count);
         }
     }

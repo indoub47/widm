@@ -49,7 +49,7 @@ namespace InspectionValidation.Tests
             db.Rows.Add(1, "01", 1, 256, 3, 36, 9, "06.4", new DateTime(2017, 1, 1), new DateTime(2017, 3, 15), null, null);
             db.Rows.Add(2, "01", 1, 256, 3, 36, 0, "06.3", new DateTime(2016, 2, 18), new DateTime(2017, 3, 15), null, null);
 
-            IList<SuspInspInfo> susps = InspValidationMethods.ValidatePirm(insp, db).Cast<SuspInspInfo>().ToList();
+            IList<InvalidInfo> susps = InspValidationMethods.ValidatePirm(insp, db);
 
             Assert.IsTrue(susps.Count == 1);
         }
@@ -60,7 +60,7 @@ namespace InspectionValidation.Tests
         {
             Insp insp = new Insp(null, "01", 1, 312, 3, 36, 9, "06.4", "428", "829", new DateTime(2017, 9, 12), "GTC", Kelintas.First);
 
-            IList<SuspInspInfo> susps = InspValidationMethods.ValidatePirm(insp, db);
+            IList<InvalidInfo> susps = InspValidationMethods.ValidatePirm(insp, db);
 
             Assert.IsTrue(susps.Count == 0);
         }
@@ -72,7 +72,7 @@ namespace InspectionValidation.Tests
         {
             Insp insp = new Insp(null, "01", 1, 312, 3, 36, 9, "06.4", "428", "829", new DateTime(2017, 9, 12), "GTC", Kelintas.Second);
 
-            IList<SuspInspInfo> susps = InspValidationMethods.ValidatePirm(insp, db);
+            IList<InvalidInfo> susps = InspValidationMethods.ValidatePirm(insp, db);
         }
 
 
@@ -82,7 +82,7 @@ namespace InspectionValidation.Tests
         {
             Insp insp = new Insp(null, "01", 1, 312, 3, 36, 9, "06.4", "428", "829", new DateTime(2017, 9, 12), "GTC", Kelintas.First);
 
-            IList<SuspInspInfo> susps = InspValidationMethods.ValidateNepirm(insp, db);
+            IList<InvalidInfo> susps = InspValidationMethods.ValidateNepirm(insp, db);
         }
 
 
@@ -94,7 +94,7 @@ namespace InspectionValidation.Tests
             db.Rows.Add(2, "01", 1, 256, 3, 36, 0, "06.3", new DateTime(2016, 2, 18), new DateTime(2017, 3, 15), null, null);
             Insp insp = new Insp(null, "01", 1, 312, 3, 36, 9, "06.4", "428", "829", new DateTime(2017, 9, 12), "GTC", Kelintas.First);
 
-            IList<SuspInspInfo> susps = InspValidationMethods.ValidateNepirm(insp, db);
+            IList<InvalidInfo> susps = InspValidationMethods.ValidateNepirm(insp, db);
         }
 
 
@@ -103,7 +103,7 @@ namespace InspectionValidation.Tests
         {
             Insp insp = new Insp(null, "01", 1, 312, 3, 36, 9, "06.4", "428", "829", new DateTime(2017, 9, 12), "GTC", Kelintas.Extra);
 
-            IList<SuspInspInfo> susps = InspValidationMethods.ValidateNepirm(insp, db);
+            IList<InvalidInfo> susps = InspValidationMethods.ValidateNepirm(insp, db);
             Assert.IsTrue(susps.Count == 1);
             Assert.AreEqual<string>("toks įrašas nerastas ir jo duomenys negali būti pakeisti", susps[0].Message);
         }
@@ -113,7 +113,7 @@ namespace InspectionValidation.Tests
         public void InspValidation_ValidateNepirm_VietaDoesntAgree()
         {
             Insp insp;
-            IList<SuspInspInfo> susps;
+            IList<InvalidInfo> susps;
 
             db.Rows.Add(4, "01", 1, 256, 3, 36, 9, "06.4", new DateTime(2017, 1, 1), new DateTime(2017, 3, 15), null, null);
 
@@ -160,7 +160,7 @@ namespace InspectionValidation.Tests
             db.Rows.Add(4, "01", 1, 256, 3, 36, 9, "06.4", new DateTime(2017, 1, 1), new DateTime(2017, 3, 15), null, null);
 
             Insp insp = new Insp(4, "01", 1, 256, 3, 36, 9, "06.3", "428", "829", new DateTime(2017, 9, 12), "GTC", Kelintas.Extra);
-            IList<SuspInspInfo> susps = InspValidationMethods.ValidateNepirm(insp, db);
+            IList<InvalidInfo> susps = InspValidationMethods.ValidateNepirm(insp, db);
             Assert.IsTrue(susps.Count == 1);
             Assert.AreEqual<string>("esantis sąlyginis kodas", susps[0].Message.Substring(0, 23));
         }
@@ -170,7 +170,7 @@ namespace InspectionValidation.Tests
         public void InspValidation_ValidateNepirm_AlreadyInspected()
         {
             Insp insp;
-            IList<SuspInspInfo> susps;
+            IList<InvalidInfo> susps;
 
             // tikrinamas II
             db.Rows.Add(4, "01", 1, 256, 3, 36, 9, "06.4", new DateTime(2017, 1, 1), new DateTime(2017, 3, 15), null, null);
@@ -206,7 +206,7 @@ namespace InspectionValidation.Tests
         public void InspValidation_ValidateNepirm_FormerIsntDone()
         {
             Insp insp;
-            IList<SuspInspInfo> susps;
+            IList<InvalidInfo> susps;
 
             // tikrinamas II
             db.Rows.Add(4, "01", 1, 256, 3, 36, 9, "06.4", null, null, null, null);
@@ -237,7 +237,7 @@ namespace InspectionValidation.Tests
         public void InspValidation_ValidateNepirm_LaterIsDone()
         {
             Insp insp;
-            IList<SuspInspInfo> susps;
+            IList<InvalidInfo> susps;
 
             // tikrinamas II - xoxo
             db.Rows.Add(4, "01", 1, 256, 3, 36, 9, "06.4", new DateTime(2017, 1, 15), null, new DateTime(2017, 9, 15), null);
@@ -309,7 +309,7 @@ namespace InspectionValidation.Tests
         public void InspValidation_ValidateNepirm_FormerIsLater()
         {
             Insp insp;
-            IList<SuspInspInfo> susps;
+            IList<InvalidInfo> susps;
 
             // tikrinamas II
             db.Rows.Add(4, "01", 1, 256, 3, 36, 9, "06.4", new DateTime(2017, 5, 15), null, null, null);
@@ -340,7 +340,7 @@ namespace InspectionValidation.Tests
         public void InspValidation_ValidateNepirm_Multiple()
         {
             Insp insp;
-            IList<SuspInspInfo> susps;
+            IList<InvalidInfo> susps;
 
             // tikrinamas II
             db.Rows.Add(4, "01", 1, 256, 3, 36, 9, "06.4", new DateTime(2017, 1, 15), new DateTime(2017, 1, 15), null, null);

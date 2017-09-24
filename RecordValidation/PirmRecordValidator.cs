@@ -9,7 +9,7 @@ namespace RecordValidation
 {
     public class PirmRecordValidator : BaseRecordValidator
     {
-        public PirmRecordValidator()
+        public PirmRecordValidator(IRecordTagMaker tagMaker) : base(tagMaker)
         {
             //linija, kelias, km, pk, m, siule, salyginis_kodas, suvirino, tikrinimo_data, aparatas
             validationMethods = new ValidationMethod[] 

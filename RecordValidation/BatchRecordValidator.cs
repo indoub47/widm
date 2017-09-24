@@ -7,24 +7,23 @@ using WidmShared;
 
 namespace RecordValidation
 {
-    public class RecordsBatchValidator
+    public class BatchRecordValidator
     {
         public BaseRecordValidator RecordValidator { get; }
-        public RecordContext Context { get; }
+        public Dictionary<string, object> Context;
 
-        public RecordsBatchValidator(BaseRecordValidator recordValidator, RecordContext context)
+        public BatchRecordValidator(BaseRecordValidator recordValidator)
         {
             RecordValidator = recordValidator;
-            Context = context;
         }
         
-        public List<InvalidRecordInfo> ValidateBatch(List<IList<object>> records)
+        public List<InvalidInfo> ValidateBatch(List<IList<object>> records)
         {
-            List<InvalidRecordInfo> allInvalids = new List<InvalidRecordInfo>();
+            List<InvalidInfo> allInvalids = new List<InvalidInfo>();
 
             foreach(var record in records)
             {
-                List<InvalidRecordInfo> singleRecordInvalids = RecordValidator.ValidateRecord(record, Context);
+                List<InvalidInfo> singleRecordInvalids = RecordValidator.ValidateRecord(record, Context);
                 allInvalids.AddRange(singleRecordInvalids);
             }
 

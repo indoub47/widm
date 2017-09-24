@@ -9,7 +9,7 @@ namespace RecordValidation
 {
     public class NepirmRecordValidator : BaseRecordValidator
     {
-        public NepirmRecordValidator()
+        public NepirmRecordValidator(IRecordTagMaker tagMaker) : base(tagMaker)
         {
             //id, linija, kelias, km, pk, m, siule, salyginis_kodas, tikrinimo_data, kelintas_tikrinimas, aparatas
             validationMethods = new ValidationMethod[] 

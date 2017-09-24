@@ -25,18 +25,18 @@ namespace InspPoolCommunication.Tests
         [TestMethod()]
         public void FetchByIdTest_FetchExisting()
         {
-            long id = 17085;
-            DataTable tbl = communicator.FetchById(id);
+            Insp insp = new Insp(17085, "17", 1, 81, 8, 16, 9, "06.4", "421", "831", new DateTime(2017, 9, 22), "GTC", Kelintas.First);
+            DataTable tbl = communicator.FetchById(insp);
             Assert.IsTrue(tbl.Rows.Count == 1, "rows count");
             DataRow row = tbl.Rows[0];
-            Assert.IsTrue(Convert.ToInt64(row["id"]) == id, "fetched record id");
+            Assert.IsTrue(Convert.ToInt64(row["id"]) == insp.Id, "fetched record id");
         }
 
         [TestMethod()]
         public void FetchByIdTest_FetchNotExisting()
         {
-            long id = 16916;
-            DataTable tbl = communicator.FetchById(id);
+            Insp insp = new Insp(16916, "17", 1, 81, 8, 16, 9, "06.4", "421", "831", new DateTime(2017, 9, 22), "GTC", Kelintas.First);
+            DataTable tbl = communicator.FetchById(insp);
             Assert.IsTrue(tbl.Rows.Count == 0, "rows count");
         }
 
@@ -77,16 +77,15 @@ namespace InspPoolCommunication.Tests
         [TestMethod()]
         public void BatchInsertInspTest()
         {
-            Insp insp2 = new Insp(null, "02", 2, 2, 2, 2, 2, "06.4", "421", "831", DateTime.Now.Date, "GTC", Kelintas.First, "inserted by BatchInsertInspTest()");
-            Insp insp3 = new Insp(null, "03", 3, 3, 3, 3, 3, "06.4", "421", "831", DateTime.Now.Date, "GTC", Kelintas.First, "inserted by BatchInsertInspTest()");
-            Insp insp4 = new Insp(null, "04", 4, 4, 4, 4, 4, "06.4", "421", "831", DateTime.Now.Date, "GTC", Kelintas.First, "inserted by BatchInsertInspTest()");
-
-            List<Insp> list = new List<Insp>();
-            list.Add(insp2);
-            list.Add(insp3);
-            list.Add(insp4);
-            int result = communicator.BatchInsertInsp(list);
-            Assert.AreEqual(3, result, "insert count");
+            Insp[] insps = new Insp[]
+            {
+                new Insp(null, "02", 2, 2, null, 2, 2, "06.4", "421", "831", DateTime.Now.Date, "GTC", Kelintas.First, "inserted by BatchInsertInspTest()"),
+                new Insp(null, "03", 3, 3, 3, 3, null, "06.4", "421", "831", DateTime.Now.Date, "GTC", Kelintas.First, "inserted by BatchInsertInspTest()"),
+                new Insp(null, "03", 3, 3, 3, 3, 3, "06.4", "421", "831", DateTime.Now.Date, "GTC", Kelintas.First, "inserted by BatchInsertInspTest()"),
+                new Insp(null, "04", 4, 4, null, 4, null, "06.4", "421", "831", DateTime.Now.Date, "GTC", Kelintas.First, "inserted by BatchInsertInspTest()")
+            };
+            int result = communicator.BatchInsertInsp(insps);
+            Assert.AreEqual(4, result, "insert count");
         }
 
         [TestMethod()]
@@ -96,10 +95,6 @@ namespace InspPoolCommunication.Tests
             int result = communicator.BatchInsertInsp(list);
             Assert.AreEqual(0, result, "insert count");
         }
-            // second - 14427, 14428, 14370, 14993
-            // third - 14388, 14447, 14389, 14448
-            // fourth - 12165, 12156, 12158, 12159
-            // extra - 8438, 10254, 8606, 14069
 
         [TestMethod()]
         public void UpdateInspInfoTest()

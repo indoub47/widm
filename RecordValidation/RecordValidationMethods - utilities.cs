@@ -41,12 +41,5 @@ namespace RecordValidation
             return value == null || value.ToString().Trim() == string.Empty;
         }
 
-        private static RecordContext PushMethodName(RecordContext ctx)
-        {
-            string mname = System.Reflection.MethodBase.GetCurrentMethod().Name;
-            ctx.Objects.Add(mname);
-            return ctx;
-        }
-
     }
 }

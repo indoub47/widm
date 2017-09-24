@@ -23,10 +23,10 @@ namespace InspPoolCommunication
             connectionString = string.Format(Properties.Settings.Default.ConnectionString, dbPath);
         }
 
-        public DataTable FetchById(long id)
+        public DataTable FetchById(Insp insp)
         {
             OleDbCommand cmd = new OleDbCommand(Properties.Settings.Default.FetchByIdQuery);
-            cmd.Parameters.AddWithValue("@id", id);
+            cmd.Parameters.AddWithValue("@id", (long)insp.Id);
 
             DataTable dataTable;
 

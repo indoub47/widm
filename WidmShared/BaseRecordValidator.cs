@@ -7,12 +7,18 @@ using System.Threading.Tasks;
 namespace WidmShared
 {
 
-    public delegate InvalidRecordInfo ValidationMethod(IList<object> record, string[] mapping);
+    public delegate InvalidInfo ValidationMethod(IList<object> record, string[] mapping);
 
     public abstract class BaseRecordValidator
     {
         protected string[] mapping;
         protected ValidationMethod[] validationMethods;
+        protected IRecordTagMaker tagMaker;
+
+        public BaseRecordValidator(IRecordTagMaker tagMaker)
+        {
+            this.tagMaker = tagMaker;
+        }
 
         /// <summary>
         /// Performs all validations on the single record.
@@ -20,24 +26,24 @@ namespace WidmShared
         /// <param name="record">welding inspection record</param>
         /// <param name="context">additional data, which is being passed along with a record</param>
         /// <returns>the list of InvalidDataInfo objects. In case there is no InvalidDataInfo returns an empty list</returns>
-        public List<InvalidRecordInfo> ValidateRecord(IList<object> record, RecordContext context)
+        public List<InvalidInfo> ValidateRecord(IList<object> record, Dictionary<string, object> context)
         {
-            List<InvalidRecordInfo> invalidList = new List<InvalidRecordInfo>();
+            List<InvalidInfo> invalidList = new List<InvalidInfo>();
 
             foreach (var validationMethod in validationMethods)
             {
-                InvalidRecordInfo info = validationMethod(record, mapping);
+                InvalidInfo info = validationMethod(record, mapping);
                 if (info != null)
                 {
-                    info.ValidationMethod = validationMethod.Method.Name; // mostly for testing
-                    info.Record = record;
-                    info.Context = (RecordContext)context.Clone();
-                    // (RecordContext kuriama kopija - tam, kad atsiradus poreikiui, būtų galima pridėti individualios info)
+                    info["method"] = validationMethod.Method.Name; // mostly for testing
+                    info["record"] = record;
+                    info["tag"] = tagMaker.Make(record);
+                    info.Incorporate(context);
                     invalidList.Add(info);
                 }
             }
 
-            // always returns List<InvalidDataInfo> - empty or not
+            // always returns List<InvalidInfo> - empty or not
             return invalidList;
         }
     }

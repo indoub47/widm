@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TagMaking.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="PirmiejiMapping" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">linija, kelias, km, pk, m, siule, salyginis_kodas, suvirino, tikrinimo_data, aparatas</Value>
+    </Setting>
+    <Setting Name="NepirmiejiMapping" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">id, linija, kelias, km, pk, m, siule, salyginis_kodas, tikrinimo_data, kelintas_tikrinimas, aparatas</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -8,9 +8,10 @@ using InspectionLib;
 
 namespace WidmShared
 {
+    public delegate DataTable DataFetchMethod(Insp insp);
     public interface IInspPoolCommunicator
     {
-        DataTable FetchById(long id);
+        DataTable FetchById(Insp insp);
         DataTable FetchByVieta(Insp insp);
         int InsertInsp(Insp insp);
         int BatchInsertInsp(IList<Insp> insps);
