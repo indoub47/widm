@@ -9,7 +9,7 @@ namespace RecordValidation
 {
     public class NepirmRecordValidator : BaseRecordValidator
     {
-        public NepirmRecordValidator(IRecordTagMaker tagMaker) : base(tagMaker)
+        public NepirmRecordValidator(string[] mapping, IRecordTagMaker tagMaker) : base(mapping, tagMaker)
         {
             //id, linija, kelias, km, pk, m, siule, salyginis_kodas, tikrinimo_data, kelintas_tikrinimas, aparatas
             validationMethods = new ValidationMethod[] 
@@ -28,7 +28,6 @@ namespace RecordValidation
                 RecordValidationMethods.ValidateNegaliButiPirmas,
                 RecordValidationMethods.ValidateAparatas
             };
-            mapping = Properties.Settings.Default.NepirmiejiMapping.Split(',').Select(x => x.Trim()).ToArray(); 
         }
 
     }

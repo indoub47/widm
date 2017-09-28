@@ -47,6 +47,11 @@ namespace DbMappings
             return Array.FindIndex(instance, (x) => x.Name == name);
         }
 
+        public static string DBColName(string name)
+        {
+            return Get(name).DbName;
+        }
+
         public static int IndexByDbName(string dbName)
         {
             return Array.FindIndex(instance, (x) => x.DbName == dbName);

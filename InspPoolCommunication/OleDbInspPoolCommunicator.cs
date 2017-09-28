@@ -166,19 +166,19 @@ namespace InspPoolCommunication
                 switch (insp.Kelintas)
                 {
                     case Kelintas.Second:
-                        patData = "II_pat_data";
-                        aparatas = "II_pat_aparat";
-                        operatorius = "II_pat_operator";
+                        patData = Mappings.DBColName("data2");
+                        aparatas = Mappings.DBColName("aparatas2");
+                        operatorius = Mappings.DBColName("operatorius2");
                         break;
                     case Kelintas.Third:
-                        patData = "III_pat_data";
-                        aparatas = "III_pat_aparat";
-                        operatorius = "III_pat_operaqtor";
+                        patData = Mappings.DBColName("data3");
+                        aparatas = Mappings.DBColName("aparatas3");
+                        operatorius = Mappings.DBColName("operatorius3");
                         break;
                     case Kelintas.Fourth:
-                        patData = "IV_pat_data";
-                        aparatas = "IV_pat_aparat";
-                        operatorius = "IV_pat_operator";
+                        patData = Mappings.DBColName("data4");
+                        aparatas = Mappings.DBColName("aparatas4");
+                        operatorius = Mappings.DBColName("operatorius4");
                         break;
                 }
 

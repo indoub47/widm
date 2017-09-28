@@ -49,26 +49,6 @@ namespace RecordValidation.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("linija, kelias, km, pk, m, siule, salyginis_kodas, suvirino, tikrinimo_data, apar" +
-            "atas")]
-        public string PirmiejiMapping {
-            get {
-                return ((string)(this["PirmiejiMapping"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("id, linija, kelias, km, pk, m, siule, salyginis_kodas, tikrinimo_data, kelintas_t" +
-            "ikrinimas, aparatas")]
-        public string NepirmiejiMapping {
-            get {
-                return ((string)(this["NepirmiejiMapping"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("06.4, 06.3")]
         public string SalygKodai {
             get {

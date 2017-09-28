@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="GSRecordFetching.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ClientSecretFile" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">client_secret.json</Value>
+    </Setting>
+    <Setting Name="CredentialDir" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">.credentials/sheets.googleapis.com-dotnet.json</Value>
+    </Setting>
+    <Setting Name="ApplicationName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Google Sheets API .NET</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

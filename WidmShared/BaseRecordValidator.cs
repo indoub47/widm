@@ -15,8 +15,9 @@ namespace WidmShared
         protected ValidationMethod[] validationMethods;
         protected IRecordTagMaker tagMaker;
 
-        public BaseRecordValidator(IRecordTagMaker tagMaker)
+        public BaseRecordValidator(string[] mapping, IRecordTagMaker tagMaker)
         {
+            this.mapping = mapping;
             this.tagMaker = tagMaker;
         }
 

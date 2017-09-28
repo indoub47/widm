@@ -9,7 +9,7 @@ namespace RecordValidation
 {
     public class PirmRecordValidator : BaseRecordValidator
     {
-        public PirmRecordValidator(IRecordTagMaker tagMaker) : base(tagMaker)
+        public PirmRecordValidator(string[] mapping, IRecordTagMaker tagMaker) : base(mapping, tagMaker)
         {
             //linija, kelias, km, pk, m, siule, salyginis_kodas, suvirino, tikrinimo_data, aparatas
             validationMethods = new ValidationMethod[] 
@@ -28,7 +28,7 @@ namespace RecordValidation
                 RecordValidationMethods.ValidateTikrinimoDataIsReal,
                 RecordValidationMethods.ValidateAparatas
             };
-            mapping = Properties.Settings.Default.PirmiejiMapping.Split(',').Select(x => x.Trim()).ToArray();
+            //mapping = Properties.Settings.Default.PirmiejiMapping.Split(',').Select(x => x.Trim()).ToArray();
         }
     }
 }

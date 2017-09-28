@@ -10,10 +10,25 @@ namespace RecordValidationTest
     [TestClass]
     public class PirmRecordValidatorTest
     {
+        string[] pirmiejiMapping = new string[]
+        {
+          "linija",
+          "kelias",
+          "km",
+          "pk",
+          "m",
+          "siule",
+          "skodas",
+          "suvirino",
+          "tdata",
+          "aparatas",
+          "ivesta_db"
+        };
+
         [TestMethod]
         public void ValidatePirmRecordTest()
         {
-            PirmRecordValidator validator = new PirmRecordValidator(new PirmiejiRecordTagMaker());
+            PirmRecordValidator validator = new PirmRecordValidator(pirmiejiMapping, new PirmiejiRecordTagMaker());
             Dictionary<string, object> ctx = new Dictionary<string, object>();
             ctx["operatorId"] = "402"; ctx["sheetName"] = "pirmieji tikrinimai";
 

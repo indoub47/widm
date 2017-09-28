@@ -81,7 +81,7 @@ namespace InspPoolCommunication.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("UPDATE ssd SET Pastaba = Pastaba + \" \" + @pastaba WHERE number = @id;")]
+        [global::System.Configuration.DefaultSettingValueAttribute("UPDATE ssd SET Pastaba = Pastaba + \", \" + @pastaba WHERE number = @id;")]
         public string UpdateExtraQuery {
             get {
                 return ((string)(this["UpdateExtraQuery"]));
@@ -90,8 +90,8 @@ namespace InspPoolCommunication.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("UPDATE ssd SET {0} = @data, {1} = @aparatas, {2} = @operatorius, Pastaba = @pasta" +
-            "ba WHERE number = @id")]
+        [global::System.Configuration.DefaultSettingValueAttribute("UPDATE ssd SET {0} = @data, {1} = @aparatas, {2} = @operatorius, Pastaba = Pastab" +
+            "a + \", \" + @pastaba WHERE number = @id")]
         public string UpdateQueryFormat {
             get {
                 return ((string)(this["UpdateQueryFormat"]));

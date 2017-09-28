@@ -10,11 +10,26 @@ namespace RecordValidationTest
     [TestClass]
     public class NepirmRecordValidatorTest
     {
+        string[] nepirmiejiMapping = new string[] 
+        {
+          "id",
+          "linija",
+          "kelias",
+          "km",
+          "pk",
+          "m",
+          "siule",
+          "skodas",
+          "tdata",
+          "kelintas",
+          "aparatas",
+        };
+
         [TestMethod]
         public void ValidateNepirmRecordTest()
         {
             NepirmiejiRecordTagMaker tagMaker = new NepirmiejiRecordTagMaker();
-            NepirmRecordValidator validator = new NepirmRecordValidator(tagMaker);
+            NepirmRecordValidator validator = new NepirmRecordValidator(nepirmiejiMapping, tagMaker);
             Dictionary<string, object> ctx = new Dictionary<string, object>();
             ctx["operatorId"] = "402"; ctx["sheetName"] = "nepirmieji tikrinimai";
 

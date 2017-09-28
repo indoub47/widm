@@ -42,6 +42,15 @@ namespace DbMappingsTest
         }
 
         [TestMethod]
+        public void TestDBName()
+        {
+            string dbColName = Mappings.DBColName("m");
+            Assert.AreEqual("metras", dbColName, "metras");
+            string dbColName1 = Mappings.DBColName("operatorius3");
+            Assert.AreEqual("III_pat_operaqtor", dbColName1, "oper3");
+        }
+
+        [TestMethod]
         public void TestGetWithInt()
         {
             MappingField mField = Mappings.Get(6);

@@ -1,0 +1,44 @@
+﻿{
+  "pirmieji": {
+    "sheetname": "Pirmieji tikrinimai",
+    "rangeaddress": "'Pirmieji tikrinimai'!A2:K",
+    "startrowindex": 2,
+    "filtercolumnindex": 10,
+    "filteradressformat": "'Pirmieji tikrinimai'!K{0}",
+    "mapping": [
+      "linija",
+      "kelias",
+      "km",
+      "pk",
+      "m",
+      "siule",
+      "skodas",
+      "suvirino",
+      "tdata",
+      "aparatas",
+      "ivesta_db"
+    ]
+  },
+
+  "nepirmieji": {
+    "sheetname": "Kiti tikrinimai",
+    "rangeaddress": "'Kiti tikrinimai'!A2:L",
+    "startrowindex": 2,
+    "filtercolumnindex": 11,
+    "filteradressformat": "'Kiti tikrinimai'!L{0}",
+    "mapping": [
+      "id",
+      "linija",
+      "kelias",
+      "km",
+      "pk",
+      "m",
+      "siule",
+      "skodas",
+      "tdata",
+      "aparatas",
+      "kelintas",
+      "ivesta_db"
+    ]
+  }
+}

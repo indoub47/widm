@@ -12,7 +12,7 @@ namespace RecordValidationTest
         [ClassInitialize()]
         public static void ClassInit(TestContext context)
         {
-            mapping = new string[] { "id", "linija", "kelias", "km", "pk", "m", "siule", "salyginis_kodas", "suvirino", "tikrinimo_data", "aparatas", "kelintas_tikrinimas" };
+            mapping = new string[] { "id", "linija", "kelias", "km", "pk", "m", "siule", "skodas", "suvirino", "tdata", "aparatas", "kelintas" };
         }
 
 

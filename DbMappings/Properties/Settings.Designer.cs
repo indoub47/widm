@@ -32,34 +32,33 @@ namespace DbMappings.Properties {
             "\n    \"typename\": \"System.Int32\"\r\n  },\r\n  {\r\n    \"name\": \"pk\",\r\n    \"dbname\": \"pi" +
             "ket\",\r\n    \"typename\": \"System.Int32\"\r\n  },\r\n  {\r\n    \"name\": \"m\",\r\n    \"dbname\"" +
             ": \"metras\",\r\n    \"typename\": \"System.Int32\"\r\n  },\r\n  {\r\n    \"name\": \"siule\",\r\n  " +
-            "  \"dbname\": \"siule\",\r\n    \"typename\": \"System.Int32\"\r\n  },\r\n  {\r\n    \"name\": \"sa" +
-            "lyginis_kodas\",\r\n    \"dbname\": \"saliginis kodas\",\r\n    \"typename\": \"System.Strin" +
-            "g\"\r\n  },\r\n  {\r\n    \"name\": \"suv_numer\",\r\n    \"dbname\": \"suv_numer\",\r\n    \"typena" +
-            "me\": \"System.Int32\"\r\n  },\r\n  {\r\n    \"name\": \"suvirino\",\r\n    \"dbname\": \"suvirino" +
-            "\",\r\n    \"typename\": \"System.String\"\r\n  },\r\n  {\r\n    \"name\": \"nr_pagal_schema\",\r\n" +
-            "    \"dbname\": \"nr_pagal_shema\",\r\n    \"typename\": \"System.Int32\"\r\n  },\r\n  {\r\n    " +
-            "\"name\": \"ifas\",\r\n    \"dbname\": \"IFas\",\r\n    \"typename\": \"System.Int32\"\r\n  },\r\n  " +
-            "{\r\n    \"name\": \"pak_suv_data\",\r\n    \"dbname\": \"Pak_suv_data\",\r\n    \"typename\": \"" +
-            "System.DateTime\"\r\n  },\r\n  {\r\n    \"name\": \"I_pat_data\",\r\n    \"dbname\": \"I_pat_dat" +
-            "a\",\r\n    \"typename\": \"System.DateTime\"\r\n  },\r\n  {\r\n    \"name\": \"I_pat_aparatas\"," +
-            "\r\n    \"dbname\": \"I_pat_aparat\",\r\n    \"typename\": \"System.String\"\r\n  },\r\n  {\r\n   " +
-            " \"name\": \"I_pat_operatorius\",\r\n    \"dbname\": \"I_pat_operator\",\r\n    \"typename\": " +
-            "\"System.String\"\r\n  },\r\n  {\r\n    \"name\": \"II_pat_data\",\r\n    \"dbname\": \"II_pat_da" +
-            "ta\",\r\n    \"typename\": \"System.DateTime\"\r\n  },\r\n  {\r\n    \"name\": \"II_pat_aparatas" +
-            "\",\r\n    \"dbname\": \"II_pat_aparat\",\r\n    \"typename\": \"System.String\"\r\n  },\r\n  {\r\n" +
-            "    \"name\": \"II_pat_operatorius\",\r\n    \"dbname\": \"II_pat_operator\",\r\n    \"typena" +
-            "me\": \"System.String\"\r\n  },\r\n  {\r\n    \"name\": \"III_pat_data\",\r\n    \"dbname\": \"III" +
-            "_pat_data\",\r\n    \"typename\": \"System.DateTime\"\r\n  },\r\n  {\r\n    \"name\": \"III_pat_" +
-            "aparatas\",\r\n    \"dbname\": \"III_pat_aparat\",\r\n    \"typename\": \"System.String\"\r\n  " +
-            "},\r\n  {\r\n    \"name\": \"III_pat_operatorius\",\r\n    \"dbname\": \"III_pat_operaqtor\",\r" +
-            "\n    \"typename\": \"System.String\"\r\n  },\r\n  {\r\n    \"name\": \"VI_pat_data\",\r\n    \"db" +
-            "name\": \"IV_pat_data\",\r\n    \"typename\": \"System.DateTime\"\r\n  },\r\n  {\r\n    \"name\":" +
-            " \"VI_pat_aparatas\",\r\n    \"dbname\": \"IV_pat_operator\",\r\n    \"typename\": \"System.S" +
-            "tring\"\r\n  },\r\n  {\r\n    \"name\": \"VI_pat_operatorius\",\r\n    \"dbname\": \"Pastaba\",\r\n" +
-            "    \"typename\": \"System.String\"\r\n  },\r\n  {\r\n    \"name\": \"panaikintas\",\r\n    \"dbn" +
-            "ame\": \"Panaikintas\",\r\n    \"typename\": \"System.Boolean\"\r\n  },\r\n  {\r\n    \"name\": \"" +
-            "defekto_id\",\r\n    \"dbname\": \"DefektoId\",\r\n    \"typename\": \"System.Int64\"\r\n  }\r\n]" +
-            "")]
+            "  \"dbname\": \"siule\",\r\n    \"typename\": \"System.Int32\"\r\n  },\r\n  {\r\n    \"name\": \"sk" +
+            "odas\",\r\n    \"dbname\": \"saliginis kodas\",\r\n    \"typename\": \"System.String\"\r\n  },\r" +
+            "\n  {\r\n    \"name\": \"suv_numer\",\r\n    \"dbname\": \"suv_numer\",\r\n    \"typename\": \"Sys" +
+            "tem.Int32\"\r\n  },\r\n  {\r\n    \"name\": \"suvirino\",\r\n    \"dbname\": \"suvirino\",\r\n    \"" +
+            "typename\": \"System.String\"\r\n  },\r\n  {\r\n    \"name\": \"nr_pagal_schema\",\r\n    \"dbna" +
+            "me\": \"nr_pagal_shema\",\r\n    \"typename\": \"System.Int32\"\r\n  },\r\n  {\r\n    \"name\": \"" +
+            "ifas\",\r\n    \"dbname\": \"IFas\",\r\n    \"typename\": \"System.Int32\"\r\n  },\r\n  {\r\n    \"n" +
+            "ame\": \"pak_suv_data\",\r\n    \"dbname\": \"Pak_suv_data\",\r\n    \"typename\": \"System.Da" +
+            "teTime\"\r\n  },\r\n  {\r\n    \"name\": \"data1\",\r\n    \"dbname\": \"I_pat_data\",\r\n    \"type" +
+            "name\": \"System.DateTime\"\r\n  },\r\n  {\r\n    \"name\": \"aparatas1\",\r\n    \"dbname\": \"I_" +
+            "pat_aparat\",\r\n    \"typename\": \"System.String\"\r\n  },\r\n  {\r\n    \"name\": \"operatori" +
+            "us1\",\r\n    \"dbname\": \"I_pat_operator\",\r\n    \"typename\": \"System.String\"\r\n  },\r\n " +
+            " {\r\n    \"name\": \"data2\",\r\n    \"dbname\": \"II_pat_data\",\r\n    \"typename\": \"System." +
+            "DateTime\"\r\n  },\r\n  {\r\n    \"name\": \"aparatas2\",\r\n    \"dbname\": \"II_pat_aparat\",\r\n" +
+            "    \"typename\": \"System.String\"\r\n  },\r\n  {\r\n    \"name\": \"operatorius2\",\r\n    \"db" +
+            "name\": \"II_pat_operator\",\r\n    \"typename\": \"System.String\"\r\n  },\r\n  {\r\n    \"name" +
+            "\": \"data3\",\r\n    \"dbname\": \"III_pat_data\",\r\n    \"typename\": \"System.DateTime\"\r\n " +
+            " },\r\n  {\r\n    \"name\": \"aparatas3\",\r\n    \"dbname\": \"III_pat_aparat\",\r\n    \"typena" +
+            "me\": \"System.String\"\r\n  },\r\n  {\r\n    \"name\": \"operatorius3\",\r\n    \"dbname\": \"III" +
+            "_pat_operaqtor\",\r\n    \"typename\": \"System.String\"\r\n  },\r\n  {\r\n    \"name\": \"data4" +
+            "\",\r\n    \"dbname\": \"IV_pat_data\",\r\n    \"typename\": \"System.DateTime\"\r\n  },\r\n  {\r\n" +
+            "    \"name\": \"aparatas4\",\r\n    \"dbname\": \"IV_pat_aparat\",\r\n    \"typename\": \"Syste" +
+            "m.String\"\r\n  },\r\n  {\r\n    \"name\": \"operatorius4\",\r\n    \"dbname\": \"IV_pat_operato" +
+            "r\",\r\n    \"typename\": \"System.String\"\r\n  },\r\n  {\r\n    \"name\": \"panaikintas\",\r\n   " +
+            " \"dbname\": \"Panaikintas\",\r\n    \"typename\": \"System.Boolean\"\r\n  },\r\n  {\r\n    \"nam" +
+            "e\": \"defekto_id\",\r\n    \"dbname\": \"DefektoId\",\r\n    \"typename\": \"System.Int64\"\r\n " +
+            " }\r\n]")]
         public string JsonString {
             get {
                 return ((string)(this["JsonString"]));

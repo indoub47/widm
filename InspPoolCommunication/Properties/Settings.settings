@@ -21,10 +21,10 @@
       <Value Profile="(Default)">4</Value>
     </Setting>
     <Setting Name="UpdateExtraQuery" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">UPDATE ssd SET Pastaba = Pastaba + " " + @pastaba WHERE number = @id;</Value>
+      <Value Profile="(Default)">UPDATE ssd SET Pastaba = Pastaba + ", " + @pastaba WHERE number = @id;</Value>
     </Setting>
     <Setting Name="UpdateQueryFormat" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">UPDATE ssd SET {0} = @data, {1} = @aparatas, {2} = @operatorius, Pastaba = @pastaba WHERE number = @id</Value>
+      <Value Profile="(Default)">UPDATE ssd SET {0} = @data, {1} = @aparatas, {2} = @operatorius, Pastaba = Pastaba + ", " + @pastaba WHERE number = @id</Value>
     </Setting>
   </Settings>
 </SettingsFile>

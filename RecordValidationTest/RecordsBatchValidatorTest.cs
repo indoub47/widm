@@ -10,13 +10,44 @@ namespace RecordValidationTest
     [TestClass]
     public class RecordsBatchValidatorTest
     {
+
+        string[] pirmiejiMapping = new string[]
+        {
+          "linija",
+          "kelias",
+          "km",
+          "pk",
+          "m",
+          "siule",
+          "skodas",
+          "suvirino",
+          "tdata",
+          "aparatas",
+          "ivesta_db"
+        };
+
+        string[] nepirmiejiMapping = new string[]
+        {
+          "id",
+          "linija",
+          "kelias",
+          "km",
+          "pk",
+          "m",
+          "siule",
+          "skodas",
+          "tdata",
+          "kelintas",
+          "aparatas"
+        };
+
         [TestMethod]
         public void TestBatchPirmValidatorAllRecsOK()
         {
             Dictionary<string, object> ctx = new Dictionary<string, object>();
             ctx["operatorId"] = "402"; ctx["sheetName"] = "pirmieji tikrinimai";
 
-            PirmRecordValidator pirmValidator = new PirmRecordValidator(new PirmiejiRecordTagMaker());
+            PirmRecordValidator pirmValidator = new PirmRecordValidator(pirmiejiMapping, new PirmiejiRecordTagMaker());
 
             BatchRecordValidator batchValidator = new BatchRecordValidator(pirmValidator);
             batchValidator.Context = ctx;
@@ -42,7 +73,7 @@ namespace RecordValidationTest
             Dictionary<string, object> ctx = new Dictionary<string, object>();
             ctx["operatorId"] = "402"; ctx["sheetName"] = "pirmieji tikrinimai";
 
-            PirmRecordValidator pirmValidator = new PirmRecordValidator(new PirmiejiRecordTagMaker());
+            PirmRecordValidator pirmValidator = new PirmRecordValidator(pirmiejiMapping, new PirmiejiRecordTagMaker());
 
             BatchRecordValidator batchValidator = new BatchRecordValidator(pirmValidator);
             batchValidator.Context = ctx;
@@ -68,7 +99,7 @@ namespace RecordValidationTest
             Dictionary<string, object> ctx = new Dictionary<string, object>();
             ctx["operatorId"] = "402"; ctx["sheetName"] = "pirmieji tikrinimai";
 
-            PirmRecordValidator pirmValidator = new PirmRecordValidator(new PirmiejiRecordTagMaker());
+            PirmRecordValidator pirmValidator = new PirmRecordValidator(pirmiejiMapping, new PirmiejiRecordTagMaker());
 
             BatchRecordValidator batchValidator = new BatchRecordValidator(pirmValidator);
             batchValidator.Context = ctx;
@@ -83,9 +114,9 @@ namespace RecordValidationTest
         public void TestBatchNepirmAllRecsOK()
         {
             Dictionary<string, object> ctx = new Dictionary<string, object>();
-            ctx["operatorId"] = "402"; ctx["sheetName"] = "pirmieji tikrinimai";
+            ctx["operatorId"] = "402"; ctx["sheetName"] = "nepirmieji tikrinimai";
 
-            NepirmRecordValidator nepirmValidator = new NepirmRecordValidator(new NepirmiejiRecordTagMaker());
+            NepirmRecordValidator nepirmValidator = new NepirmRecordValidator(nepirmiejiMapping, new NepirmiejiRecordTagMaker());
 
             BatchRecordValidator batchValidator = new BatchRecordValidator(nepirmValidator);
             batchValidator.Context = ctx;
@@ -110,9 +141,9 @@ namespace RecordValidationTest
         public void TestBatchNepirmFewRecsNotOK()
         {
             Dictionary<string, object> ctx = new Dictionary<string, object>();
-            ctx["operatorId"] = "402"; ctx["sheetName"] = "pirmieji tikrinimai";
+            ctx["operatorId"] = "402"; ctx["sheetName"] = "nepirmieji tikrinimai";
 
-            NepirmRecordValidator nepirmValidator = new NepirmRecordValidator(new NepirmiejiRecordTagMaker());
+            NepirmRecordValidator nepirmValidator = new NepirmRecordValidator(nepirmiejiMapping, new NepirmiejiRecordTagMaker());
 
             BatchRecordValidator batchValidator = new BatchRecordValidator(nepirmValidator);
             batchValidator.Context = ctx;
@@ -136,9 +167,9 @@ namespace RecordValidationTest
         public void TestBatchNepirmEmptyList()
         {
             Dictionary<string, object> ctx = new Dictionary<string, object>();
-            ctx["operatorId"] = "402"; ctx["sheetName"] = "pirmieji tikrinimai";
+            ctx["operatorId"] = "402"; ctx["sheetName"] = "nepirmieji tikrinimai";
 
-            NepirmRecordValidator nepirmValidator = new NepirmRecordValidator(new NepirmiejiRecordTagMaker());
+            NepirmRecordValidator nepirmValidator = new NepirmRecordValidator(nepirmiejiMapping, new NepirmiejiRecordTagMaker());
 
             BatchRecordValidator batchValidator = new BatchRecordValidator(nepirmValidator);
             batchValidator.Context = ctx;

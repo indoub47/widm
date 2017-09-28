@@ -59,7 +59,7 @@ namespace RecordValidation
         public static InvalidInfo ValidateSalKodas(IList<object> record, string[] mapping)
         {
             return ValidateStringFromArray(
-                "salyginis_kodas",
+                "skodas",
                 Properties.Settings.Default.SalygKodai.Split(',').Select(x => x.Trim()).ToArray(),
                 record,
                 mapping,
@@ -78,7 +78,7 @@ namespace RecordValidation
 
         public static InvalidInfo ValidateTikrinimoData(IList<object> record, string[] mapping)
         {
-            object value = GetRowItem("tikrinimo_data", record, mapping);
+            object value = GetRowItem("tdata", record, mapping);
 
             if (IsEmpty(value))
             {
@@ -128,7 +128,7 @@ namespace RecordValidation
                 return null;
             }
 
-            object value = GetRowItem("tikrinimo_data", record, mapping);
+            object value = GetRowItem("tdata", record, mapping);
             DateTime data = Convert.ToDateTime(value);
             if (IsNotReal(data))
             {
@@ -153,7 +153,7 @@ namespace RecordValidation
         public static InvalidInfo ValidateKelintas(IList<object> record, string[] mapping)
         {
             return ValidateStringFromArray(
-                "kelintas_tikrinimas",
+                "kelintas",
                 Properties.Settings.Default.Kelinti.Split(',').Select(x => x.Trim()).ToArray(),
                 record,
                 mapping,
@@ -168,7 +168,7 @@ namespace RecordValidation
                 return null;
             }
 
-            object value = GetRowItem("kelintas_tikrinimas", record, mapping);
+            object value = GetRowItem("kelintas", record, mapping);
 
             // tam atvejui, jeigu kelintas būtų nebūtinai privalomas
             if (IsEmpty(value))
