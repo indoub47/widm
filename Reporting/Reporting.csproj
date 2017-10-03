@@ -45,9 +45,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\InspectionLib\InspectionLib.csproj">
+    <ProjectReference Include="..\InspectionLib\InspLib.csproj">
       <Project>{8893fdcf-18f1-4b18-a07c-59bb802a9f9f}</Project>
-      <Name>InspectionLib</Name>
+      <Name>InspLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\WidmShared\WidmShared.csproj">
       <Project>{ec03ebf3-4317-4304-9eca-e7e7937673f3}</Project>

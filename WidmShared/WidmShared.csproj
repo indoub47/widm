@@ -59,21 +59,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseInspValidator.cs" />
+    <Compile Include="InspValidator.cs" />
     <Compile Include="IBatchInspValidator.cs" />
     <Compile Include="IInspPoolCommunicator.cs" />
     <Compile Include="IInspTagMaker.cs" />
-    <Compile Include="IRecordsFetcher.cs" />
-    <Compile Include="IRecordTagMaker.cs" />
+    <Compile Include="IRecFetcher.cs" />
+    <Compile Include="IRecTagMaker.cs" />
     <Compile Include="IReporter.cs" />
     <Compile Include="InvalidInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BaseRecordValidator.cs" />
+    <Compile Include="BaseRecValidator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\InspectionLib\InspectionLib.csproj">
+    <ProjectReference Include="..\InspectionLib\InspLib.csproj">
       <Project>{8893fdcf-18f1-4b18-a07c-59bb802a9f9f}</Project>
-      <Name>InspectionLib</Name>
+      <Name>InspLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

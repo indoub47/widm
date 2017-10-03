@@ -28,18 +28,20 @@ namespace RecordValidationTest
         [TestMethod]
         public void ValidatePirmRecordTest()
         {
-            PirmRecordValidator validator = new PirmRecordValidator(pirmiejiMapping, new PirmiejiRecordTagMaker());
+            PirmRecValidator validator = new PirmRecValidator(pirmiejiMapping, new PirmRecTagMaker());
             Dictionary<string, object> ctx = new Dictionary<string, object>();
             ctx["operatorId"] = "402"; ctx["sheetName"] = "pirmieji tikrinimai";
+            string earlierDate = DateTime.Now.AddDays(-5).ToShortDateString();
+            string wrongFormatEarlierDate = DateTime.Now.AddDays(-5).ToString("MM-dd-yyyy");
 
             IList<IList<object>> recs = new object[][]
             {
                 //linija, kelias, km, pk, m, siule, salyginis_kodas, suvirino, tikrinimo_data, aparatas
-                new object[] { "01", 5, 325, 6, 92, 0, "06.4", "GTC", "2017-09-15", "831" },
-                new object[] { "01", -1, 325, 6, 92, 0, "06.4", "GTC", "2017-09-15", "831" },
-                new object[] { "01", -1, 325, 6, 92, 0, "06.4", "GTC", "09-14-2017" },
+                new object[] { "01", 5, 325, 6, 92, 0, "06.4", "GTC", earlierDate, "831" },
+                new object[] { "01", -1, 325, 6, 92, 0, "06.4", "GTC", earlierDate, "831" },
+                new object[] { "01", -1, 325, 6, 92, 0, "06.4", "GTC", wrongFormatEarlierDate },
                 new object[] { },
-                new object[] { "01", 8, 3, 6, 12, 0, "06.4", "GTC", "09-14-2017", 831 }
+                new object[] { "01", 8, 3, 6, 12, 0, "06.4", "GTC", wrongFormatEarlierDate, 831 }
             };
 
             List<InvalidInfo> invalidList;

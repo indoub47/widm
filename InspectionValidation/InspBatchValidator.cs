@@ -10,10 +10,10 @@ namespace InspectionValidation
 {
     public class InspBatchValidator : IBatchInspValidator
     {
-        private BaseInspValidator _validator;
+        private InspValidator _validator;
         public Dictionary<string, object> Context;
 
-        public InspBatchValidator(BaseInspValidator validator)
+        public InspBatchValidator(InspValidator validator)
         {
             _validator = validator;
         }

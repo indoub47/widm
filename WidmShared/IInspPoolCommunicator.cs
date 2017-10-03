@@ -9,6 +9,8 @@ using InspectionLib;
 namespace WidmShared
 {
     public delegate DataTable DataFetchMethod(Insp insp);
+    public delegate int DbUpdateMethod(List<Insp> insps);
+
     public interface IInspPoolCommunicator
     {
         DataTable FetchById(Insp insp);

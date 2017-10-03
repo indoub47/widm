@@ -38,7 +38,7 @@ namespace RecordValidationTest
             foreach (var obj in valuesMessages)
             {
                 record[index] = obj[0];
-                Assert.IsTrue((RecordValidationMethods.ValidateId(record, mapping) == null) == (bool)obj[1], obj[2].ToString());
+                Assert.IsTrue((RecValidationMethods.ValidateId(record, mapping) == null) == (bool)obj[1], obj[2].ToString());
             }
         }
 
@@ -66,7 +66,7 @@ namespace RecordValidationTest
             foreach (var obj in valuesMessages)
             {
                 record[index] = obj[0];
-                Assert.IsTrue((RecordValidationMethods.ValidateLinija(record, mapping) == null) == (bool)obj[1], obj[2].ToString());
+                Assert.IsTrue((RecValidationMethods.ValidateLinija(record, mapping) == null) == (bool)obj[1], obj[2].ToString());
             }
         }
 
@@ -92,7 +92,7 @@ namespace RecordValidationTest
             foreach (var obj in valuesMessages)
             {
                 record[index] = obj[0];
-                Assert.IsTrue((RecordValidationMethods.ValidateKelias(record, mapping) == null) == (bool)obj[1], obj[2].ToString());
+                Assert.IsTrue((RecValidationMethods.ValidateKelias(record, mapping) == null) == (bool)obj[1], obj[2].ToString());
             }
         }
 
@@ -118,7 +118,7 @@ namespace RecordValidationTest
             foreach (var obj in valuesMessages)
             {
                 record[index] = obj[0];
-                Assert.IsTrue((RecordValidationMethods.ValidateKm(record, mapping) == null) == (bool)obj[1], obj[2].ToString());
+                Assert.IsTrue((RecValidationMethods.ValidateKm(record, mapping) == null) == (bool)obj[1], obj[2].ToString());
             }
         }
 
@@ -144,7 +144,7 @@ namespace RecordValidationTest
             foreach (var obj in valuesMessages)
             {
                 record[index] = obj[0];
-                Assert.IsTrue((RecordValidationMethods.ValidatePk(record, mapping) == null) == (bool)obj[1], obj[2].ToString());
+                Assert.IsTrue((RecValidationMethods.ValidatePk(record, mapping) == null) == (bool)obj[1], obj[2].ToString());
             }
         }
 
@@ -170,7 +170,7 @@ namespace RecordValidationTest
             foreach (var obj in valuesMessages)
             {
                 record[index] = obj[0];
-                Assert.IsTrue((RecordValidationMethods.ValidateM(record, mapping) == null) == (bool)obj[1], obj[2].ToString());
+                Assert.IsTrue((RecValidationMethods.ValidateM(record, mapping) == null) == (bool)obj[1], obj[2].ToString());
             }
         }
 
@@ -196,7 +196,7 @@ namespace RecordValidationTest
             foreach (var obj in valuesMessages)
             {
                 record[index] = obj[0];
-                Assert.IsTrue((RecordValidationMethods.ValidateSiule(record, mapping) == null) == (bool)obj[1], obj[2].ToString());
+                Assert.IsTrue((RecValidationMethods.ValidateSiule(record, mapping) == null) == (bool)obj[1], obj[2].ToString());
             }
         }
 
@@ -222,7 +222,7 @@ namespace RecordValidationTest
             foreach (var obj in valuesMessages)
             {
                 record[index] = obj[0];
-                Assert.IsTrue((RecordValidationMethods.ValidateSalKodas(record, mapping) == null) == (bool)obj[1], obj[2].ToString());
+                Assert.IsTrue((RecValidationMethods.ValidateSalKodas(record, mapping) == null) == (bool)obj[1], obj[2].ToString());
             }
         }
 
@@ -249,7 +249,7 @@ namespace RecordValidationTest
             foreach (var obj in valuesMessages)
             {
                 record[index] = obj[0];
-                Assert.IsTrue((RecordValidationMethods.ValidateAparatas(record, mapping) == null) == (bool)obj[1], obj[2].ToString());
+                Assert.IsTrue((RecValidationMethods.ValidateAparatas(record, mapping) == null) == (bool)obj[1], obj[2].ToString());
             }
         }
 
@@ -382,7 +382,7 @@ namespace RecordValidationTest
             foreach(var obj in valuesMessages)
             {
                 record[index] = obj[0];
-                Assert.IsTrue((RecordValidationMethods.ValidateTikrinimoData(record, mapping) == null) == (bool)obj[1], obj[2].ToString());
+                Assert.IsTrue((RecValidationMethods.ValidateTikrinimoData(record, mapping) == null) == (bool)obj[1], obj[2].ToString());
             }
         }
 
@@ -409,7 +409,7 @@ namespace RecordValidationTest
             foreach (var obj in valuesMessages)
             {
                 record[index] = obj[0];
-                Assert.IsTrue((RecordValidationMethods.ValidateTikrinimoDataIsReal(record, mapping) == null) == (bool)obj[1], obj[2].ToString());
+                Assert.IsTrue((RecValidationMethods.ValidateTikrinimoDataIsReal(record, mapping) == null) == (bool)obj[1], obj[2].ToString());
             }
         }
 
@@ -445,7 +445,7 @@ namespace RecordValidationTest
             {
                 record[keliasIndex] = obj[0];
                 record[pkIndex] = obj[1];
-                Assert.IsTrue((RecordValidationMethods.ValidatePrivalomasPk(record, mapping) == null) == (bool)obj[2], obj[3].ToString());
+                Assert.IsTrue((RecValidationMethods.ValidatePrivalomasPk(record, mapping) == null) == (bool)obj[2], obj[3].ToString());
             }
         }
 
@@ -486,7 +486,7 @@ namespace RecordValidationTest
             {
                 record[keliasIndex] = obj[0];
                 record[siuleIndex] = obj[1];
-                Assert.IsTrue((RecordValidationMethods.ValidateSiuleIesmeEmpty(record, mapping) == null) == (bool)obj[2], obj[3].ToString());
+                Assert.IsTrue((RecValidationMethods.ValidateSiuleIesmeEmpty(record, mapping) == null) == (bool)obj[2], obj[3].ToString());
             }
         }
 
@@ -510,7 +510,7 @@ namespace RecordValidationTest
             foreach (var obj in valuesMessages)
             {
                 record[index] = obj[0];
-                Assert.IsTrue((RecordValidationMethods.ValidateSuvirino(record, mapping) == null) == (bool)obj[1], obj[2].ToString());
+                Assert.IsTrue((RecValidationMethods.ValidateSuvirino(record, mapping) == null) == (bool)obj[1], obj[2].ToString());
             }
         }
 
@@ -539,7 +539,7 @@ namespace RecordValidationTest
             foreach (var obj in valuesMessages)
             {
                 record[index] = obj[0];
-                Assert.IsTrue((RecordValidationMethods.ValidateKelintas(record, mapping) == null) == (bool)obj[1], obj[2].ToString());
+                Assert.IsTrue((RecValidationMethods.ValidateKelintas(record, mapping) == null) == (bool)obj[1], obj[2].ToString());
             }
         }
 
@@ -567,7 +567,7 @@ namespace RecordValidationTest
             foreach (var obj in valuesMessages)
             {
                 record[index] = obj[0];
-                Assert.IsTrue((RecordValidationMethods.ValidateNegaliButiPirmas(record, mapping) == null) == (bool)obj[1], obj[2].ToString());
+                Assert.IsTrue((RecValidationMethods.ValidateNegaliButiPirmas(record, mapping) == null) == (bool)obj[1], obj[2].ToString());
             }
         }
     }

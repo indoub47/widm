@@ -28,17 +28,18 @@ namespace RecordValidationTest
         [TestMethod]
         public void ValidateNepirmRecordTest()
         {
-            NepirmiejiRecordTagMaker tagMaker = new NepirmiejiRecordTagMaker();
-            NepirmRecordValidator validator = new NepirmRecordValidator(nepirmiejiMapping, tagMaker);
+            NepirmRecTagMaker tagMaker = new NepirmRecTagMaker();
+            NepirmRecValidator validator = new NepirmRecValidator(nepirmiejiMapping, tagMaker);
             Dictionary<string, object> ctx = new Dictionary<string, object>();
             ctx["operatorId"] = "402"; ctx["sheetName"] = "nepirmieji tikrinimai";
+            string earlierDate = DateTime.Now.AddDays(-5).ToShortDateString();
 
             IList<IList<object>> recs = new object[][]
             {
                 //id, linija, kelias, km, pk, m, siule, salyginis_kodas, tikrinimo_data, kelintas_tikrinimas, aparatas
-                new object[] { 12345, "01", 5, 325, 6, 92, 0, "06.4", "2017-09-15", 2, "831" }, // ok
-                new object[] { 87654, "01", 4, 325, 6, 92, 0, "06.4", "2017-09-15", "papild", "831" }, // papild
-                new object[] { 87654, "01", 4, 325, 6, 92, 0, "06.4", "2017-09-15", "1", "831" }, // kelintas 1
+                new object[] { 12345, "01", 5, 325, 6, 92, 0, "06.4", earlierDate, 2, "831" }, // ok
+                new object[] { 87654, "01", 4, 325, 6, 92, 0, "06.4", earlierDate, "papild", "831" }, // papild
+                new object[] { 87654, "01", 4, 325, 6, 92, 0, "06.4", earlierDate, "1", "831" }, // kelintas 1
                 new object[] { 789523, "01", 3, 325, 6, 92, 0, "06.4", DateTime.Now }, // no kelintas, no aparatas
                 new object[] { }, // empty
                 new object[] { 0, "01", 8, 3, 6, 12, 0, "06.4", DateTime.Now, 5 } // 0 id, 5 kelintas, aparatas

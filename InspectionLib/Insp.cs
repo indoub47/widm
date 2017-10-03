@@ -64,7 +64,7 @@ namespace InspectionLib
         }
 
         /// <summary>
-        /// Record mus be validated. If record doesn't have field "kelintas_tikrinimas",
+        /// Record must be validated. If record doesn't have field "kelintas_tikrinimas",
         /// property Kelintas is being initialized to value Kelintas.First.
         /// If record doesn't have field "operatorius", property Operatorius will be
         /// initialized with a string.Empty value.

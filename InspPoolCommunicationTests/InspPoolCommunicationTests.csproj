@@ -93,9 +93,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\InspectionLib\InspectionLib.csproj">
+    <ProjectReference Include="..\InspectionLib\InspLib.csproj">
       <Project>{8893fdcf-18f1-4b18-a07c-59bb802a9f9f}</Project>
-      <Name>InspectionLib</Name>
+      <Name>InspLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\InspPoolCommunication\InspPoolCommunication.csproj">
       <Project>{A5CF4285-5E8E-4F1D-96EE-89178AF4F07F}</Project>

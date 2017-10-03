@@ -1,7 +1,27 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Widm.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="DbPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:/DB</Value>
+    </Setting>
+    <Setting Name="VerifyLogFileName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">validate/validate_log {0:yyyy-MM-dd} {0:H-mm-ss}.log</Value>
+    </Setting>
+    <Setting Name="ProcessLogFileName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">log/log {0:yyyy-MM-dd} {0:H-mm-ss}.log</Value>
+    </Setting>
+    <Setting Name="DbUpdateReportFileName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">db_update/db_update_report {0:yyyy-MM-dd} {0:H-mm-ss}.log</Value>
+    </Setting>
+    <Setting Name="OutputDir" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">C:/WidmOutput/</Value>
+    </Setting>
+    <Setting Name="DbBackupFileName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">db_backup/db_backup {0:yyyy-MM-dd} {0:H-mm-ss}.mdb</Value>
+    </Setting>
+    <Setting Name="CreateDBBackup" Type="System.Boolean" Scope="Application">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

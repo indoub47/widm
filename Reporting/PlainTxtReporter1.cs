@@ -101,7 +101,17 @@ namespace Reporting
             return sb;
         }
 
-        public virtual StringBuilder ReportRecordValidation(IList<InvalidInfo> invalidRecordInfoList)
+        public virtual StringBuilder ReportRepeatedInsps(Dictionary<string, List<Insp>> repeatedInsps)
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var rep in repeatedInsps)
+            {
+                sb.AppendLine($"{rep.Key}: " + String.Join(", ", rep.Value.Select(insp => $"{insp.Operatorius}-{Kl.Roman(insp.Kelintas)}")));
+            }
+            return sb;
+        }
+
+        public virtual StringBuilder ReportRecValidation(IList<InvalidInfo> invalidRecordInfoList)
         {
             IEnumerable<Dictionary<string, object>> iriList = invalidRecordInfoList;
             StringBuilder sb = new StringBuilder();

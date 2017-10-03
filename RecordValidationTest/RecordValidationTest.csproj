@@ -76,9 +76,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RecordValidation\RecordValidation.csproj">
+    <ProjectReference Include="..\RecordValidation\RecValidation.csproj">
       <Project>{d2b97994-5bdd-40aa-830e-c11d9793dba5}</Project>
-      <Name>RecordValidation</Name>
+      <Name>RecValidation</Name>
     </ProjectReference>
     <ProjectReference Include="..\TagMaking\TagMaking.csproj">
       <Project>{d9ee9608-8e71-4332-8259-183248097898}</Project>

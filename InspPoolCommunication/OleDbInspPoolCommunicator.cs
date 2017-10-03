@@ -66,22 +66,6 @@ namespace InspPoolCommunication
             return dataTable;
         }
 
-        public int InsertInsp(Insp insp)
-        {
-            OleDbCommand cmd = new OleDbCommand(Properties.Settings.Default.InsertQuery);
-
-            setupInsertCommand(insp, cmd);
-
-            int result;
-            using (OleDbConnection conn = new OleDbConnection(connectionString))
-            {
-                cmd.Connection = conn;
-                conn.Open();
-                result = cmd.ExecuteNonQuery();
-            }
-            return result;
-        }
-
         public int BatchInsertInsp(IList<Insp> insps)
         {
             OleDbCommand cmd = new OleDbCommand(Properties.Settings.Default.InsertQuery);
@@ -100,20 +84,6 @@ namespace InspPoolCommunication
             return result;
         }
 
-        public int UpdateInspInfo(Insp insp)
-        {
-            OleDbCommand cmd = new OleDbCommand();
-            setupUpdateCommand(insp, cmd);
-            int result;
-            using (OleDbConnection conn = new OleDbConnection(connectionString))
-            {
-                cmd.Connection = conn;
-                conn.Open();
-                result = cmd.ExecuteNonQuery();
-            }
-            return result;
-        }
-
         public int BatchUpdateInsp(IList<Insp> insps)
         {
             OleDbCommand cmd = new OleDbCommand();
@@ -127,6 +97,37 @@ namespace InspPoolCommunication
                     setupUpdateCommand(insp, cmd);
                     result += cmd.ExecuteNonQuery();
                 }
+            }
+            return result;
+        }
+
+
+        public int InsertInsp(Insp insp)
+        {
+            OleDbCommand cmd = new OleDbCommand(Properties.Settings.Default.InsertQuery);
+
+            setupInsertCommand(insp, cmd);
+
+            int result;
+            using (OleDbConnection conn = new OleDbConnection(connectionString))
+            {
+                cmd.Connection = conn;
+                conn.Open();
+                result = cmd.ExecuteNonQuery();
+            }
+            return result;
+        }
+
+        public int UpdateInspInfo(Insp insp)
+        {
+            OleDbCommand cmd = new OleDbCommand();
+            setupUpdateCommand(insp, cmd);
+            int result;
+            using (OleDbConnection conn = new OleDbConnection(connectionString))
+            {
+                cmd.Connection = conn;
+                conn.Open();
+                result = cmd.ExecuteNonQuery();
             }
             return result;
         }
