@@ -25,6 +25,20 @@ namespace Widm
         {
             Actions action = Actions.ValidateOnly;
 
+            //string input = ReadUserInput();
+            //switch (input)
+            //{
+            //    case "vo":
+            //        action = Actions.ValidateOnly;
+            //        break;
+            //    case "un":
+            //        action = Actions.UpdateFaultless;
+            //        break;
+            //    case "fu":
+            //        action = Actions.ForceUpdate;
+            //        break;
+            //}
+
             // loggers
             LogWriter logger = LogWriterFactory.Create(LogFile.ProcessLog);
 
@@ -78,61 +92,68 @@ namespace Widm
             StringBuilder inspValidationLog = new StringBuilder();
             List<InvalidInfo> allRecInvalids = new List<InvalidInfo>();
             List<InvalidInfo> allInspInvalids = new List<InvalidInfo>();
-            List<Insp> allInsps = new List<Insp>();
+            List<Insp> allCreatedInsps = new List<Insp>();
+            List<Insp> allUpdatedInsps = new List<Insp>();
 
             SheetConfig sheet = sheetData["pirmieji"];
             foreach (var spreadsheet in spreadsheets)
             {
-
+                Console.WriteLine($"Operatorius: {spreadsheet.OperatorId}, lentelė: {sheet.SheetName}");
+                Console.WriteLine("fetching and validating records...");
                 var pirmValidate = fetchAndValidate(
                     sheetData["pirmieji"], spreadsheet, recFetcher, 
                     service, pRecBatchValidator, pInspBatchValidator);
 
                 bool toUpdateDb = CollectLogThenDecideIfUpdateDb(
-                    pirmValidate, action, logger, reporter, allRecInvalids, allInspInvalids);
+                    pirmValidate, action, logger, reporter, allRecInvalids, allInspInvalids, allCreatedInsps);
 
                 if (! toUpdateDb)
                     continue;
 
+                Console.WriteLine("updating db...");
                 updateDb(
                     pirmValidate.Item2, inspPoolCommunicator.BatchInsertInsp, 
-                    allInsps, gsUpdater, service, sheet, spreadsheet);               
+                    allUpdatedInsps, gsUpdater, service, sheet, spreadsheet);               
             }
 
             sheet = sheetData["nepirmieji"];
             foreach (var spreadsheet in spreadsheets)
             {
-
+                Console.WriteLine($"Operatorius: {spreadsheet.OperatorId}, lentelė: {sheet.SheetName}");
+                Console.WriteLine("fetching and validating records...");
                 var nepirmValidate = fetchAndValidate(
                     sheetData["nepirmieji"], spreadsheet, recFetcher,
                     service, nRecBatchValidator, nInspBatchValidator);
 
                 bool toUpdateDb = CollectLogThenDecideIfUpdateDb(
-                    nepirmValidate, action, logger, reporter, allRecInvalids, allInspInvalids);
+                    nepirmValidate, action, logger, reporter, allRecInvalids, allInspInvalids, allCreatedInsps);
 
                 if (!toUpdateDb)
                     continue;
 
+                Console.WriteLine("updating db...");
                 updateDb(
                     nepirmValidate.Item2, inspPoolCommunicator.BatchUpdateInsp,
-                    allInsps, gsUpdater, service, sheet, spreadsheet);
+                    allUpdatedInsps, gsUpdater, service, sheet, spreadsheet);
             }
 
             RepeatFinder repFinder = new RepeatFinder();
-            Dictionary<string, List<Insp>> repeats = repFinder.FindRepeats(allInsps);
+            Dictionary<string, List<Insp>> repeats = repFinder.FindRepeats(allCreatedInsps);
 
             // create reports:
             //  allRecInvalids, allInspInvalids, inspDuplicates
             LogWriter verifyLog = LogWriterFactory.Create(LogFile.VerifyLog);
-            verifyLog.Log("Critical:\n" + reporter.ReportRecValidation(allRecInvalids));
-            verifyLog.Log("Suspicious:\n" + reporter.ReportInspValidation(allInspInvalids));
-            verifyLog.Log("Repeated Inspections:\n" + reporter.ReportRepeatedInsps(repeats));
+            verifyLog.Log("Critical:\r\n" + reporter.ReportRecValidation(allRecInvalids));
+            verifyLog.Log("Suspicious:\r\n" + reporter.ReportInspValidation(allInspInvalids));
+            verifyLog.Log("Repeated Inspections:\r\n" + reporter.ReportRepeatedInsps(repeats));
 
-            if (allInsps.Count > 0)
+            if (allUpdatedInsps.Count > 0)
             {
                 LogWriter dbUpdateReport = LogWriterFactory.Create(LogFile.DbUpdateReport);
-                dbUpdateReport.Log(reporter.ReportDbUpdate(allInsps));
+                dbUpdateReport.Log(reporter.ReportDbUpdate(allUpdatedInsps));
             }
+            Console.WriteLine("Done");
+            Console.ReadKey();
         }
 
         /// <summary>
@@ -201,8 +222,15 @@ namespace Widm
         private static bool CollectLogThenDecideIfUpdateDb(
             Tuple<List<InvalidInfo>, List<Insp>, List<InvalidInfo>> validateResult, Actions action,
             LogWriter tempLogger, PlainTxtReporter1 reporter, 
-            List<InvalidInfo> allRecInvalids, List<InvalidInfo> allInspInvalids)
+            List<InvalidInfo> allRecInvalids, List<InvalidInfo> allInspInvalids, List<Insp> allCreatedInsps)
         {
+
+            // if no rec invalids, collects insps for repeat finding
+            if (validateResult.Item2 != null && validateResult.Item1 == null)
+            {
+                Array.ForEach(validateResult.Item2.ToArray(), insp => allCreatedInsps.Add(insp));
+            }
+
             // no records
             if (validateResult.Item1 == null && validateResult.Item2 == null)
                 return false;
@@ -218,7 +246,7 @@ namespace Widm
                 StringBuilder nRecReport = reporter.ReportRecValidation(validateResult.Item1);
                 tempLogger.Log(nRecReport);
                 Console.WriteLine(nRecReport);
-                allRecInvalids.Concat(validateResult.Item1);
+                Array.ForEach<InvalidInfo>(validateResult.Item1.ToArray(), r => allRecInvalids.Add(r));
                 return false;
             }
 
@@ -229,7 +257,7 @@ namespace Widm
                 StringBuilder nInspReport = reporter.ReportInspValidation(validateResult.Item3);
                 tempLogger.Log(nInspReport);
                 Console.WriteLine(nInspReport);
-                allInspInvalids.Concat(validateResult.Item3);
+                Array.ForEach<InvalidInfo>(validateResult.Item3.ToArray(), r => allInspInvalids.Add(r));
 
                 if (action != Actions.ForceUpdate)
                     return false;
@@ -247,6 +275,7 @@ namespace Widm
             int result = dbUpdateMethod(insps);
             // -- accumulate
             allInsps.Concat(insps);
+            Array.ForEach(insps.ToArray(), insp => allInsps.Add(insp));
             // -- update google sheet
             gsUpdater.BatchUpdateSheet(spreadsheet.Id, sheet, service);
 
@@ -303,10 +332,11 @@ namespace Widm
             Console.TreatControlCAsInput = true;
 
             string inputString = String.Empty;
+            string query = " vo - validate only,\n un - update if no flaws,\n fu - force update,\n Esc - exit";
             ConsoleKeyInfo keyInfo;
             do
             {
-                Console.WriteLine("v - verify, s - settings, Esc - exit");
+                Console.WriteLine(query);
                 inputString = String.Empty;
                 do
                 {
@@ -349,7 +379,7 @@ namespace Widm
 
                 inputString = inputString.Trim();
                 Console.WriteLine("{0}", inputString);
-            } while (inputString != "v" && inputString != "s");
+            } while (inputString != "vo" && inputString != "un" && inputString != "fu");
             return inputString;
         }
         

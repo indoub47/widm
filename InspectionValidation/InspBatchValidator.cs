@@ -16,6 +16,7 @@ namespace InspectionValidation
         public InspBatchValidator(InspValidator validator)
         {
             _validator = validator;
+            Context = new Dictionary<string, object>();
         }
 
         public IList<InvalidInfo> Validate(IList<Insp> inspections)

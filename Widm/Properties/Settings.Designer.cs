@@ -25,7 +25,7 @@ namespace Widm.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:/DB")]
+        [global::System.Configuration.DefaultSettingValueAttribute("testDb.mdb")]
         public string DbPath {
             get {
                 return ((string)(this["DbPath"]));
@@ -61,7 +61,7 @@ namespace Widm.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:/WidmOutput/")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:/Users/pc/Desktop/widm output")]
         public string OutputDir {
             get {
                 return ((string)(this["OutputDir"]));

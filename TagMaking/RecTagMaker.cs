@@ -31,7 +31,7 @@ namespace TagMaking
             object obj = getRowItem(columnName, record);
             if (isEmpty(obj))
             {
-                return "_";
+                return "?";
             }
 
             try

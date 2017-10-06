@@ -64,7 +64,8 @@ namespace Widm
             {
                 try
                 {
-                    File.Create(fileName);
+                    FileStream fs = File.Create(fileName);
+                    fs.Close();
                 }
                 catch
                 {

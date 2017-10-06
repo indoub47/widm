@@ -12,10 +12,10 @@
       <Value Profile="(Default)">06.4, 06.3</Value>
     </Setting>
     <Setting Name="Aparatai" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">807, 806, 831, 832</Value>
+      <Value Profile="(Default)">807, 806, 830, 831</Value>
     </Setting>
     <Setting Name="Suvirino" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">IF4, IF3, GTC, VitrasS</Value>
+      <Value Profile="(Default)">IF4, IF3, GTC, VitrasS, gamykla</Value>
     </Setting>
     <Setting Name="Kelinti" Type="System.String" Scope="Application">
       <Value Profile="(Default)">1, 2, 3, 4, papild</Value>

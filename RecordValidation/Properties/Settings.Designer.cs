@@ -58,7 +58,7 @@ namespace RecordValidation.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("807, 806, 831, 832")]
+        [global::System.Configuration.DefaultSettingValueAttribute("807, 806, 830, 831")]
         public string Aparatai {
             get {
                 return ((string)(this["Aparatai"]));
@@ -67,7 +67,7 @@ namespace RecordValidation.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("IF4, IF3, GTC, VitrasS")]
+        [global::System.Configuration.DefaultSettingValueAttribute("IF4, IF3, GTC, VitrasS, gamykla")]
         public string Suvirino {
             get {
                 return ((string)(this["Suvirino"]));

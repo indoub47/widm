@@ -18,11 +18,11 @@ namespace TagMaking
             try
             {
                 long id = Convert.ToInt64(objId);
-                return $"ID: {id} {vietoskodas}";
+                return $"ID: {id}, {vietoskodas}";
             }
             catch
             {
-                return $"ID: {objId.ToString()} {vietoskodas}";
+                return $"ID: {objId.ToString()}, {vietoskodas}";
             }
         }
     }

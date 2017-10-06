@@ -15,6 +15,7 @@ namespace RecordValidation
         public BatchRecValidator(BaseRecValidator recordValidator)
         {
             RecordValidator = recordValidator;
+            Context = new Dictionary<string, object>();
         }
         
         public List<InvalidInfo> ValidateBatch(List<IList<object>> records)

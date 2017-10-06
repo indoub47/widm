@@ -81,8 +81,11 @@ namespace InspectionLib
             // tikrinimo_data, suvirino, kelintas_tikrinimas, pastaba
             long? id = null;
             int ind = Array.IndexOf(mapping, "id");
-            if (ind != -1)
+            try
+            {
                 id = Convert.ToInt64(record[ind].ToString().Trim());
+            }
+            catch { }
 
             string linija = record[Array.IndexOf(mapping, "linija")].ToString().Trim();
             int kelias = Convert.ToInt32(record[Array.IndexOf(mapping, "kelias")]);
@@ -90,17 +93,23 @@ namespace InspectionLib
 
             int? pk = null;
             ind = Array.IndexOf(mapping, "pk");
-            if (ind != -1)
+            try
+            {
                 pk = Convert.ToInt32(record[ind]);
+            }
+            catch { }
 
             int m = Convert.ToInt32(record[Array.IndexOf(mapping, "m")]);
 
             int? siule = null;
             ind = Array.IndexOf(mapping, "siule");
-            if (ind != -1)
+            try
+            {
                 siule = Convert.ToInt32(record[ind]);
+            }
+            catch { }
 
-            string salyginisKodas = record[Array.IndexOf(mapping, "salyginis_kodas")].ToString().Trim();
+            string salyginisKodas = record[Array.IndexOf(mapping, "skodas")].ToString().Trim();
 
             string operatorius = string.Empty;
             ind = Array.IndexOf(mapping, "operatorius");
@@ -109,13 +118,15 @@ namespace InspectionLib
 
             string aparatas = record[Array.IndexOf(mapping, "aparatas")].ToString().Trim();
 
-            DateTime tikrinimoData = Convert.ToDateTime(record[Array.IndexOf(mapping, "tikrinimo_data")]);
+            DateTime tikrinimoData = Convert.ToDateTime(record[Array.IndexOf(mapping, "tdata")]);
 
-            string suvirino = record[Array.IndexOf(mapping, "suvirino")].ToString().Trim();
-
-
+            string suvirino = string.Empty;
+            ind = Array.IndexOf(mapping, "suvirino");
+            if (ind != -1)
+                suvirino = record[ind].ToString().Trim();
+            
             Kelintas kelintasTikrinimas = Kelintas.Extra;
-            ind = Array.IndexOf(mapping, "kelintas_tikrinimas");
+            ind = Array.IndexOf(mapping, "kelintas");
             if (ind == -1)
                 kelintasTikrinimas = Kelintas.First;
             else
