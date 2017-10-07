@@ -54,9 +54,11 @@ namespace GSheetsActions
             List<ValueRange> requestData, 
             string valueInputOption = "USER_ENTERED")
         {
-            BatchUpdateValuesRequest requestBody = new BatchUpdateValuesRequest();
-            requestBody.Data = requestData;
-            requestBody.ValueInputOption = valueInputOption;
+            BatchUpdateValuesRequest requestBody = new BatchUpdateValuesRequest
+            {
+                Data = requestData,
+                ValueInputOption = valueInputOption
+            };
             return requestBody;
         }
 
@@ -76,9 +78,11 @@ namespace GSheetsActions
                     rangeValues[r][sheetConfig.FilterColumnIndex] == null ||
                     rangeValues[r][sheetConfig.FilterColumnIndex].ToString().Trim() == string.Empty)
                 {
-                    ValueRange vr = new ValueRange();
-                    vr.Range = string.Format(sheetConfig.FilterAddressFormat, r + sheetConfig.StartRowIndex);
-                    vr.Values = new List<IList<object>> { updateValue };
+                    ValueRange vr = new ValueRange
+                    {
+                        Range = string.Format(sheetConfig.FilterAddressFormat, r + sheetConfig.StartRowIndex),
+                        Values = new List<IList<object>> { updateValue }
+                    };
                     requestData.Add(vr);
                 }
             }

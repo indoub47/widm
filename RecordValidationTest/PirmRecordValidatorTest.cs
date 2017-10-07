@@ -28,7 +28,7 @@ namespace RecordValidationTest
         [TestMethod]
         public void ValidatePirmRecordTest()
         {
-            PirmRecValidator validator = new PirmRecValidator(pirmiejiMapping, new PirmRecTagMaker());
+            PirmRecValidator validator = new PirmRecValidator(pirmiejiMapping, new PirmRecTagMaker(pirmiejiMapping));
             Dictionary<string, object> ctx = new Dictionary<string, object>();
             ctx["operatorId"] = "402"; ctx["sheetName"] = "pirmieji tikrinimai";
             string earlierDate = DateTime.Now.AddDays(-5).ToShortDateString();

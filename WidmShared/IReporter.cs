@@ -9,8 +9,8 @@ namespace WidmShared
 {
     public interface IReporter
     {
-        StringBuilder ReportRecValidation(IList<InvalidInfo> invalidRecordInfoList);
-        StringBuilder ReportInspValidation(IList<InvalidInfo> suspInspInfoList);
+        StringBuilder ReportRecValidation(IList<InvalidInfo> invalidRecordInfoList, bool addHeader = true);
+        StringBuilder ReportInspValidation(IList<InvalidInfo> suspInspInfoList, bool addHeader = true);
         StringBuilder ReportDbUpdate(IList<Insp> inspList);
     }
 }

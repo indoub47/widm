@@ -24,7 +24,7 @@ namespace InspectionValidation
             List<InvalidInfo> allInfos = new List<InvalidInfo>();
             foreach (Insp insp in inspections)
             {
-                allInfos.Concat(_validator.Validate(insp, Context));
+                allInfos.AddRange(_validator.Validate(insp, Context));
             }
 
             return allInfos;

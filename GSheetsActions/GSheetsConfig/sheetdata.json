@@ -4,7 +4,7 @@
     "rangeaddress": "'Pirmieji tikrinimai'!A2:K",
     "startrowindex": 2,
     "filtercolumnindex": 10,
-    "filteradressformat": "'Pirmieji tikrinimai'!K{0}",
+    "filteraddressformat": "'Pirmieji tikrinimai'!K{0}",
     "mapping": [
       "linija",
       "kelias",
@@ -25,7 +25,7 @@
     "rangeaddress": "'Kiti tikrinimai'!A2:L",
     "startrowindex": 2,
     "filtercolumnindex": 11,
-    "filteradressformat": "'Kiti tikrinimai'!L{0}",
+    "filteraddressformat": "'Kiti tikrinimai'!L{0}",
     "mapping": [
       "id",
       "linija",

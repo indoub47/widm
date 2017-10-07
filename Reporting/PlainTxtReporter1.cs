@@ -12,10 +12,9 @@ namespace Reporting
     {
         public virtual StringBuilder ReportDbUpdate(IList<Insp> inspList)
         {
-            IEnumerable<Insp> wiList = new List<Insp>();
             StringBuilder sb = new StringBuilder(DateTime.Now.ToShortDateString() + ", " + DateTime.Now.ToShortTimeString()).AppendLine();
 
-            var groupped = wiList.OrderBy(x1 => x1.TData).GroupBy(xx1 => xx1.TData.Date, (key1, group1) => new
+            var groupped = inspList.OrderBy(x1 => x1.TData).GroupBy(xx1 => xx1.TData.Date, (key1, group1) => new
             {
                 TData = key1.Date,
                 GrByTData = group1.OrderBy(x2 => x2.Aparatas).GroupBy(xx2 => xx2.Aparatas, (key2, group2) => new
@@ -63,7 +62,7 @@ namespace Reporting
             return sb;
         }
 
-        public virtual StringBuilder ReportInspValidation(IList<InvalidInfo> invalidInfoList)
+        public virtual StringBuilder ReportInspValidation(IList<InvalidInfo> invalidInfoList, bool addHeader = true)
         {
             IEnumerable<Dictionary<string, object>> iiList = invalidInfoList;
             StringBuilder sb = new StringBuilder();
@@ -86,7 +85,8 @@ namespace Reporting
             {
                 foreach (var a2 in a1.GrByOperatorius)
                 {
-                    sb.AppendLine("Operatorius: " + a1.Operatorius + ", lentelė: " + a2.Sheet);
+                    if (addHeader)
+                        sb.AppendLine("Operatorius: " + a1.Operatorius + ", lentelė: " + a2.Sheet);
                     foreach (var a3 in a2.GrBySheet)
                     {
                         sb.AppendLine("\tįrašas: " + a3.Tag);
@@ -111,7 +111,7 @@ namespace Reporting
             return sb;
         }
 
-        public virtual StringBuilder ReportRecValidation(IList<InvalidInfo> invalidRecordInfoList)
+        public virtual StringBuilder ReportRecValidation(IList<InvalidInfo> invalidRecordInfoList, bool addHeader = true)
         {
             IEnumerable<Dictionary<string, object>> iriList = invalidRecordInfoList;
             StringBuilder sb = new StringBuilder();
@@ -134,7 +134,8 @@ namespace Reporting
             {
                 foreach (var a2 in a1.GrByOperatorius)
                 {
-                    sb.AppendLine("Operatorius: " + a1.Operatorius + ", lentelė: " + a2.Sheet);
+                    if (addHeader)
+                        sb.AppendLine("Operatorius: " + a1.Operatorius + ", lentelė: " + a2.Sheet);
                     foreach (var a3 in a2.GrBySheet)
                     {
                         sb.AppendLine("\tįrašas: " + a3.Tag);

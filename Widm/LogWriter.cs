@@ -22,7 +22,7 @@ namespace Widm
             {
                 using (StreamWriter w = File.AppendText(FileName))
                 {
-                    WriteLog(exception, w);
+                    writeLog(exception, w);
                 }
             }
             catch (Exception ex)
@@ -42,7 +42,7 @@ namespace Widm
             {
                 using (StreamWriter w = File.AppendText(FileName))
                 {
-                    WriteLog(logText, w);
+                    writeLog(logText, w);
                 }
             }
             catch (Exception ex)
@@ -52,7 +52,7 @@ namespace Widm
             }
         }
 
-        private void WriteLog(Exception exception, TextWriter writer)
+        private void writeLog(Exception exception, TextWriter writer)
         {
             StringBuilder sb = new StringBuilder();
             exceptionRecord(exception, sb);
@@ -70,7 +70,7 @@ namespace Widm
             }
         }
 
-        private void WriteLog(string logText, TextWriter writer)
+        private void writeLog(string logText, TextWriter writer)
         {
             try
             {

@@ -6,9 +6,9 @@ namespace TagMaking
 {
     public class NepirmRecTagMaker : RecTagMaker
     {
-        public NepirmRecTagMaker()
+        public NepirmRecTagMaker(string[] mapping)
         {
-            mapping = Properties.Settings.Default.NepirmiejiMapping.Split(',').Select(x => x.Trim()).ToArray();
+            this.mapping = mapping;
         }
 
         public override string Make(IList<object> record)

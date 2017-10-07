@@ -44,13 +44,18 @@ namespace RecordValidationTest
         [TestMethod]
         public void TestBatchPirmValidatorAllRecsOK()
         {
-            Dictionary<string, object> ctx = new Dictionary<string, object>();
-            ctx["operatorId"] = "402"; ctx["sheetName"] = "pirmieji tikrinimai";
+            Dictionary<string, object> ctx = new Dictionary<string, object>
+            {
+                ["operatorId"] = "402",
+                ["sheetName"] = "pirmieji tikrinimai"
+            };
 
-            PirmRecValidator pirmValidator = new PirmRecValidator(pirmiejiMapping, new PirmRecTagMaker());
+            PirmRecValidator pirmValidator = new PirmRecValidator(pirmiejiMapping, new PirmRecTagMaker(pirmiejiMapping));
 
-            BatchRecValidator batchValidator = new BatchRecValidator(pirmValidator);
-            batchValidator.Context = ctx;
+            BatchRecValidator batchValidator = new BatchRecValidator(pirmValidator)
+            {
+                Context = ctx
+            };
 
             List<IList<object>> bunchOfRecords = new List<IList<object>>
             {
@@ -70,13 +75,18 @@ namespace RecordValidationTest
         [TestMethod]
         public void TestBatchPirmValidatorFewRecsNotOK()
         {
-            Dictionary<string, object> ctx = new Dictionary<string, object>();
-            ctx["operatorId"] = "402"; ctx["sheetName"] = "pirmieji tikrinimai";
+            Dictionary<string, object> ctx = new Dictionary<string, object>
+            {
+                ["operatorId"] = "402",
+                ["sheetName"] = "pirmieji tikrinimai"
+            };
 
-            PirmRecValidator pirmValidator = new PirmRecValidator(pirmiejiMapping, new PirmRecTagMaker());
+            PirmRecValidator pirmValidator = new PirmRecValidator(pirmiejiMapping, new PirmRecTagMaker(pirmiejiMapping));
 
-            BatchRecValidator batchValidator = new BatchRecValidator(pirmValidator);
-            batchValidator.Context = ctx;
+            BatchRecValidator batchValidator = new BatchRecValidator(pirmValidator)
+            {
+                Context = ctx
+            };
 
             List<IList<object>> bunchOfRecords = new List<IList<object>>
             {
@@ -96,13 +106,18 @@ namespace RecordValidationTest
         [TestMethod]
         public void TestBatchPirmValidatorEmptyList()
         {
-            Dictionary<string, object> ctx = new Dictionary<string, object>();
-            ctx["operatorId"] = "402"; ctx["sheetName"] = "pirmieji tikrinimai";
+            Dictionary<string, object> ctx = new Dictionary<string, object>
+            {
+                ["operatorId"] = "402",
+                ["sheetName"] = "pirmieji tikrinimai"
+            };
 
-            PirmRecValidator pirmValidator = new PirmRecValidator(pirmiejiMapping, new PirmRecTagMaker());
+            PirmRecValidator pirmValidator = new PirmRecValidator(pirmiejiMapping, new PirmRecTagMaker(pirmiejiMapping));
 
-            BatchRecValidator batchValidator = new BatchRecValidator(pirmValidator);
-            batchValidator.Context = ctx;
+            BatchRecValidator batchValidator = new BatchRecValidator(pirmValidator)
+            {
+                Context = ctx
+            };
 
             List<IList<object>> bunchOfRecords = new List<IList<object>>{};
 
@@ -113,13 +128,18 @@ namespace RecordValidationTest
         [TestMethod]
         public void TestBatchNepirmAllRecsOK()
         {
-            Dictionary<string, object> ctx = new Dictionary<string, object>();
-            ctx["operatorId"] = "402"; ctx["sheetName"] = "nepirmieji tikrinimai";
+            Dictionary<string, object> ctx = new Dictionary<string, object>
+            {
+                ["operatorId"] = "402",
+                ["sheetName"] = "nepirmieji tikrinimai"
+            };
 
-            NepirmRecValidator nepirmValidator = new NepirmRecValidator(nepirmiejiMapping, new NepirmRecTagMaker());
+            NepirmRecValidator nepirmValidator = new NepirmRecValidator(nepirmiejiMapping, new NepirmRecTagMaker(nepirmiejiMapping));
 
-            BatchRecValidator batchValidator = new BatchRecValidator(nepirmValidator);
-            batchValidator.Context = ctx;
+            BatchRecValidator batchValidator = new BatchRecValidator(nepirmValidator)
+            {
+                Context = ctx
+            };
 
             // id, linija, kelias, km, pk, m, siule, salyginis_kodas, tikrinimo_data, kelintas_tikrinimas, aparatas
 
@@ -140,13 +160,18 @@ namespace RecordValidationTest
         [TestMethod]
         public void TestBatchNepirmFewRecsNotOK()
         {
-            Dictionary<string, object> ctx = new Dictionary<string, object>();
-            ctx["operatorId"] = "402"; ctx["sheetName"] = "nepirmieji tikrinimai";
+            Dictionary<string, object> ctx = new Dictionary<string, object>
+            {
+                ["operatorId"] = "402",
+                ["sheetName"] = "nepirmieji tikrinimai"
+            };
 
-            NepirmRecValidator nepirmValidator = new NepirmRecValidator(nepirmiejiMapping, new NepirmRecTagMaker());
+            NepirmRecValidator nepirmValidator = new NepirmRecValidator(nepirmiejiMapping, new NepirmRecTagMaker(nepirmiejiMapping));
 
-            BatchRecValidator batchValidator = new BatchRecValidator(nepirmValidator);
-            batchValidator.Context = ctx;
+            BatchRecValidator batchValidator = new BatchRecValidator(nepirmValidator)
+            {
+                Context = ctx
+            };
 
             List<IList<object>> bunchOfRecords = new List<IList<object>>
             {
@@ -166,13 +191,18 @@ namespace RecordValidationTest
         [TestMethod]
         public void TestBatchNepirmEmptyList()
         {
-            Dictionary<string, object> ctx = new Dictionary<string, object>();
-            ctx["operatorId"] = "402"; ctx["sheetName"] = "nepirmieji tikrinimai";
+            Dictionary<string, object> ctx = new Dictionary<string, object>
+            {
+                ["operatorId"] = "402",
+                ["sheetName"] = "nepirmieji tikrinimai"
+            };
 
-            NepirmRecValidator nepirmValidator = new NepirmRecValidator(nepirmiejiMapping, new NepirmRecTagMaker());
+            NepirmRecValidator nepirmValidator = new NepirmRecValidator(nepirmiejiMapping, new NepirmRecTagMaker(nepirmiejiMapping));
 
-            BatchRecValidator batchValidator = new BatchRecValidator(nepirmValidator);
-            batchValidator.Context = ctx;
+            BatchRecValidator batchValidator = new BatchRecValidator(nepirmValidator)
+            {
+                Context = ctx
+            };
 
             List<IList<object>> bunchOfRecords = new List<IList<object>>{};
 

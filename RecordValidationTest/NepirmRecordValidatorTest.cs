@@ -28,7 +28,7 @@ namespace RecordValidationTest
         [TestMethod]
         public void ValidateNepirmRecordTest()
         {
-            NepirmRecTagMaker tagMaker = new NepirmRecTagMaker();
+            NepirmRecTagMaker tagMaker = new NepirmRecTagMaker(nepirmiejiMapping);
             NepirmRecValidator validator = new NepirmRecValidator(nepirmiejiMapping, tagMaker);
             Dictionary<string, object> ctx = new Dictionary<string, object>();
             ctx["operatorId"] = "402"; ctx["sheetName"] = "nepirmieji tikrinimai";

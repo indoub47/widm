@@ -5,9 +5,9 @@ namespace TagMaking
 {
     public class PirmRecTagMaker : RecTagMaker
     {
-        public PirmRecTagMaker()
+        public PirmRecTagMaker(string[] mapping)
         {
-            mapping = Properties.Settings.Default.PirmiejiMapping.Split(',').Select(x => x.Trim()).ToArray();
+            this.mapping = mapping;
         }
 
         public override string Make(IList<object> record)
