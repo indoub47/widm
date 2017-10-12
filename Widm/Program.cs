@@ -23,39 +23,14 @@ namespace Widm
 
         static void Main(string[] args)
         {
-            Actions action = Actions.ForceUpdate;
-
-            string input = readUserInput();
-            switch (input)
-            {
-                case "v":
-                    action = Actions.ValidateOnly;
-                    break;
-                case "u":
-                    action = Actions.UpdateFaultless;
-                    break;
-                case "fu":
-                    action = Actions.ForceUpdate;
-                    break;
-            }
+            Actions action = Actions.ValidateOnly;            
 
             // loggers
-            LogWriter logger = LogWriterFactory.Create(LogFile.ProcessLog);
-
-            // get action from user
-
-            if (action != Actions.ValidateOnly)
-            {
-                // create db backup
-                bool dbBackupSuccess = createDbBackup(logger);
-                // ask user if he wants to continue despite db backup failure
-            }
+            LogWriter logger = LogWriterFactory.Create(LogFile.ProcessLog);            
 
             // GoogleSheets config
             SpreadSheetConfig[] spreadsheets = SpreadSheetConfig.GetConfig();
             Dictionary<string, SheetConfig> sheetData = SheetConfig.GetConfig();
-
-            List<Tuple<string, string>> skipped = new List<Tuple<string, string>>();
 
             // common objects
             SheetsService service = new GSheetsConnector().Connect();
@@ -88,88 +63,118 @@ namespace Widm
             InspBatchValidator nInspBatchValidator = new InspBatchValidator(nInspValidator);
 
             // accumulators
-            StringBuilder recValidationLog = new StringBuilder();
-            StringBuilder inspValidationLog = new StringBuilder();
-            List<InvalidInfo> allRecInvalids = new List<InvalidInfo>();
-            List<InvalidInfo> allInspInvalids = new List<InvalidInfo>();
-            List<Insp> allCreatedInsps = new List<Insp>();
-            List<Insp> allUpdatedInsps = new List<Insp>();
+            StringBuilder recValidationLog;
+            StringBuilder inspValidationLog;
+            List<InvalidInfo> allRecInvalids;
+            List<InvalidInfo> allInspInvalids;
+            List<Insp> allCreatedInsps;
+            List<Insp> allUpdatedInsps;
 
-
-            SheetConfig sheet = sheetData["pirmieji"];
-            foreach (var spreadsheet in spreadsheets)
+            do
             {
+                // get action from user
+                string input = readUserInput();
+                switch (input)
+                {
+                    case "v":
+                        action = Actions.ValidateOnly;
+                        break;
+                    case "u":
+                        action = Actions.UpdateFaultless;
+                        break;
+                    case "fu":
+                        action = Actions.ForceUpdate;
+                        break;
+                }
+
+                if (action != Actions.ValidateOnly)
+                {
+                    // create db backup
+                    bool dbBackupSuccess = createDbBackup(logger);
+                }
+
+                recValidationLog = new StringBuilder();
+                inspValidationLog = new StringBuilder();
+                allRecInvalids = new List<InvalidInfo>();
+                allInspInvalids = new List<InvalidInfo>();
+                allCreatedInsps = new List<Insp>();
+                allUpdatedInsps = new List<Insp>();
+
+                SheetConfig sheet = sheetData["pirmieji"];
+                foreach (var spreadsheet in spreadsheets)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine($"Operatorius: {spreadsheet.OperatorId}, lentelė: {sheet.SheetName}");
+                    Console.WriteLine("fetching and validating records...");
+
+                    pInspBatchValidator.Context["operatorId"] = spreadsheet.OperatorId;
+                    pInspBatchValidator.Context["sheetName"] = sheet.SheetName;
+
+                    var pirmValidate = fetchAndValidate(
+                        sheetData["pirmieji"], spreadsheet, recFetcher,
+                        service, pRecBatchValidator, pInspBatchValidator);
+
+                    bool toUpdateDb = collectLogThenDecideIfUpdateDb(
+                        pirmValidate, action, logger, reporter, allRecInvalids, allInspInvalids, allCreatedInsps);
+
+                    if (!toUpdateDb)
+                        continue;
+
+                    Console.WriteLine("updating db...");
+                    updateDb(
+                        pirmValidate.Item2, inspPoolCommunicator.BatchInsertInsp,
+                        allUpdatedInsps, gsUpdater, service, sheet, spreadsheet);
+                }
+
+
+                sheet = sheetData["nepirmieji"];
+                foreach (var spreadsheet in spreadsheets)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine($"Operatorius: {spreadsheet.OperatorId}, lentelė: {sheet.SheetName}");
+                    Console.WriteLine("fetching and validating records...");
+
+                    nInspBatchValidator.Context["operatorId"] = spreadsheet.OperatorId;
+                    nInspBatchValidator.Context["sheetName"] = sheet.SheetName;
+
+                    var nepirmValidate = fetchAndValidate(
+                        sheetData["nepirmieji"], spreadsheet, recFetcher,
+                        service, nRecBatchValidator, nInspBatchValidator);
+
+                    bool toUpdateDb = collectLogThenDecideIfUpdateDb(
+                        nepirmValidate, action, logger, reporter, allRecInvalids, allInspInvalids, allCreatedInsps);
+
+                    if (!toUpdateDb)
+                        continue;
+
+                    Console.WriteLine("updating db...");
+                    updateDb(
+                        nepirmValidate.Item2, inspPoolCommunicator.BatchUpdateInsp,
+                        allUpdatedInsps, gsUpdater, service, sheet, spreadsheet);
+                }
+
+
+                RepeatFinder repFinder = new RepeatFinder();
+                Dictionary<string, List<Insp>> repeats = repFinder.FindRepeats(allCreatedInsps);
+
+                // create reports:
+                //  allRecInvalids, allInspInvalids, inspDuplicates
                 Console.WriteLine();
-                Console.WriteLine($"Operatorius: {spreadsheet.OperatorId}, lentelė: {sheet.SheetName}");
-                Console.WriteLine("fetching and validating records...");
+                LogWriter verifyLog = LogWriterFactory.Create(LogFile.VerifyLog);
+                verifyLog.Log("Critical:\r\n" + reporter.ReportRecValidation(allRecInvalids));
+                verifyLog.Log("Suspicious:\r\n" + reporter.ReportInspValidation(allInspInvalids));
+                string repInspsReport = "Repeated Inspections:\r\n" + reporter.ReportRepeatedInsps(repeats);
+                Console.WriteLine(repInspsReport);
+                verifyLog.Log(repInspsReport);
 
-                pInspBatchValidator.Context["operatorId"] = spreadsheet.OperatorId;
-                pInspBatchValidator.Context["sheetName"] = sheet.SheetName;
-
-                var pirmValidate = fetchAndValidate(
-                    sheetData["pirmieji"], spreadsheet, recFetcher, 
-                    service, pRecBatchValidator, pInspBatchValidator);
-
-                bool toUpdateDb = collectLogThenDecideIfUpdateDb(
-                    pirmValidate, action, logger, reporter, allRecInvalids, allInspInvalids, allCreatedInsps);
-
-                if (! toUpdateDb)
-                    continue;
-
-                Console.WriteLine("updating db...");
-                updateDb(
-                    pirmValidate.Item2, inspPoolCommunicator.BatchInsertInsp, 
-                    allUpdatedInsps, gsUpdater, service, sheet, spreadsheet);               
-            }
-
-
-            sheet = sheetData["nepirmieji"];
-            foreach (var spreadsheet in spreadsheets)
-            {
-                Console.WriteLine();
-                Console.WriteLine($"Operatorius: {spreadsheet.OperatorId}, lentelė: {sheet.SheetName}");
-                Console.WriteLine("fetching and validating records...");
-
-                nInspBatchValidator.Context["operatorId"] = spreadsheet.OperatorId;
-                nInspBatchValidator.Context["sheetName"] = sheet.SheetName;
-
-                var nepirmValidate = fetchAndValidate(
-                    sheetData["nepirmieji"], spreadsheet, recFetcher,
-                    service, nRecBatchValidator, nInspBatchValidator);
-
-                bool toUpdateDb = collectLogThenDecideIfUpdateDb(
-                    nepirmValidate, action, logger, reporter, allRecInvalids, allInspInvalids, allCreatedInsps);
-
-                if (!toUpdateDb)
-                    continue;
-
-                Console.WriteLine("updating db...");
-                updateDb(
-                    nepirmValidate.Item2, inspPoolCommunicator.BatchUpdateInsp,
-                    allUpdatedInsps, gsUpdater, service, sheet, spreadsheet);
-            }
-
-
-            RepeatFinder repFinder = new RepeatFinder();
-            Dictionary<string, List<Insp>> repeats = repFinder.FindRepeats(allCreatedInsps);
-
-            // create reports:
-            //  allRecInvalids, allInspInvalids, inspDuplicates
-            Console.WriteLine();
-            LogWriter verifyLog = LogWriterFactory.Create(LogFile.VerifyLog);
-            verifyLog.Log("Critical:\r\n" + reporter.ReportRecValidation(allRecInvalids));
-            verifyLog.Log("Suspicious:\r\n" + reporter.ReportInspValidation(allInspInvalids));
-            string repInspsReport = "Repeated Inspections:\r\n" + reporter.ReportRepeatedInsps(repeats);
-            Console.WriteLine(repInspsReport);
-            verifyLog.Log(repInspsReport);
-
-            if (allUpdatedInsps.Count > 0)
-            {
-                LogWriter dbUpdateReport = LogWriterFactory.Create(LogFile.DbUpdateReport);
-                dbUpdateReport.Log(reporter.ReportDbUpdate(allUpdatedInsps));
-            }
-            Console.WriteLine("Done");
-            Console.ReadKey();
+                if (allUpdatedInsps.Count > 0)
+                {
+                    LogWriter dbUpdateReport = LogWriterFactory.Create(LogFile.DbUpdateReport);
+                    dbUpdateReport.Log(reporter.ReportDbUpdate(allUpdatedInsps));
+                }
+                Console.WriteLine("Done");
+                //Console.ReadKey();
+            } while (true);
         }
 
         /// <summary>
@@ -196,6 +201,7 @@ namespace Widm
             recFetcher.Initialize(spreadsheet.Id, sheet, service);
             List<IList<object>> recs = recFetcher.Fetch();
 
+            Console.WriteLine($" ...{recs.Count} records fetched");
             // if no records in this sheet - return nulls
             if (recs.Count == 0)
                 return new Tuple<List<InvalidInfo>, List<Insp>, List<InvalidInfo>>(null, null, null);
@@ -294,6 +300,11 @@ namespace Widm
         {
             // -- update database
             int result = dbUpdateMethod(insps);
+            Console.WriteLine($" ... {result} of {insps.Count} DB updates committed");
+            if (result != insps.Count)
+            {
+                Console.WriteLine("ATTENTION: DB UPDATE RESULT DOESN'T MATCH INSPECTION COUNT!");
+            }
             // -- accumulate
             allInsps.AddRange(insps);
             // -- update google sheet
@@ -333,6 +344,7 @@ namespace Widm
             try
             {
                 File.Copy(Properties.Settings.Default.DbPath, dbBackupFileName, true);
+                Console.WriteLine($"DB file backup created: \"{dbBackupFileName}\"");
             }
             catch (Exception ex)
             {
