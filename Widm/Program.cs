@@ -72,6 +72,7 @@ namespace Widm
 
             do
             {
+                Console.WriteLine($"DB file name: \"{Properties.Settings.Default.DbPath}\"");
                 // get action from user
                 string input = readUserInput();
                 switch (input)
