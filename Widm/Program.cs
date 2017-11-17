@@ -23,6 +23,22 @@ namespace Widm
 
         static void Main(string[] args)
         {
+            string dbPath = Properties.Settings.Default.DbPath;
+            string outputDir = Properties.Settings.Default.OutputDir;
+            if (!File.Exists(dbPath))
+            {
+                Console.WriteLine($"Database file {dbPath} doesn't exist");
+                Console.ReadKey();
+                return;
+            }
+
+            if (!Directory.Exists(outputDir))
+            {
+                Console.WriteLine($"Output folder {outputDir} doesn't exist");
+                Console.ReadKey();
+                return;
+            }
+
             Actions action = Actions.ValidateOnly;            
 
             // loggers
@@ -37,7 +53,7 @@ namespace Widm
             GSRecordFetcher recFetcher = new GSRecordFetcher();
             PlainTxtReporter1 reporter = new PlainTxtReporter1();
             OleDbInspPoolCommunicator inspPoolCommunicator = 
-                new OleDbInspPoolCommunicator(Properties.Settings.Default.DbPath);
+                new OleDbInspPoolCommunicator(dbPath);
             InspTagMaker inspTagMaker = new InspTagMaker();
             GSheetsUpdater gsUpdater = new GSheetsUpdater();
 
@@ -72,8 +88,8 @@ namespace Widm
 
             do
             {
-                Console.WriteLine($"DB file name: \"{Properties.Settings.Default.DbPath}\"");
                 // get action from user
+                Console.WriteLine($"Database file: \"{dbPath}\"");
                 string input = readUserInput();
                 switch (input)
                 {
@@ -202,7 +218,7 @@ namespace Widm
             recFetcher.Initialize(spreadsheet.Id, sheet, service);
             List<IList<object>> recs = recFetcher.Fetch();
 
-            Console.WriteLine($" ...{recs.Count} records fetched");
+            Console.WriteLine($"... {recs.Count} records fetched");
             // if no records in this sheet - return nulls
             if (recs.Count == 0)
                 return new Tuple<List<InvalidInfo>, List<Insp>, List<InvalidInfo>>(null, null, null);
@@ -301,7 +317,7 @@ namespace Widm
         {
             // -- update database
             int result = dbUpdateMethod(insps);
-            Console.WriteLine($" ... {result} of {insps.Count} DB updates committed");
+            Console.WriteLine($"... {result} of {insps.Count} DB updates committed");
             if (result != insps.Count)
             {
                 Console.WriteLine("ATTENTION: DB UPDATE RESULT DOESN'T MATCH INSPECTION COUNT!");
