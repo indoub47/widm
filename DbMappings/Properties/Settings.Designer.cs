@@ -55,10 +55,11 @@ namespace DbMappings.Properties {
             "\",\r\n    \"dbname\": \"IV_pat_data\",\r\n    \"typename\": \"System.DateTime\"\r\n  },\r\n  {\r\n" +
             "    \"name\": \"aparatas4\",\r\n    \"dbname\": \"IV_pat_aparat\",\r\n    \"typename\": \"Syste" +
             "m.String\"\r\n  },\r\n  {\r\n    \"name\": \"operatorius4\",\r\n    \"dbname\": \"IV_pat_operato" +
-            "r\",\r\n    \"typename\": \"System.String\"\r\n  },\r\n  {\r\n    \"name\": \"panaikintas\",\r\n   " +
-            " \"dbname\": \"Panaikintas\",\r\n    \"typename\": \"System.Boolean\"\r\n  },\r\n  {\r\n    \"nam" +
-            "e\": \"defekto_id\",\r\n    \"dbname\": \"DefektoId\",\r\n    \"typename\": \"System.Int64\"\r\n " +
-            " }\r\n]")]
+            "r\",\r\n    \"typename\": \"System.String\"\r\n  },\r\n  {\r\n    \"name\": \"pastaba\",\r\n    \"db" +
+            "name\": \"Pastaba\",\r\n    \"typename\": \"System.String\"\r\n  },\r\n  {\r\n    \"name\": \"pana" +
+            "ikintas\",\r\n    \"dbname\": \"Panaikintas\",\r\n    \"typename\": \"System.Boolean\"\r\n  },\r" +
+            "\n  {\r\n    \"name\": \"defekto_id\",\r\n    \"dbname\": \"DefektoId\",\r\n    \"typename\": \"Sy" +
+            "stem.Int64\"\r\n  }\r\n]")]
         public string JsonString {
             get {
                 return ((string)(this["JsonString"]));

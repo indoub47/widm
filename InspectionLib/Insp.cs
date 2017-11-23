@@ -113,7 +113,7 @@ namespace InspectionLib
 
             string operatorius = string.Empty;
             ind = Array.IndexOf(mapping, "operatorius");
-            if (ind != -1)
+            if (ind != -1 && record.Count > ind)
                 operatorius = record[ind].ToString();
 
             string aparatas = record[Array.IndexOf(mapping, "aparatas")].ToString().Trim();
@@ -122,20 +122,34 @@ namespace InspectionLib
 
             string suvirino = string.Empty;
             ind = Array.IndexOf(mapping, "suvirino");
-            if (ind != -1)
+            if (ind != -1 && record.Count > ind)
                 suvirino = record[ind].ToString().Trim();
             
             Kelintas kelintasTikrinimas = Kelintas.Extra;
             ind = Array.IndexOf(mapping, "kelintas");
-            if (ind == -1)
+            if (ind == -1 || record.Count <= ind)
                 kelintasTikrinimas = Kelintas.First;
             else
                 kelintasTikrinimas = ParseKelintas(record[ind].ToString().Trim());
 
             ind = Array.IndexOf(mapping, "pastaba");
             string pastaba = string.Empty;
-            if (ind != -1)
+            if (ind != -1 && record.Count > ind)
+            {
                 pastaba = record[ind].ToString().Trim();
+            }
+
+            ind = Array.IndexOf(mapping, "pkodas");
+            string pkodas = string.Empty;
+            if (ind != -1 && record.Count > ind)
+            {
+                pkodas = record[ind].ToString().Trim();
+            }
+
+            if (pkodas != null && pkodas != string.Empty)
+            {
+                pastaba = pastaba + string.Format("{0}-{1:yyMMdd}", pkodas, tikrinimoData);
+            }
 
             return new Insp(id, linija, kelias, km, pk, m, siule, salyginisKodas, 
                 operatorius, aparatas, tikrinimoData, suvirino, kelintasTikrinimas, pastaba);

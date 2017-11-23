@@ -26,7 +26,8 @@ namespace RecordValidation
                 RecValidationMethods.ValidateSuvirino,
                 RecValidationMethods.ValidateTikrinimoData,
                 RecValidationMethods.ValidateTikrinimoDataIsReal,
-                RecValidationMethods.ValidateAparatas
+                RecValidationMethods.ValidateAparatas,
+                RecValidationMethods.ValidatePavojingumas
             };
             //mapping = Properties.Settings.Default.PirmiejiMapping.Split(',').Select(x => x.Trim()).ToArray();
         }

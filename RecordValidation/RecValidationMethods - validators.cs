@@ -160,6 +160,17 @@ namespace RecordValidation
                 "kelintas tikrinimas");
         }
 
+        public static InvalidInfo ValidatePavojingumas(IList<object> record, string[] mapping)
+        {
+            return ValidateStringFromArray(
+                "pkodas",
+                Properties.Settings.Default.Pavojingumai.Split(',').Select(x => x.Trim()).ToArray(),
+                record,
+                mapping,
+                "pavojingumas", 
+                true);
+        }
+
         public static InvalidInfo ValidateNegaliButiPirmas(IList<object> record, string[] mapping)
         {
             // jeigu "kelintas" yra išvis blogas - bus išgaudytas, ten, kur tikrinamas kelintas

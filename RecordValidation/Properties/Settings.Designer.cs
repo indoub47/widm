@@ -91,5 +91,14 @@ namespace RecordValidation.Properties {
                 return ((string)(this["Linijos"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("D3, D2, D1, DP, ID, L")]
+        public string Pavojingumai {
+            get {
+                return ((string)(this["Pavojingumai"]));
+            }
+        }
     }
 }

@@ -1,10 +1,10 @@
 ﻿{
   "pirmieji": {
     "sheetname": "Pirmieji tikrinimai",
-    "rangeaddress": "'Pirmieji tikrinimai'!A2:K",
+    "rangeaddress": "'Pirmieji tikrinimai'!A2:L",
     "startrowindex": 2,
-    "filtercolumnindex": 10,
-    "filteraddressformat": "'Pirmieji tikrinimai'!K{0}",
+    "filtercolumnindex": 11,
+    "filteraddressformat": "'Pirmieji tikrinimai'!L{0}",
     "mapping": [
       "linija",
       "kelias",
@@ -16,16 +16,17 @@
       "suvirino",
       "tdata",
       "aparatas",
+      "pkodas",
       "ivesta_db"
     ]
   },
 
   "nepirmieji": {
     "sheetname": "Kiti tikrinimai",
-    "rangeaddress": "'Kiti tikrinimai'!A2:L",
+    "rangeaddress": "'Kiti tikrinimai'!A2:M",
     "startrowindex": 2,
-    "filtercolumnindex": 11,
-    "filteraddressformat": "'Kiti tikrinimai'!L{0}",
+    "filtercolumnindex": 12,
+    "filteraddressformat": "'Kiti tikrinimai'!M{0}",
     "mapping": [
       "id",
       "linija",
@@ -38,6 +39,7 @@
       "tdata",
       "aparatas",
       "kelintas",
+      "pkodas",
       "ivesta_db"
     ]
   }

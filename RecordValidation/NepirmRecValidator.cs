@@ -25,6 +25,7 @@ namespace RecordValidation
                 RecValidationMethods.ValidateTikrinimoData,
                 RecValidationMethods.ValidateTikrinimoDataIsReal,
                 RecValidationMethods.ValidateKelintas,
+                RecValidationMethods.ValidatePavojingumas,
                 RecValidationMethods.ValidateNegaliButiPirmas,
                 RecValidationMethods.ValidateAparatas
             };

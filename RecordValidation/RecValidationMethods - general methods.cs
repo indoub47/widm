@@ -183,17 +183,19 @@ namespace RecordValidation
             string errorMessage, bool nullIsAllowed = false)
         {
             object value = GetRowItem(propertyName, record, mapping);
-            if (
-                (IsEmpty(value) && !nullIsAllowed) || 
-                Array.IndexOf(validValues, value.ToString().Trim()) == -1
-               )
+
+            if (IsEmpty(value))
             {
+                if (nullIsAllowed)
+                    return null;
+                else
+                    return new InvalidInfo(errorMessage);
+            }
+
+            if (Array.IndexOf(validValues, value.ToString().Trim()) == -1)
                 return new InvalidInfo(errorMessage);
-            }
             else
-            {
                 return null;
-            }
         }
     }
 }
