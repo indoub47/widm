@@ -24,7 +24,7 @@ namespace RecordValidation
         {
             return ValidateStringFromArray(
                 "linija",
-                Properties.Settings.Default.Linijos.Split(',').Select(x => x.Trim()).ToArray(),
+                linijos,
                 record,
                 mapping,
                 "linija");
@@ -60,7 +60,7 @@ namespace RecordValidation
         {
             return ValidateStringFromArray(
                 "skodas",
-                Properties.Settings.Default.SalygKodai.Split(',').Select(x => x.Trim()).ToArray(),
+                skodai,
                 record,
                 mapping,
                 "salyginis kodas");
@@ -70,7 +70,7 @@ namespace RecordValidation
         {
             return ValidateStringFromArray(
                 "aparatas",
-                Properties.Settings.Default.Aparatai.Split(',').Select(x => x.Trim()).ToArray(),
+                aparatai,
                 record,
                 mapping,
                 "defektoskopo kodas");
@@ -144,7 +144,7 @@ namespace RecordValidation
         {
             return ValidateStringFromArray(
                 "suvirino",
-                Properties.Settings.Default.Suvirino.Split(',').Select(x => x.Trim()).ToArray(),
+                virintojai,
                 record,
                 mapping,
                 "kas suvirino");
@@ -154,7 +154,7 @@ namespace RecordValidation
         {
             return ValidateStringFromArray(
                 "kelintas",
-                Properties.Settings.Default.Kelinti.Split(',').Select(x => x.Trim()).ToArray(),
+                kelinti,
                 record,
                 mapping,
                 "kelintas tikrinimas");
@@ -164,7 +164,7 @@ namespace RecordValidation
         {
             return ValidateStringFromArray(
                 "pkodas",
-                Properties.Settings.Default.Pavojingumai.Split(',').Select(x => x.Trim()).ToArray(),
+                pavojingumai,
                 record,
                 mapping,
                 "pavojingumas", 

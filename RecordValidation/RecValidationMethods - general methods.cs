@@ -10,6 +10,13 @@ namespace RecordValidation
 {
     public static partial class RecValidationMethods
     {
+        private static string[] skodai = Properties.Settings.Default.SalygKodai.Split(',').Select(x => x.Trim()).ToArray();
+        private static string[] aparatai = Properties.Settings.Default.Aparatai.Split(',').Select(x => x.Trim()).ToArray();
+        private static string[] linijos = Properties.Settings.Default.Linijos.Split(',').Select(x => x.Trim()).ToArray();
+        private static string[] virintojai = Properties.Settings.Default.Suvirino.Split(',').Select(x => x.Trim()).ToArray();
+        private static string[] kelinti = Properties.Settings.Default.Kelinti.Split(',').Select(x => x.Trim()).ToArray();
+        private static string[] pavojingumai = Properties.Settings.Default.Pavojingumai.Split(',').Select(x => x.Trim()).ToArray();
+
         [AttributeUsage(AttributeTargets.Method)]
         private class AllowZeroAttribute : System.Attribute
         { }
