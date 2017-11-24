@@ -3,16 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GSheetsActions;
 using Google.Apis.Sheets.v4;
-using RecordValidation;
-using TagMaking;
-using WidmShared;
-using Reporting;
-using InspectionValidation;
-using InspPoolCommunication;
-using DbMappings;
-using InspectionLib;
 using System.IO;
 
 namespace Widm

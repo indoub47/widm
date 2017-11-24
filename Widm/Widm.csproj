@@ -77,65 +77,105 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LogWriter.cs" />
-    <Compile Include="LogWriterFactory.cs" />
+    <Compile Include="DBMapping\DbMappings.cs" />
+    <Compile Include="GSheetsActions\GSheetsConfig\SheetConfig.cs" />
+    <Compile Include="GSheetsActions\GSheetsConfig\SpreadSheetConfig.cs" />
+    <Compile Include="GSheetsActions\GSheetsConnector.cs" />
+    <Compile Include="GSheetsActions\GSheetsUpdater.cs" />
+    <Compile Include="GSheetsActions\GSRecordFetcher.cs" />
+    <Compile Include="InspLib\Insp.cs" />
+    <Compile Include="InspLib\Pkodas.cs" />
+    <Compile Include="InspPoolCommunication\OleDbInspPoolCommunicator.cs" />
+    <Compile Include="InspValidating\InspBatchValidator.cs" />
+    <Compile Include="InspValidating\InspValidationMethods.cs" />
+    <Compile Include="InspLib\Kelintas.cs" />
+    <Compile Include="LogWriting\LogWriter.cs" />
+    <Compile Include="LogWriting\LogWriterFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\RecValidation.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>RecValidation.settings</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="RepeatFinder.cs" />
+    <Compile Include="RecValidation\BatchRecValidator.cs" />
+    <Compile Include="RecValidation\GSRecBatchValidator.cs" />
+    <Compile Include="RecValidation\NepirmRecValidator.cs" />
+    <Compile Include="RecValidation\PirmRecValidator.cs" />
+    <Compile Include="RecValidation\RecValidationMethods - general methods.cs" />
+    <Compile Include="RecValidation\RecValidationMethods - utilities.cs" />
+    <Compile Include="RecValidation\RecValidationMethods - validators.cs" />
+    <Compile Include="RepeatFinding\RepeatFinder.cs" />
+    <Compile Include="Reporting\PlainTxtReporter1.cs" />
+    <Compile Include="Properties\InspPoolCommunication.Designer.cs">
+      <DependentUpon>InspPoolCommunication.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Properties\InspPoolMapping.Designer.cs">
+      <DependentUpon>InspPoolMapping.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Properties\GSheets.Designer.cs">
+      <DependentUpon>GSheets.settings</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Shared\BaseRecValidator.cs" />
+    <Compile Include="Shared\IBatchInspValidator.cs" />
+    <Compile Include="Shared\IInspPoolCommunicator.cs" />
+    <Compile Include="Shared\IInspTagMaker.cs" />
+    <Compile Include="Shared\InspValidator.cs" />
+    <Compile Include="Shared\InvalidInfo.cs" />
+    <Compile Include="Shared\IRecFetcher.cs" />
+    <Compile Include="Shared\IRecTagMaker.cs" />
+    <Compile Include="Shared\IReporter.cs" />
+    <Compile Include="TagMaking\InspTagMaker.cs" />
+    <Compile Include="TagMaking\NepirmRecTagMaker.cs" />
+    <Compile Include="TagMaking\PirmRecTagMaker.cs" />
+    <Compile Include="TagMaking\RecTagMaker.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="client_secret.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="GSheetsActions\client_secret.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GSheetsActions\GSheetsConfig\sheetdata.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="GSheetsActions\GSheetsConfig\spreadsheets.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
+    <None Include="Properties\RecValidation.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>RecValidation.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DbMappings\DbMappings.csproj">
-      <Project>{d17a7305-45bf-476a-abeb-9e7119d7f8a7}</Project>
-      <Name>DbMappings</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\GSheetsActions\GSheetsActions.csproj">
-      <Project>{6fd18138-b4a6-4a20-a478-8a1848d53ca1}</Project>
-      <Name>GSheetsActions</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\InspectionLib\InspLib.csproj">
-      <Project>{8893fdcf-18f1-4b18-a07c-59bb802a9f9f}</Project>
-      <Name>InspLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\InspectionValidation\InspValidation.csproj">
-      <Project>{a39bc841-3df0-4dbe-b091-7f97c647561f}</Project>
-      <Name>InspValidation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\InspPoolCommunication\InspPoolCommunication.csproj">
-      <Project>{a5cf4285-5e8e-4f1d-96ee-89178af4f07f}</Project>
-      <Name>InspPoolCommunication</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RecordValidation\RecValidation.csproj">
-      <Project>{d2b97994-5bdd-40aa-830e-c11d9793dba5}</Project>
-      <Name>RecValidation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Reporting\Reporting.csproj">
-      <Project>{284eeeeb-f349-4e58-b299-d49c38e04215}</Project>
-      <Name>Reporting</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TagMaking\TagMaking.csproj">
-      <Project>{d9ee9608-8e71-4332-8259-183248097898}</Project>
-      <Name>TagMaking</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WidmShared\WidmShared.csproj">
-      <Project>{ec03ebf3-4317-4304-9eca-e7e7937673f3}</Project>
-      <Name>WidmShared</Name>
-    </ProjectReference>
+    <None Include="Properties\InspPoolCommunication.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>InspPoolCommunication.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\InspPoolMapping.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>InspPoolMapping.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Properties\GSheets.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>GSheets.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="testDb.mdb">
