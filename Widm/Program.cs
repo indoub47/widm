@@ -5,29 +5,60 @@ using System.Text;
 using System.Threading.Tasks;
 using Google.Apis.Sheets.v4;
 using System.IO;
+using System.Windows.Forms;
+
 
 namespace Widm
 {
+    
     class Program
     {
-        private enum Actions { ValidateOnly, UpdateFaultless, ForceUpdate };
+        private enum Actions { ValidateOnly, UpdateFaultless, ForceUpdate, ChangeDb, ChangeOutputDir };        
 
+        [STAThread]
         static void Main(string[] args)
         {
             string dbPath = Properties.Settings.Default.DbPath;
             string outputDir = Properties.Settings.Default.OutputDir;
+
             if (!File.Exists(dbPath))
             {
-                Console.WriteLine($"Database file {dbPath} doesn't exist");
+                Console.WriteLine($"Database file {dbPath} doesn't exist. Select database file.");
                 Console.ReadKey();
-                return;
+                string selectedPath = selectDbPath(dbPath);
+                if (selectedPath != string.Empty)
+                {
+                    dbPath = selectedPath;
+                    Properties.Settings.Default.DbPath = selectedPath;
+                    Properties.Settings.Default.Save();
+
+                    Console.WriteLine($"Database file: \"{dbPath}\"");
+                    Console.WriteLine($"Output folder: \"{outputDir}\"");
+                }
+                else
+                {
+                    Environment.Exit(0);
+                }
             }
 
             if (!Directory.Exists(outputDir))
             {
-                Console.WriteLine($"Output folder {outputDir} doesn't exist");
+                Console.WriteLine($"Output folder {outputDir} doesn't exist. Choose a valid folder.");
                 Console.ReadKey();
-                return;
+                string outputFolder = selectOutputFolder(outputDir);
+                if (outputFolder != string.Empty)
+                {
+                    outputDir = outputFolder;
+                    Properties.Settings.Default.OutputDir = outputFolder;
+                    Properties.Settings.Default.Save();
+
+                    Console.WriteLine($"Database file: \"{dbPath}\"");
+                    Console.WriteLine($"Output folder: \"{outputDir}\"");
+                }
+                else
+                {
+                    Environment.Exit(0);
+                }                
             }
 
             Actions action = Actions.ValidateOnly;            
@@ -81,6 +112,7 @@ namespace Widm
             {
                 // get action from user
                 Console.WriteLine($"Database file: \"{dbPath}\"");
+                Console.WriteLine($"Output folder: \"{outputDir}\"");
                 string input = readUserInput();
                 switch (input)
                 {
@@ -93,7 +125,38 @@ namespace Widm
                     case "fu":
                         action = Actions.ForceUpdate;
                         break;
+                    case "db":
+                        action = Actions.ChangeDb;
+                        break;
+                    case "od":
+                        action = Actions.ChangeOutputDir;
+                        break;
                 }
+
+                if (action == Actions.ChangeDb)
+                {
+                    string selectedPath = selectDbPath(dbPath);
+                    if (selectedPath != string.Empty)
+                    {
+                        dbPath = selectedPath;
+                        Properties.Settings.Default.DbPath = selectedPath;
+                        Properties.Settings.Default.Save();
+                    }
+                    Environment.Exit(0);
+                }
+
+                if (action == Actions.ChangeOutputDir)
+                {
+                    string outputFolder = selectOutputFolder(outputDir);
+                    if (outputFolder != string.Empty)
+                    {
+                        outputDir = outputFolder;
+                        Properties.Settings.Default.OutputDir = outputFolder;
+                        Properties.Settings.Default.Save();
+                    }
+                    continue;
+                }
+
 
                 if (action != Actions.ValidateOnly)
                 {
@@ -372,7 +435,7 @@ namespace Widm
             Console.TreatControlCAsInput = true;
 
             string inputString = String.Empty;
-            string query = " v - validate only,\n u - update if no flaws,\n fu - force update,\n Esc - exit";
+            string query = " v - validate only,\n u - update if no flaws,\n fu - force update,\n db - change DB and restart application,\n od - change output directory,\n Esc - exit";
             ConsoleKeyInfo keyInfo;
             do
             {
@@ -419,10 +482,85 @@ namespace Widm
 
                 inputString = inputString.Trim();
                 Console.WriteLine("{0}", inputString);
-            } while (inputString != "v" && inputString != "u" && inputString != "fu");
+            } while (inputString != "v" && inputString != "u" && inputString != "fu" && inputString != "db" && inputString != "od");
             return inputString;
         }
         
+        private static string selectOutputFolder(string oldFolder)
+        {
+            string pFolder;
+            string selectedFolder;
+            try
+            {
+                DirectoryInfo parentFolder = Directory.GetParent(oldFolder);
+                if (parentFolder != null)
+                {
+                    pFolder = parentFolder.FullName;
+                }
+                else
+                {
+                    pFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyComputer);
+                }
+            }
+            catch
+            {
+                pFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyComputer);
+            }
+
+            using (FolderBrowserDialog fbd = new FolderBrowserDialog())
+            {
+                fbd.Description = "Select output folder";
+                fbd.RootFolder = Environment.SpecialFolder.MyComputer;
+                fbd.SelectedPath = pFolder;
+                fbd.ShowNewFolderButton = true;
+                DialogResult res = fbd.ShowDialog();
+                if (res == DialogResult.OK)
+                {
+                    selectedFolder = fbd.SelectedPath;
+                }
+                else
+                {
+                    selectedFolder = string.Empty;
+                }
+            }
+
+            return selectedFolder;            
+        }
+
+
+        private static string selectDbPath(string oldDbPath)
+        {
+            string selectedFile;
+            string initialFolder;
+
+            if (oldDbPath == null || !File.Exists(oldDbPath))
+            {
+                initialFolder = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            }
+            else
+            {
+                initialFolder = Path.GetDirectoryName(Properties.Settings.Default.DbPath);
+            }
+
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Title = "Select database file";
+                ofd.InitialDirectory = initialFolder;
+                ofd.Filter = "Access DB (*.MDB; *.ACCDB)| *.MDB; *.ACCDB | All files(*.*) | *.*";
+                ofd.FilterIndex = 1;
+
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    selectedFile = ofd.FileName;
+                }
+                else
+                {
+                    selectedFile = string.Empty;
+                }
+            }
+
+            return selectedFile;
+        }
 
     }
 }

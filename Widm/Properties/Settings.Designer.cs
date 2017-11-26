@@ -23,18 +23,21 @@ namespace Widm.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("testDb.mdb")]
         public string DbPath {
             get {
                 return ((string)(this["DbPath"]));
             }
+            set {
+                this["DbPath"] = value;
+            }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("validate/validate_log {0:yyyy-MM-dd} {0:H-mm-ss}.log")]
+        [global::System.Configuration.DefaultSettingValueAttribute("validate_log {0:yyyy-MM-dd} {0:H-mm-ss}.log")]
         public string VerifyLogFileName {
             get {
                 return ((string)(this["VerifyLogFileName"]));
@@ -43,7 +46,7 @@ namespace Widm.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("log/log {0:yyyy-MM-dd} {0:H-mm-ss}.log")]
+        [global::System.Configuration.DefaultSettingValueAttribute("log {0:yyyy-MM-dd} {0:H-mm-ss}.log")]
         public string ProcessLogFileName {
             get {
                 return ((string)(this["ProcessLogFileName"]));
@@ -52,25 +55,28 @@ namespace Widm.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("db_update/db_update_report {0:yyyy-MM-dd} {0:H-mm-ss}.log")]
+        [global::System.Configuration.DefaultSettingValueAttribute("db_update_report {0:yyyy-MM-dd} {0:H-mm-ss}.log")]
         public string DbUpdateReportFileName {
             get {
                 return ((string)(this["DbUpdateReportFileName"]));
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("C:/Users/pc/Desktop/widm output")]
         public string OutputDir {
             get {
                 return ((string)(this["OutputDir"]));
             }
+            set {
+                this["OutputDir"] = value;
+            }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("db_backup/db_backup {0:yyyy-MM-dd} {0:H-mm-ss}.mdb")]
+        [global::System.Configuration.DefaultSettingValueAttribute("db_backup {0:yyyy-MM-dd} {0:H-mm-ss}.mdb")]
         public string DbBackupFileName {
             get {
                 return ((string)(this["DbBackupFileName"]));
