@@ -91,5 +91,17 @@ namespace Widm.Properties {
                 return ((bool)(this["CreateDBBackup"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UpdateSummaryToOutputDir {
+            get {
+                return ((bool)(this["UpdateSummaryToOutputDir"]));
+            }
+            set {
+                this["UpdateSummaryToOutputDir"] = value;
+            }
+        }
     }
 }

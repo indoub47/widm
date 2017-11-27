@@ -240,10 +240,17 @@ namespace Widm
 
                 if (allUpdatedInsps.Count > 0)
                 {
+                    StringBuilder report = reporter.ReportDbUpdate(allUpdatedInsps);
                     LogWriter dbUpdateReport = LogWriterFactory.Create(LogFile.DbUpdateReport);
-                    dbUpdateReport.Log(reporter.ReportDbUpdate(allUpdatedInsps));
+                    dbUpdateReport.Log(report);
+                    if (Properties.Settings.Default.UpdateSummaryToOutputDir)
+                    {
+                        dbUpdateReport = LogWriterFactory.Create(LogFile.DbUpdateReport, Path.GetDirectoryName(dbPath));
+                        dbUpdateReport.Log(report);
+                    }
                 }
                 Console.WriteLine("Done");
+                Console.WriteLine();
                 //Console.ReadKey();
             } while (true);
         }

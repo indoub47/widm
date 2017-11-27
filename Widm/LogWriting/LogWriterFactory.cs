@@ -7,10 +7,10 @@ using System.IO;
 
 namespace Widm
 {
-    public enum LogFile { VerifyLog, ProcessLog, DbUpdateReport };
+    public enum LogFile { VerifyLog, ProcessLog, DbUpdateReport};
     public static class LogWriterFactory
     {
-        public static LogWriter Create(LogFile logType)
+        public static LogWriter Create(LogFile logType, string outputFolder = "")
         {
             string fileName = string.Empty;
             switch (logType)
@@ -26,7 +26,15 @@ namespace Widm
                     break;
             }
 
-            fileName = Path.Combine(Properties.Settings.Default.OutputDir, fileName);
+            if (outputFolder != "")
+            {
+                fileName = Path.Combine(outputFolder, fileName);
+            }
+            else
+            {
+                fileName = Path.Combine(Properties.Settings.Default.OutputDir, fileName);
+            }
+            
             fileName = string.Format(fileName, DateTime.Now);
 
             if (isFileOk(fileName))
