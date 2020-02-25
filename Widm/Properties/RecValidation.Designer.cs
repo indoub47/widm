@@ -12,7 +12,7 @@ namespace Widm.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.3.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
     internal sealed partial class RecValidation : global::System.Configuration.ApplicationSettingsBase {
         
         private static RecValidation defaultInstance = ((RecValidation)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new RecValidation())));
@@ -85,7 +85,7 @@ namespace Widm.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("01, 17, 22, 23, 24, 46, 47, 48, 49, 50, 51, 52, 86, 87, 94, 95, 96 ")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1, 01, 17, 22, 23, 24, 46, 47, 48, 49, 50, 51, 52, 86, 87, 94, 95, 96 ")]
         public string Linijos {
             get {
                 return ((string)(this["Linijos"]));

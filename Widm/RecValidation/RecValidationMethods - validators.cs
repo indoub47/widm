@@ -11,7 +11,7 @@ namespace Widm
     {
         public static InvalidInfo ValidateId(IList<object> record, string[] mapping)
         {
-            return ValidatePositiveLong(
+            return validatePositiveLong(
                 "id",
                 record,
                 mapping,
@@ -21,7 +21,7 @@ namespace Widm
 
         public static InvalidInfo ValidateLinija(IList<object> record, string[] mapping)
         {
-            return ValidateStringFromArray(
+            return validateStringFromArray(
                 "linija",
                 galimosLinijos,
                 record,
@@ -32,32 +32,32 @@ namespace Widm
         public static InvalidInfo ValidateKelias(
             IList<object> record, string[] mapping)
         {
-            return ValidatePositiveInt("kelias", record, mapping, "oo.Xooo.oo.oo.o");
+            return validatePositiveInt("kelias", record, mapping, "oo.Xooo.oo.oo.o");
         }
 
         public static InvalidInfo ValidateKm(IList<object> record, string[] mapping)
         {
-            return ValidatePositiveInt("km", record, mapping, "oo.oXXX.oo.oo.o");
+            return validatePositiveInt("km", record, mapping, "oo.oXXX.oo.oo.o");
         }
 
         public static InvalidInfo ValidatePk(IList<object> record, string[] mapping)
         {
-            return ValidatePositiveIntOrZeroOrNull("pk", record, mapping, "oo.oooo.XX.oo.o");
+            return validatePositiveIntOrZeroOrNull("pk", record, mapping, "oo.oooo.XX.oo.o");
         }
 
         public static InvalidInfo ValidateM(IList<object> record, string[] mapping)
         {
-            return ValidatePositiveIntOrZero("m", record, mapping, "oo.oooo.oo.XX.o");
+            return validatePositiveIntOrZero("m", record, mapping, "oo.oooo.oo.XX.o");
         }
 
         public static InvalidInfo ValidateSiule(IList<object> record, string[] mapping)
         {
-            return ValidatePositiveIntOrZeroOrNull("siule", record, mapping, "oo.oooo.oo.oo.X");
+            return validatePositiveIntOrZeroOrNull("siule", record, mapping, "oo.oooo.oo.oo.X");
         }
 
         public static InvalidInfo ValidateSalKodas(IList<object> record, string[] mapping)
         {
-            return ValidateStringFromArray(
+            return validateStringFromArray(
                 "skodas",
                 galimiSkodai,
                 record,
@@ -67,7 +67,7 @@ namespace Widm
 
         public static InvalidInfo ValidateAparatas(IList<object> record, string[] mapping)
         {
-            return ValidateStringFromArray(
+            return validateStringFromArray(
                 "aparatas",
                 galimiAparatai,
                 record,
@@ -141,7 +141,7 @@ namespace Widm
 
         public static InvalidInfo ValidateSuvirino(IList<object> record, string[] mapping)
         {
-            return ValidateStringFromArray(
+            return validateStringFromArray(
                 "suvirino",
                 galimosSuvirinimoImones,
                 record,
@@ -151,7 +151,7 @@ namespace Widm
 
         public static InvalidInfo ValidateKelintas(IList<object> record, string[] mapping)
         {
-            return ValidateStringFromArray(
+            return validateStringFromArray(
                 "kelintas",
                 galimiKelinti,
                 record,
@@ -161,7 +161,7 @@ namespace Widm
 
         public static InvalidInfo ValidatePavojingumas(IList<object> record, string[] mapping)
         {
-            return ValidateStringFromArray(
+            return validateStringFromArray(
                 "pkodas",
                 galimiPavojingumai,
                 record,

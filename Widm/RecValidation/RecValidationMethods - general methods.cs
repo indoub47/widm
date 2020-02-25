@@ -98,7 +98,7 @@ namespace Widm
         }
 
         [Int64]
-        private static InvalidInfo ValidatePositiveLong(
+        private static InvalidInfo validatePositiveLong(
             string propertyName,
             IList<object> record,
             string[] mapping,
@@ -115,7 +115,7 @@ namespace Widm
         }
 
         [AllowNull]
-        private static InvalidInfo ValidatePositiveIntOrNull(
+        private static InvalidInfo validatePositiveIntOrNull(
             string propertyName,
             IList<object> record,
             string[] mapping,
@@ -132,7 +132,7 @@ namespace Widm
         }
 
         [AllowZero]
-        private static InvalidInfo ValidatePositiveIntOrZero(
+        private static InvalidInfo validatePositiveIntOrZero(
             string propertyName,
             IList<object> record,
             string[] mapping,
@@ -150,7 +150,7 @@ namespace Widm
 
         [AllowZero]
         [AllowNull]
-        private static InvalidInfo ValidatePositiveIntOrZeroOrNull(
+        private static InvalidInfo validatePositiveIntOrZeroOrNull(
             string propertyName,
             IList<object> record,
             string[] mapping,
@@ -166,7 +166,7 @@ namespace Widm
                 attributes);
         }
 
-        private static InvalidInfo ValidatePositiveInt(
+        private static InvalidInfo validatePositiveInt(
             string propertyName,
             IList<object> record,
             string[] mapping,
@@ -182,7 +182,7 @@ namespace Widm
                 attributes);
         }
 
-        private static InvalidInfo ValidateStringFromArray(
+        private static InvalidInfo validateStringFromArray(
             string propertyName,
             string[] validValues,
             IList<object> record,

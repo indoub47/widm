@@ -87,7 +87,17 @@ namespace Widm
             }
             catch { }
 
-            string linija = record[Array.IndexOf(mapping, "linija")].ToString().Trim();
+            string linija;
+            object objLinija = record[Array.IndexOf(mapping, "linija")];
+            try
+            {
+                linija = Convert.ToInt32(objLinija.ToString().Trim()).ToString("00");
+            }
+            catch
+            {
+                linija = objLinija.ToString().Trim();
+            }
+
             int kelias = Convert.ToInt32(record[Array.IndexOf(mapping, "kelias")]);
             int km = Convert.ToInt32(record[Array.IndexOf(mapping, "km")]);
 
